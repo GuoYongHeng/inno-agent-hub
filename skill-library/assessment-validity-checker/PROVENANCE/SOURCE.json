@@ -1,0 +1,43 @@
+{
+  "name": "assessment-validity-checker",
+  "number": 6,
+  "repo_url": "https://github.com/GarethManning/education-agent-skills",
+  "source_url": "https://github.com/GarethManning/education-agent-skills/blob/6bbbce418f82e11044009c9f3b7373a354de5bd0/skills/curriculum-assessment/assessment-validity-checker/SKILL.md",
+  "commit": "6bbbce418f82e11044009c9f3b7373a354de5bd0",
+  "source_version": "1.0",
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://github.com/GarethManning/education-agent-skills/blob/6bbbce418f82e11044009c9f3b7373a354de5bd0/LICENSE",
+  "author": "Gareth Manning；#25 另列贡献者 Sean Hu",
+  "origin_status": "仓库自述与安装来源一致，原始发布仓库已定位",
+  "source_archive_sha256": "d7f800ffd1f5b6f2f9f1c16229a937e32ebb203a99f9946e1a882b1948c4162d",
+  "built_at_utc": "2026-10-01T03:22:48.920187+00:00",
+  "source_content_modified": true,
+  "source_files": [
+    {
+      "path": "SKILL.md",
+      "git_blob_sha1": "9f4bd408ae95d17ea41346991ae84ef8aafbf3f5",
+      "sha256": "7cd36cbcd1f57d5216931d1c231b3e8774e4b5c9fec42e9ee1cb689e457bf33f"
+    }
+  ],
+  "status": "InnoSpark_zh_CN_candidate_NOT_client_validated",
+  "scope_note": "Source bytes preserved. Added root LICENSE and provenance. No InnoSpark upload or tests performed.",
+  "known_dependency_boundary": "主体为文本指令，已读部分未要求本地脚本或付费API。chains_well_with不等于依赖已安装；#5明确依赖跨Skill组件。上下文/学习数据由用户提供；远端MCP不是本次单包测试的前提。",
+  "source_read_coverage": "读取源文件1–205行；尾部示例未全部展开",
+  "official_criteria_results": "",
+  "client_behavior_result": "",
+  "adaptation": {
+    "category": "评",
+    "default_reply_language": "简体中文",
+    "upstream_skill_sha256": "7cd36cbcd1f57d5216931d1c231b3e8774e4b5c9fec42e9ee1cb689e457bf33f",
+    "adapted_skill_sha256": "37edc876739a4beeac184e91741bc16a91bd11e3dd94c70fcfe717970a89578d",
+    "description": "在frontmatter中添加/更新category；在正文最前加入回复语言指令。上游原文件保存在PROVENANCE/UPSTREAM_SKILL.md。"
+  },
+  "adapted_skill_sha256": "baf044b314b111e27320753bdf697b17cc8d7e563033990197671eb36ae534a0",
+  "adaptation_v2": {
+    "active_files_changed": [
+      "移出上传包内的上游入口文件副本；固定来源、原文哈希和许可仍保留",
+      "移出上传包内的上游 README 副本；固定仓库地址仍保留"
+    ],
+    "upstream_archive_and_hashes_preserved": true
+  }
+}

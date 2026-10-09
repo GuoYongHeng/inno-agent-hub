@@ -1,0 +1,48 @@
+{
+  "name": "check-understanding",
+  "number": 12,
+  "repo_url": "https://github.com/yugash007/edu-agent-skills",
+  "source_url": "https://github.com/yugash007/edu-agent-skills/blob/e75f44303570bb2eae37a8f7536c0358be2502ee/skills/assessment/check-understanding/SKILL.md",
+  "commit": "e75f44303570bb2eae37a8f7536c0358be2502ee",
+  "source_version": "1.1.0",
+  "license": "MIT",
+  "license_url": "https://github.com/yugash007/edu-agent-skills/blob/e75f44303570bb2eae37a8f7536c0358be2502ee/LICENSE",
+  "author": "edu-agent-skills contributors",
+  "origin_status": "README、包名与本仓库来源一致",
+  "source_archive_sha256": "07b02e7733b2212ae582db917ecb5f5a880473178ed88feb157ce49947a5fcf8",
+  "built_at_utc": "2026-10-01T03:22:46.499549+00:00",
+  "source_content_modified": true,
+  "source_files": [
+    {
+      "path": "SKILL.md",
+      "git_blob_sha1": "0125ad09e2b9f3ae3454df24bf55be52b3d2a468",
+      "sha256": "fbcd0be7500df8e22e69860a2eb213b726b62ced669b8fd044a3e129793cbf10"
+    },
+    {
+      "path": "examples.md",
+      "git_blob_sha1": "aa15b9b50396046d8da573a4a355558dc4f18f98",
+      "sha256": "fe01b5b205dfba750e5461892953b93f68b6722f5bf2d2024354728b6e03971c"
+    }
+  ],
+  "status": "InnoSpark_zh_CN_candidate_NOT_client_validated",
+  "scope_note": "Source bytes preserved. Added root LICENSE and provenance. No InnoSpark upload or tests performed.",
+  "known_dependency_boundary": "纯文本流程加跨Skill路由；socratic-mode、teach-concept、challenge-generator等并未因上传本包而自动可用。记忆持久化需另有实际工具或人工导入导出台账。",
+  "source_read_coverage": "SKILL.md全文；完整目录只有SKILL.md和examples.md，无独立README；示例未逐字审阅",
+  "official_criteria_results": "",
+  "client_behavior_result": "",
+  "adaptation": {
+    "category": "评",
+    "default_reply_language": "简体中文",
+    "upstream_skill_sha256": "fbcd0be7500df8e22e69860a2eb213b726b62ced669b8fd044a3e129793cbf10",
+    "adapted_skill_sha256": "bc14446cfc814b925ae9282718742a6472b7b617a550ae9b5a3ab4e075095648",
+    "description": "在frontmatter中添加/更新category；在正文最前加入回复语言指令。上游原文件保存在PROVENANCE/UPSTREAM_SKILL.md。"
+  },
+  "adapted_skill_sha256": "30c9f893b155b2d0d64e02c4e01ad12f667f7355f35b87693e7568f0aced13fe",
+  "adaptation_v2": {
+    "active_files_changed": [
+      "移出上传包内的上游入口文件副本；固定来源、原文哈希和许可仍保留",
+      "移出上传包内的上游 README 副本；固定仓库地址仍保留"
+    ],
+    "upstream_archive_and_hashes_preserved": true
+  }
+}
