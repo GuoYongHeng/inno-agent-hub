@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: gap-analysis-from-student-work
+name-zh: "基于学生作业的学情差距分析助手"
 description: "Analyse student work against criteria to identify specific gaps between current performance and learning objectives. Use when reviewing submissions, planning feedback, or diagnosing learning needs."
 disable-model-invocation: false
 user-invocable: true

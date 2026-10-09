@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: cognitive-load-analyser
+name-zh: "学习任务认知负荷分析"
 category: 课程教学
 description: "分析学习任务中的认知负荷问题，并提出具体的设计改进建议。适用于任务超出学生承受能力、指令复杂或材料需要简化的场景。"
 disable-model-invocation: false

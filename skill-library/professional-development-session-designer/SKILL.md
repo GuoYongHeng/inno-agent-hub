@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: professional-development-session-designer
+name-zh: "校本教研活动设计助手"
 description: "【校本教研活动设计助手】Design a professional development session using adult learning principles with active teacher engagement. Use when planning INSET days, CPD workshops, or staff training sessions."
 disable-model-invocation: false
 user-invocable: true

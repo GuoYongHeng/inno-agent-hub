@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: assessment-validity-checker
+name-zh: "评价效度校验助手"
 description: "Audit a proposed assessment for construct validity, reliability, and alignment to learning objectives. Use when reviewing or quality-assuring assessments before deployment."
 disable-model-invocation: false
 user-invocable: true

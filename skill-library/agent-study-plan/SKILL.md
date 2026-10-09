@@ -1,5 +1,6 @@
 ---
 name: "可执行学习计划助手"
+name-zh: "学习计划智能助手"
 category: 学习发展
 description: "把模糊目标拆成今天、这一周和下一轮可执行的学习安排。 Workflow: agent_study_plan.run."
 version: "0.10.0"

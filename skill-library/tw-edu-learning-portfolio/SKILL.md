@@ -1,5 +1,6 @@
 ---
 name: tw-edu-learning-portfolio
+name-zh: "TW教育学习档案助手"
 description: "协助整理学习证据、反思与成果。适用于学习历程、成果反思。"
 version: 4.0.0
 author: 奇老师・数位叙事力社群

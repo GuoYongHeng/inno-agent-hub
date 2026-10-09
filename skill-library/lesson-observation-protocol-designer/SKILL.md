@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: lesson-observation-protocol-designer
+name-zh: "观课量表设计助手"
 description: "【观课量表设计助手】Design a focused lesson observation protocol with specific look-fors and evidence collection methods. Use when planning peer observations, coaching visits, or developmental classroom visits."
 disable-model-invocation: false
 user-invocable: true

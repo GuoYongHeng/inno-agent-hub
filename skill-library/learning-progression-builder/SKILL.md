@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: learning-progression-builder
+name-zh: "学习进阶路径设计"
 category: 课程教学
 description: "为目标技能或理解构建从先备知识到熟练掌握的学习进阶路径。适用于安排教学内容顺序、设计诊断评估或梳理先备知识缺口的场景。"
 disable-model-invocation: false

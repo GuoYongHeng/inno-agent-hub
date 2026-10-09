@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "知识迁移挑战教练"
+name-zh: "知识迁移桥梁搭建助手"
 category: 学习发展
 description: "After the learner demonstrates understanding of a concept, present near-transfer and far-transfer challenges. Use to test whether learning is portable or task-specific — this is what separates understanding from familiarity."
 disable-model-invocation: false

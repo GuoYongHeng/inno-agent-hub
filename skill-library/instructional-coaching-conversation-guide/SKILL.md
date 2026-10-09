@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: instructional-coaching-conversation-guide
+name-zh: "教研带教对话指导助手"
 description: "【教研带教对话指导助手】Generate a coaching conversation guide with questions, protocols, and follow-up actions for a teaching focus. Use when preparing for coaching sessions, mentoring, or peer feedback conversations."
 disable-model-invocation: false
 user-invocable: true

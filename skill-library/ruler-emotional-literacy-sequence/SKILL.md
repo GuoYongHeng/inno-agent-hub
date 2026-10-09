@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "RULER情绪素养活动"
+name-zh: "RULER情感素养序列设计助手"
 category: 学习发展
 description: "Design a RULER emotional literacy sequence for recognising, understanding, labelling, expressing, and regulating emotions. Use when students struggle with emotional regulation, conflict, or anxiety."
 disable-model-invocation: false

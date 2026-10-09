@@ -1,5 +1,6 @@
 ---
 name: "Python 项目学习教练"
+name-zh: "大学计算机Python辅导助手"
 category: 学习发展
 description: "把 Python 学习从“看完教程就忘”变成语法理解、小项目、调试反馈和作品沉淀。核心不是再推荐一堆资料，而是让用户今天能完成一个可检查的小成果。 Workflow: college_cs_python.run."
 version: "0.10.0"

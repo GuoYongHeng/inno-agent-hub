@@ -1,5 +1,6 @@
 ---
 name: "primary-math-mental-arithmetic"
+name-zh: "小学数学每日口算训练"
 category: 课程教学
 description: "为小学生生成短、准、可批改的口算训练，让每天 5-10 分钟练出速度、准确率和数感。"
 version: "0.10.0"

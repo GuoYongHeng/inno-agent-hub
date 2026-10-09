@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: dialogic-teaching-move-generator
+name-zh: "课堂对话推进策略"
 category: 课程教学
 description: "针对学生在课堂上的具体回应，生成延伸其思考的后续教学策略。适用于学生提出值得探讨的观点，教师希望进一步深化对话的场景。"
 disable-model-invocation: false

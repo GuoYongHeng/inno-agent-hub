@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: variation-theory-task-designer
+name-zh: "概念变式学习设计"
 category: 课程教学
 description: "运用变式理论中的对比、分离与融合，设计教授概念关键特征的任务。适用于学生混淆相似概念或无法辨别关键差异的场景。"
 disable-model-invocation: false

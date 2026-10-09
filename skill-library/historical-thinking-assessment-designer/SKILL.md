@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: historical-thinking-assessment-designer
+name-zh: "历史思维评价设计助手"
 description: "Design formative assessments that make students' historical thinking visible — revealing whether they source, close-read, contextualise, and corroborate. Use when assessing historical thinking skills or planning a diagnostic."
 disable-model-invocation: false
 user-invocable: true

@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: ai-feedback-design-principles
+name-zh: "AI反馈设计原则指导助手"
 description: "Audit and redesign AI-generated feedback for pedagogical quality, timing, and learning impact. Use when building or reviewing automated feedback in digital learning tools."
 disable-model-invocation: false
 user-invocable: true

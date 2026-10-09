@@ -1,5 +1,6 @@
 ---
 name: check-understanding
+name-zh: "理解度核查助手"
 description: Use when verifying whether the learner truly understands a concept through reasoning and application, not recall trivia.
 version: 1.1.0
 authors:

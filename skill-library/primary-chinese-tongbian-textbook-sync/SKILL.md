@@ -1,5 +1,6 @@
 ---
 name: "primary-chinese-tongbian-textbook-sync"
+name-zh: "小学语文统编教材同步学习"
 category: 课程教学
 description: "把统编版小学语文的年级、册别、单元和学习场景，转成预习、同步练习、错题追练、单元复习和考前巩固等可直接执行的学习任务。让家长和学生知道今天这篇课文到底要学会什么、怎么练才不空泛。"
 version: "0.10.0"

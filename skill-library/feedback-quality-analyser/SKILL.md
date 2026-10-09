@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: feedback-quality-analyser
+name-zh: "反馈质量分析助手"
 description: "Analyse existing written feedback for quality, specificity, actionability, and impact on student learning. Use when reviewing teacher or peer feedback to improve feedback practices."
 disable-model-invocation: false
 user-invocable: true

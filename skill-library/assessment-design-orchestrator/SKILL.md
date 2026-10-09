@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: assessment-design-orchestrator
+name-zh: "评价设计统筹助手"
 description: "Routes between five assessment pathways — formative, rubric/criteria, authentic/performance, peer/self, and diagnostic — with validity and equity checks. Use when a teacher needs help choosing how to assess."
 disable-model-invocation: false
 user-invocable: true

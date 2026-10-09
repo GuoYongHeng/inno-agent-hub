@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: coherent-rubric-logic-builder
+name-zh: "量规逻辑连贯性构建助手"
 description: "Build a five-level rubric with coherent logic for a learning target within a developmental band. Use for Manning methodology programmes where Competent = success. For general curriculum rubrics, use criterion-referenced-rubric-generator instead."
 disable-model-invocation: true
 user-invocable: true

@@ -1,5 +1,6 @@
 ---
 name: "拍照识题与引导答疑"
+name-zh: "拍照搜题智能助手"
 category: 学习发展
 description: "把拍照题目转成先识题、再讲思路、最后追问确认的学习过程，而不是只给答案。 Workflow: agent_photo_question.run."
 version: "0.10.0"

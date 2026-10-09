@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "学习自我效能培养"
+name-zh: "自我效能感培养序列设计助手"
 category: 学习发展
 description: "Design a mastery experience sequence that systematically builds student confidence in a skill they avoid. Use when students say 'I can't do this', avoid tasks, or show learned helplessness."
 disable-model-invocation: false

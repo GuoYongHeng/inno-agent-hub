@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: single-point-rubric-designer
+name-zh: "单点评价量规设计助手"
 description: "Design a single-point rubric with one criterion and open columns for evidence. Use for student self-assessment, peer feedback, teacher formative feedback, or pre-task planning. Works with any learning target, with or without a band system."
 disable-model-invocation: true
 user-invocable: true

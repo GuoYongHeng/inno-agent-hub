@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "先解释后反馈教练"
+name-zh: "先解释后追问助手"
 category: 学习发展
 description: "Require the learner to explain a concept in their own words before the AI evaluates or extends it. Ensures the AI works from the learner's understanding rather than providing an explanation from scratch."
 disable-model-invocation: false

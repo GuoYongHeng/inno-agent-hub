@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: lesson-study-cycle-designer
+name-zh: "课例研究磨课循环设计助手"
 description: "【课例研究磨课循环设计助手】Design a complete lesson study cycle from research question through collaborative planning to research lesson. Use when planning jugyou kenkyuu or collaborative teacher inquiry into practice."
 disable-model-invocation: false
 user-invocable: true

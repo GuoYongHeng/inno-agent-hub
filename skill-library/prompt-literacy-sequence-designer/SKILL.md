@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: prompt-literacy-sequence-designer
+name-zh: "学生提示词素养教学设计"
 category: 课程教学
 description: "设计教授提示词质量的学习序列，通过对比模糊与经过改进的提示词，展示具体表述和背景信息为何会改变 AI 输出。适用于学生使用 AI 却不了解输出质量为何有差异的场景。"
 disable-model-invocation: false

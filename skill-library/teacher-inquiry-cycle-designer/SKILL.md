@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: teacher-inquiry-cycle-designer
+name-zh: "教师行动研究循环设计助手"
 description: "【教师行动研究循环设计助手】Design a practitioner inquiry cycle from research question through data collection to evidence-informed action. Use when starting action research, teacher-led investigation, or professional inquiry."
 disable-model-invocation: false
 user-invocable: true

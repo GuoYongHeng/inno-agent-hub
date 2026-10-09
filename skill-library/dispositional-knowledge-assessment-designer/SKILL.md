@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: dispositional-knowledge-assessment-designer
+name-zh: "心智倾向评价设计助手"
 description: "Design multi-informant assessment approaches for dispositional competencies like curiosity or resilience. Use when assessing character strengths or competencies that written tests cannot capture."
 disable-model-invocation: true
 user-invocable: true

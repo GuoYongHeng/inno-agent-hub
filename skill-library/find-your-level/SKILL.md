@@ -1,5 +1,6 @@
 ---
 name: find-your-level
+name-zh: "学习水平定位助手"
 description: Use when a learner's technical level is unknown or uncertain, requiring diagnostic calibration before teaching begins.
 version: 1.1.0
 authors:

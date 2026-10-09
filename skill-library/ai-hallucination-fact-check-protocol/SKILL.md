@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: ai-hallucination-fact-check-protocol
+name-zh: "AI生成内容事实核查教学"
 category: 课程教学
 description: "为 AI 生成的文本设计事实核查流程，在 SIFT 核查法的基础上增加针对 AI 幻觉检测的调整。适用于学生需要核实 AI 生成的主张和引用的场景。"
 disable-model-invocation: false

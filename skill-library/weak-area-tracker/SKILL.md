@@ -1,5 +1,6 @@
 ---
 name: weak-area-tracker
+name-zh: "学习薄弱环节追踪助手"
 description: Use when logging, scoring, and triaging a learner's persistent weak areas to drive intervention selection.
 version: 1.1.0
 authors:

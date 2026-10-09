@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: vocabulary-tiering-tool
+name-zh: "分层词汇教学设计"
 category: 课程教学
 description: "将文本或主题中的词汇分为日常、学术和专业三类，并确定教学优先级。适用于提前教授词汇或识别文本中语言障碍的场景。"
 disable-model-invocation: false

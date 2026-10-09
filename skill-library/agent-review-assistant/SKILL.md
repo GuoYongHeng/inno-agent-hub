@@ -1,5 +1,6 @@
 ---
 name: "检索纠错复习助手"
+name-zh: "智能复习助手"
 category: 学习发展
 description: "把复习从重新看笔记变成检索、纠错、归纳和再练习的闭环。 Workflow: agent_review_assistant.run."
 version: "0.10.0"

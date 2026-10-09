@@ -1,5 +1,6 @@
 ---
 name: claude-edu-adaptive-learning-design
+name-zh: "自适应学习路径设计"
 description: "为教师和课程设计者设计自适应学习单元，或根据前测、正确率、错题和用时调整学习路径。适用于分层内容、形成性评价、晋级规则，以及低带宽或离线条件下的教学设计。"
 title: 自适应学习设计 (Adaptive Learning Design)
 category: 课程教学

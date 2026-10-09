@@ -1,5 +1,6 @@
 ---
 name: tw-edu-worksheet-creator
+name-zh: "学生学习单设计与生成"
 category: 课程教学
 description: "编排学生可完成的练习与思考任务。适用于学习单、练习单。"
 version: 4.0.0

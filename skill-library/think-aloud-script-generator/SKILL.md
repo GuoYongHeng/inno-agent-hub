@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: think-aloud-script-generator
+name-zh: "教师思维示范脚本"
 category: 课程教学
 description: "为教师编写出声思考脚本，示范完成特定任务时的专家推理过程。适用于示范问题解决、写作、阅读理解或分析过程的场景。"
 disable-model-invocation: false

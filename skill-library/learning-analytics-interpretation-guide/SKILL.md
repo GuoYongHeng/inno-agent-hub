@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: learning-analytics-interpretation-guide
+name-zh: "学习分析数据解读指导助手"
 description: "Interpret learning analytics data and translate dashboard findings into actionable teaching decisions. Use when reviewing LMS data, quiz patterns, or engagement metrics."
 disable-model-invocation: false
 user-invocable: true

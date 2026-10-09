@@ -1,5 +1,6 @@
 ---
 name: claude-edu-education-research-design
+name-zh: "教育研究设计助手"
 description: 【教育研究设计助手】協助教育研究者設計嚴謹的研究計畫，包括研究問題形成、研究方法選擇、資料收集與分析策略規劃。適用於研究方法相關的教學設計與實施場景。
 title: 教育研究設計 (Educational Research Design)
 category: 教研科研

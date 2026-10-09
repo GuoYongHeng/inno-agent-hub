@@ -1,5 +1,6 @@
 ---
 name: "preschool-literacy-daily"
+name-zh: "学前每日识字训练"
 category: 课程教学
 description: "把学前识字做成“看见、读出、理解、会用”的轻量游戏，不让孩子在机械认字里失去兴趣。"
 version: "0.12.0"

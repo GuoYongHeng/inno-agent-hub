@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: text-complexity-analyser
+name-zh: "教学文本复杂度分析"
 category: 课程教学
 description: "从定量、定性以及读者与任务三个维度分析文本复杂度，并提供学习支架建议。适用于选择文本、评估可读性或规划阅读支持的场景。"
 disable-model-invocation: false

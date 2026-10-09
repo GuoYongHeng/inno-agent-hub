@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: error-analysis-protocol
+name-zh: "错题分析流程指导助手"
 description: "Design an error analysis protocol to diagnose the root cause of student mistakes and misconceptions. Use when error patterns appear in student work and targeted feedback is needed."
 disable-model-invocation: false
 user-invocable: true

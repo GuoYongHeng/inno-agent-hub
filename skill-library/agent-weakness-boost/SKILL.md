@@ -1,5 +1,6 @@
 ---
 name: "薄弱知识点提升助手"
+name-zh: "弱项提升智能助手"
 category: 学习发展
 description: "把“薄弱项”从模糊标签变成一个可诊断、可练习、可复测的小专题提升闭环。 Workflow: agent_weakness_boost.run."
 version: "0.10.0"

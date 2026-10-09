@@ -1,5 +1,6 @@
 ---
 name: "家长陪学脚本助手"
+name-zh: "家长陪伴智能助手"
 category: 学习发展
 description: "家长陪学把家长的“我该怎么陪”变成少催促、可执行、能复盘的陪学脚本。重点不是替家长管孩子，而是把家庭学习场景拆成可沟通、可执行、可复盘的小步骤。 Workflow: agent_parent_companion.run."
 version: "0.10.0"
