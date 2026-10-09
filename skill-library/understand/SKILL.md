@@ -1,5 +1,6 @@
 ---
 name: understand
+name-zh: "代码库理解"
 category: 开发工具
 subject: 其它
 kind: 开发工具

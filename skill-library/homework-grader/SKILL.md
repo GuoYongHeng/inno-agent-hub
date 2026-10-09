@@ -1,5 +1,6 @@
 ---
 name: homework-grader
+name-zh: "作业批改器"
 category: 教学辅导
 subject: 跨学科
 kind: 评价测评

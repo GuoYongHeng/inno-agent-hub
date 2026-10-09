@@ -1,5 +1,6 @@
 ---
 name: baoyu-comic
+name-zh: "宝玉漫画"
 category: 内容创作
 subject: 跨学科
 kind: 课件生成

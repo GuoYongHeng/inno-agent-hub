@@ -1,5 +1,6 @@
 ---
 name: baoyu-slide-deck
+name-zh: "宝玉幻灯片"
 category: 内容创作
 subject: 跨学科
 kind: 课件生成

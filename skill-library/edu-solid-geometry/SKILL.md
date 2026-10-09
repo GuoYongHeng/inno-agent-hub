@@ -1,5 +1,6 @@
 ---
 name: edu-solid-geometry
+name-zh: "立体几何教学"
 category: 教学辅导
 subject: 数学
 kind: 课件生成

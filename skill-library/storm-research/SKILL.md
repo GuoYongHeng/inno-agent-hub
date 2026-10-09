@@ -1,5 +1,6 @@
 ---
 name: storm-research
+name-zh: "风暴研究"
 category: 研究检索
 subject: 跨学科
 kind: 教研科研

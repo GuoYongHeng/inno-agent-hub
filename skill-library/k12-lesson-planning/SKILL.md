@@ -1,5 +1,6 @@
 ---
 name: k12-lesson-planning
+name-zh: "K12课程设计"
 category: 教学辅导
 subject: 跨学科
 kind: 教学设计

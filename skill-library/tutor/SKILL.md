@@ -1,5 +1,6 @@
 ---
 name: tutor
+name-zh: "导师"
 category: 教学辅导
 subject: 跨学科
 kind: 学习辅导

@@ -1,5 +1,6 @@
 ---
 name: theme-factory
+name-zh: "主题工厂"
 category: 内容创作
 subject: 跨学科
 kind: 课件生成

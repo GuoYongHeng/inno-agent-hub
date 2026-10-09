@@ -1,5 +1,6 @@
 ---
 name: webapp-testing
+name-zh: "Web应用测试"
 category: 开发工具
 subject: 其它
 kind: 开发工具

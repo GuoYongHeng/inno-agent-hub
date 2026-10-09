@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: backwards-design-unit-planner
+name-zh: "逆向设计单元规划器"
 category: 教学辅导
 subject: 跨学科
 kind: 教学设计

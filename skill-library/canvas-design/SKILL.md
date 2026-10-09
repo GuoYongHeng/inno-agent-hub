@@ -1,5 +1,6 @@
 ---
 name: canvas-design
+name-zh: "画布设计"
 category: 内容创作
 subject: 艺术
 kind: 内容创作

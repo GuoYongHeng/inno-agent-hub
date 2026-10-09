@@ -1,5 +1,6 @@
 ---
 name: baoyu-url-to-markdown
+name-zh: "宝玉网页转Markdown"
 category: 文档处理
 subject: 跨学科
 kind: 文档处理

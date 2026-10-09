@@ -1,5 +1,6 @@
 ---
 name: Exam2Knowledge
+name-zh: "考题转知识"
 category: 教学辅导
 subject: 跨学科
 kind: 评价测评

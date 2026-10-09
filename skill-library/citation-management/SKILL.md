@@ -1,5 +1,6 @@
 ---
 name: citation-management
+name-zh: "引用管理"
 category: 研究检索
 subject: 跨学科
 kind: 教研科研

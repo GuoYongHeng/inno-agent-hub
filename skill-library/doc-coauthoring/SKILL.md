@@ -1,5 +1,6 @@
 ---
 name: doc-coauthoring
+name-zh: "文档协作写作"
 category: 文档处理
 subject: 其它
 kind: 文档处理

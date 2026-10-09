@@ -1,5 +1,6 @@
 ---
 name: frontend-design
+name-zh: "前端设计"
 category: 内容创作
 subject: 其它
 kind: 开发工具

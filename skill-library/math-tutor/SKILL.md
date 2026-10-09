@@ -1,5 +1,6 @@
 ---
 name: math-tutor
+name-zh: "数学导师"
 category: 教学辅导
 subject: 数学
 kind: 学习辅导

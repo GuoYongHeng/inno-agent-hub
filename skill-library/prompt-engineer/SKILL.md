@@ -1,5 +1,6 @@
 ---
 name: prompt-engineer
+name-zh: "提示词工程师"
 category: 开发工具
 subject: 其它
 kind: 开发工具

@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: differentiation-adapter
+name-zh: "差异化教学适配器"
 category: 教学辅导
 subject: 跨学科
 kind: 教学设计

@@ -1,5 +1,6 @@
 ---
 name: frontend-slides
+name-zh: "前端幻灯片"
 category: 内容创作
 subject: 跨学科
 kind: 课件生成

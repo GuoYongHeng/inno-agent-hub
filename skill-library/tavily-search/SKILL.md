@@ -1,5 +1,6 @@
 ---
 name: tavily-search
+name-zh: "Tavily搜索"
 category: 研究检索
 subject: 跨学科
 kind: 通用工具

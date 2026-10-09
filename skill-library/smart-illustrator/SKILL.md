@@ -1,5 +1,6 @@
 ---
 name: smart-illustrator
+name-zh: "智能插画师"
 category: 内容创作
 subject: 跨学科
 kind: 课件生成

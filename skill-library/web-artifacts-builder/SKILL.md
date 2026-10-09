@@ -1,5 +1,6 @@
 ---
 name: web-artifacts-builder
+name-zh: "Web构件构建器"
 category: 内容创作
 subject: 其它
 kind: 开发工具

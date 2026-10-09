@@ -1,5 +1,6 @@
 ---
 name: edu-analytic-geometry
+name-zh: "解析几何教学"
 category: 教学辅导
 subject: 数学
 kind: 课件生成
