@@ -1,0 +1,53 @@
+{
+  "name": "weak-area-tracker",
+  "number": 14,
+  "repo_url": "https://github.com/yugash007/edu-agent-skills",
+  "source_url": "https://github.com/yugash007/edu-agent-skills/blob/e75f44303570bb2eae37a8f7536c0358be2502ee/skills/memory/weak-area-tracker/SKILL.md",
+  "commit": "e75f44303570bb2eae37a8f7536c0358be2502ee",
+  "source_version": "1.1.0",
+  "license": "MIT",
+  "license_url": "https://github.com/yugash007/edu-agent-skills/blob/e75f44303570bb2eae37a8f7536c0358be2502ee/LICENSE",
+  "author": "edu-agent-skills contributors",
+  "origin_status": "README、包名与本仓库来源一致",
+  "source_archive_sha256": "07b02e7733b2212ae582db917ecb5f5a880473178ed88feb157ce49947a5fcf8",
+  "built_at_utc": "2026-10-01T03:22:46.504335+00:00",
+  "source_content_modified": true,
+  "source_files": [
+    {
+      "path": "README.md",
+      "git_blob_sha1": "f6f2ffb21a42a59317ca53356af670360c626cac",
+      "sha256": "3e9d9a5952e7d0b0bdae11b0880c225e90b498b7c39a1037a15806b572851e07"
+    },
+    {
+      "path": "SKILL.md",
+      "git_blob_sha1": "d6dd5d65e210496aa544e506d37fe084345803a6",
+      "sha256": "19fff5cc8487828eab50d01215f054296daf380b1a9d86de76aa9b95ac8c0384"
+    },
+    {
+      "path": "examples.md",
+      "git_blob_sha1": "2a1fcd8ee98356b19ab256adc0ae0e55108f5bb1",
+      "sha256": "3ddafd93ab2f81ab58ed12c293fb264094fbaa8c2334b202de6497b006f4c9b8"
+    }
+  ],
+  "status": "InnoSpark_zh_CN_candidate_NOT_client_validated",
+  "scope_note": "Source bytes preserved. Added root LICENSE and provenance. No InnoSpark upload or tests performed.",
+  "known_dependency_boundary": "纯文本流程加跨Skill路由；socratic-mode、teach-concept、challenge-generator等并未因上传本包而自动可用。记忆持久化需另有实际工具或人工导入导出台账。",
+  "source_read_coverage": "SKILL.md 全文；README 草案标记已见；完整目录树已核；examples.md未逐字审阅",
+  "official_criteria_results": "",
+  "client_behavior_result": "",
+  "adaptation": {
+    "category": "评",
+    "default_reply_language": "简体中文",
+    "upstream_skill_sha256": "19fff5cc8487828eab50d01215f054296daf380b1a9d86de76aa9b95ac8c0384",
+    "adapted_skill_sha256": "6cf3eb9b3bdd72deecc3c9563d5a3fbfee2ca0eb71671f08478fa110b46af024",
+    "description": "在frontmatter中添加/更新category；在正文最前加入回复语言指令。上游原文件保存在PROVENANCE/UPSTREAM_SKILL.md。"
+  },
+  "adapted_skill_sha256": "5864a63967f381d32ee6f0420696278b9811e3ebcd4e67106410d58224c58827",
+  "adaptation_v2": {
+    "active_files_changed": [
+      "移出上传包内的上游入口文件副本；固定来源、原文哈希和许可仍保留",
+      "移出上传包内的上游 README 副本；固定仓库地址仍保留"
+    ],
+    "upstream_archive_and_hashes_preserved": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "gap-analysis-from-student-work",
+  "number": 9,
+  "repo_url": "https://github.com/GarethManning/education-agent-skills",
+  "source_url": "https://github.com/GarethManning/education-agent-skills/blob/6bbbce418f82e11044009c9f3b7373a354de5bd0/skills/curriculum-assessment/gap-analysis-from-student-work/SKILL.md",
+  "commit": "6bbbce418f82e11044009c9f3b7373a354de5bd0",
+  "source_version": "1.0",
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://github.com/GarethManning/education-agent-skills/blob/6bbbce418f82e11044009c9f3b7373a354de5bd0/LICENSE",
+  "author": "Gareth Manning；#25 另列贡献者 Sean Hu",
+  "origin_status": "仓库自述与安装来源一致，原始发布仓库已定位",
+  "source_archive_sha256": "d7f800ffd1f5b6f2f9f1c16229a937e32ebb203a99f9946e1a882b1948c4162d",
+  "built_at_utc": "2026-10-01T03:22:48.924072+00:00",
+  "source_content_modified": true,
+  "source_files": [
+    {
+      "path": "SKILL.md",
+      "git_blob_sha1": "283bb6a5736763553625d05cbafa6389a62abff0",
+      "sha256": "27428b49667ccbfed30ae854ad5fed2ca3fc5a0f4cf2f44701f5ba296fc71be6"
+    }
+  ],
+  "status": "InnoSpark_zh_CN_candidate_NOT_client_validated",
+  "scope_note": "Source bytes preserved. Added root LICENSE and provenance. No InnoSpark upload or tests performed.",
+  "known_dependency_boundary": "主体为文本指令，已读部分未要求本地脚本或付费API。chains_well_with不等于依赖已安装；#5明确依赖跨Skill组件。上下文/学习数据由用户提供；远端MCP不是本次单包测试的前提。",
+  "source_read_coverage": "读取源文件1–180行；尾部示例未全部展开",
+  "official_criteria_results": "",
+  "client_behavior_result": "",
+  "adaptation": {
+    "category": "评",
+    "default_reply_language": "简体中文",
+    "upstream_skill_sha256": "27428b49667ccbfed30ae854ad5fed2ca3fc5a0f4cf2f44701f5ba296fc71be6",
+    "adapted_skill_sha256": "e7798afb0e704841ad12aae95b98ca8ecae7365aad955875938d38af35869eb5",
+    "description": "在frontmatter中添加/更新category；在正文最前加入回复语言指令。上游原文件保存在PROVENANCE/UPSTREAM_SKILL.md。"
+  },
+  "adapted_skill_sha256": "82f8f4d1290240a9a7ea9bf58f20bb87ccd8386314610ab0cf923c8afbf28a10",
+  "adaptation_v2": {
+    "active_files_changed": [
+      "移出上传包内的上游入口文件副本；固定来源、原文哈希和许可仍保留",
+      "移出上传包内的上游 README 副本；固定仓库地址仍保留"
+    ],
+    "upstream_archive_and_hashes_preserved": true
+  }
+}

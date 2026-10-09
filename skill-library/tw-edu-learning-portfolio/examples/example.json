@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "skill": "tw-edu-learning-portfolio",
+  "language": "zh-CN",
+  "context": {
+    "subject": "语文",
+    "grade": "初中八年级",
+    "topic": "环境观察"
+  },
+  "sources": [
+    {
+      "title": "教师提供教材",
+      "status": "user_provided"
+    }
+  ],
+  "content": {
+    "title": "学习历程（范例）",
+    "records": [
+      {
+        "date": "2026-09-01",
+        "artifact": "观察短文",
+        "evidence": "修订前后版本",
+        "reflection": "我增加了听觉细节。",
+        "next_step": "检查段落衔接。"
+      }
+    ]
+  }
+}
