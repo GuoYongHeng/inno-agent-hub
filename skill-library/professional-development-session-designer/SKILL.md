@@ -70,7 +70,7 @@ chains_well_with:
   - "technological-pedagogical-content-knowledge-developer"
 teacher_time: "4 minutes"
 tags: ["CPD", "professional-development", "Timperley", "adult-learning", "INSET", "staff-training"]
-category: 教研方法
+category: 教研科研
 ---
 
 **默认使用简体中文输出；用户明确指定其他语言时以用户指令为准。**

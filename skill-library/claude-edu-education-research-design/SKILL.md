@@ -2,7 +2,7 @@
 name: claude-edu-education-research-design
 description: 【教育研究设计助手】協助教育研究者設計嚴謹的研究計畫，包括研究問題形成、研究方法選擇、資料收集與分析策略規劃。適用於研究方法相關的教學設計與實施場景。
 title: 教育研究設計 (Educational Research Design)
-category: 研究方法
+category: 教研科研
 source: ChatGPT3a01/claude-educational-ai-skills
 source_path: 研究方法/education-research-design.md
 converted: 由平铺 Markdown 自动升级为标准 SKILL 结构

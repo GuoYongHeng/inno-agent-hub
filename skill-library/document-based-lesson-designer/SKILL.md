@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: document-based-lesson-designer
+category: 课程教学
 description: "采用“像历史学家一样阅读”的四部分结构，设计完整的史料教学课。适用于规划一手史料探究课，或将教材教学转化为史料探究的场景。"
 disable-model-invocation: false
 user-invocable: true

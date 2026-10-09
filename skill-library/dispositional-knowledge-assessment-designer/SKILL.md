@@ -84,7 +84,7 @@ chains_well_with:
   - "kud-knowledge-type-mapper"
 teacher_time: "5 minutes"
 tags: ["dispositional-knowledge", "assessment", "multi-informant", "coaching-feedback", "developmental-bands", "agency", "collaboration", "self-regulation", "observation", "self-reflection"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

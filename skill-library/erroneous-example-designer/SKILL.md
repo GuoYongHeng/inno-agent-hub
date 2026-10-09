@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: erroneous-example-designer
+category: 课程教学
 description: "设计刻意包含错误的示例，培养学生识别错误的能力并加深理解。适用于学生出现典型错误，需要练习发现错误的场景。"
 disable-model-invocation: false
 user-invocable: true

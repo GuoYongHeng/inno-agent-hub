@@ -78,7 +78,7 @@ chains_well_with:
   - "udl-barrier-anticipator"
 teacher_time: "10-15 minutes"
 tags: ["orchestrator", "composite-framework", "practitioner-framework", "emerging-evidence", "assessment", "formative-assessment", "rubric", "authentic-assessment", "peer-assessment", "diagnostic", "validity", "equity"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

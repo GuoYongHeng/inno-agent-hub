@@ -75,7 +75,7 @@ chains_well_with:
   - "historical-source-adapter"
 teacher_time: "4 minutes"
 tags: ["assessment", "historical-thinking", "formative-assessment", "HATs", "diagnostic", "sourcing", "close-reading", "contextualisation", "corroboration", "DIG"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

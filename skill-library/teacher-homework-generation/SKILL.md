@@ -1,5 +1,6 @@
 ---
 name: "teacher-homework-generation"
+category: 课程教学
 description: "帮助老师生成分层、可批改、不过量的作业，而不是堆题。"
 version: "0.10.0"
 author: zhongwei

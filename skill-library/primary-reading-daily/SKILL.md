@@ -1,5 +1,6 @@
 ---
 name: "primary-reading-daily"
+category: 课程教学
 description: "把小学阅读练成“读懂、找依据、会表达”的短训练，而不是泛泛问读后感。"
 version: "0.10.0"
 author: zhongwei

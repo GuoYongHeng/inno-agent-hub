@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: udl-lesson-auditor
+category: 课程教学
 description: "依据通用学习设计（UDL）的参与、表征以及行动与表达三项原则，审查现有课程。识别具体的学习参与障碍，并按影响程度排序，提出具体修改建议。"
 disable-model-invocation: false
 user-invocable: true

@@ -67,7 +67,7 @@ chains_well_with:
   - "kud-knowledge-type-mapper"
 teacher_time: "3 minutes"
 tags: ["validity", "reliability", "assessment-design", "quality-assurance", "measurement"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

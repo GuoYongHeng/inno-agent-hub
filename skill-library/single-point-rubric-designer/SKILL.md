@@ -69,7 +69,7 @@ chains_well_with:
   - "kud-chart-author"
 teacher_time: "3 minutes"
 tags: ["single-point-rubric", "self-assessment", "peer-assessment", "formative-assessment", "criterion", "reflection", "Manning", "Sadler", "Fluckiger"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

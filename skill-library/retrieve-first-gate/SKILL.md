@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "先检索后讲解教练"
+category: 学习发展
 description: "Before any explanation or answer, require the learner to produce a free-recall attempt and confidence rating. Use when a student wants help understanding or reviewing a topic — this skill ensures the AI works from what the learner already knows."
 disable-model-invocation: false
 user-invocable: true

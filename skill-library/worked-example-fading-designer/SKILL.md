@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: worked-example-fading-designer
+category: 课程教学
 description: "设计从完整解题示例逐步过渡到独立练习的渐隐式例题序列。适用于向初学者教授操作步骤、算法或多步骤流程的场景。"
 disable-model-invocation: false
 user-invocable: true

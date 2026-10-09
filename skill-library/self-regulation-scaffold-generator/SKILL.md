@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "自我调节学习脚手架"
+category: 学习发展
 description: "Generate scaffolds supporting student self-regulation across planning, monitoring, and evaluation phases. Use when students struggle to manage their own learning during extended or independent tasks."
 disable-model-invocation: false
 user-invocable: true

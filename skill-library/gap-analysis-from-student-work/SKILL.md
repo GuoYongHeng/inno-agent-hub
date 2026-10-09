@@ -66,7 +66,7 @@ chains_well_with:
   - "kud-knowledge-type-mapper"
 teacher_time: "3 minutes"
 tags: ["gap-analysis", "student-work", "formative-assessment", "feedback", "diagnostic"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "渐进提示阶梯教练"
+category: 学习发展
 description: "Provide graduated assistance from abstract conceptual nudge to concrete procedural step, with reflection required before each escalation. Teaches help-seeking as a skill and prevents direct-answer shortcuts."
 disable-model-invocation: false
 user-invocable: true

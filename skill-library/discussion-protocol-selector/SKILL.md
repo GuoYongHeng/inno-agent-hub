@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: discussion-protocol-selector
+category: 课程教学
 description: "根据讨论目的、主题和群体准备程度，选择并配置结构化讨论流程。适用于规划课堂讨论、苏格拉底式研讨或结构化辩论的场景。"
 disable-model-invocation: false
 user-invocable: true

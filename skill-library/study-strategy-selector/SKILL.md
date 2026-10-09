@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "学习策略选择助手"
+category: 学习发展
 description: "Select evidence-based study strategies matched to material type, learning goal, and student habits. Use when advising students on revision techniques, homework, or independent study approaches."
 disable-model-invocation: false
 user-invocable: true

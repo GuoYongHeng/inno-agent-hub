@@ -1,5 +1,6 @@
 ---
 name: "雅思分项训练教练"
+category: 学习发展
 description: "把雅思备考从背资料变成听说读写诊断、分项训练、输出反馈和复测节奏。核心不是再推荐一堆资料，而是让用户今天能完成一个可检查的小成果。 Workflow: ielts_prep.run."
 version: "0.10.0"
 author: zhongwei

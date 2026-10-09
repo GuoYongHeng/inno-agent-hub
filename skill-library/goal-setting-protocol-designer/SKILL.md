@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "学习目标设定设计器"
+category: 学习发展
 description: "Design a structured goal-setting protocol using SMART or implementation-intention frameworks for students. Use when launching units, projects, or developing student self-direction habits."
 disable-model-invocation: false
 user-invocable: true

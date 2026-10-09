@@ -2,7 +2,7 @@
 name: criterion-referenced-rubric-generator
 description: "评｜根据学习目标和学生任务生成可观察的表现等级、学生自评版及评分者校准说明。"
 license: CC BY-SA 4.0
-category: 评
+category: 评价监测
 ---
 
 ## 回复语言

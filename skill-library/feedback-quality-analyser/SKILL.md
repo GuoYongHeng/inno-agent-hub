@@ -60,7 +60,7 @@ chains_well_with:
   - "kud-knowledge-type-mapper"
 teacher_time: "3 minutes"
 tags: ["feedback", "formative-assessment", "metacognition", "writing", "assessment"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

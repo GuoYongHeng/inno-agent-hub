@@ -1,5 +1,6 @@
 ---
 name: tw-edu-worksheet-creator
+category: 课程教学
 description: "编排学生可完成的练习与思考任务。适用于学习单、练习单。"
 version: 4.0.0
 author: 奇老师・数位叙事力社群

@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "探索尝试与归纳教练"
+category: 学习发展
 description: "Stage exploration before instruction on complex problems. The learner produces two attempted approaches before consolidation — which builds on those attempts, not from scratch. Use for genuinely hard problems where struggle produces deeper learning."
 disable-model-invocation: false
 user-invocable: true

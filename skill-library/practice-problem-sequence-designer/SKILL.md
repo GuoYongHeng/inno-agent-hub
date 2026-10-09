@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: practice-problem-sequence-designer
+category: 课程教学
 description: "生成带有学习支架、难度逐步提升且有策略地安排变化的练习题序列。适用于制作学习单、课后作业或独立练习材料的场景。"
 disable-model-invocation: false
 user-invocable: true

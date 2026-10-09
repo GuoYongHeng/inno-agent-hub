@@ -6,7 +6,7 @@ authors:
   - edu-agent-skills contributors
 tags: [assessment, reasoning, misconception-detection]
 status: stable
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: argument-structure-scaffold-generator
+category: 课程教学
 description: "针对特定主张或问题，使用图尔敏（Toulmin）、观点—证据—解释—回扣（PEEL）或主张—证据—推理（CER）框架生成论证结构支架。适用于各学科的议论性或分析性写作教学。"
 disable-model-invocation: false
 user-invocable: true

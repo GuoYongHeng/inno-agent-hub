@@ -1,5 +1,6 @@
 ---
 name: "亲子阅读陪伴助手"
+category: 学习发展
 description: "亲子阅读陪伴让亲子阅读从“读完了吗”变成有互动、有表达、有下一本书方向的陪读过程。重点不是替家长管孩子，而是把家庭学习场景拆成可沟通、可执行、可复盘的小步骤。 Workflow: family_reading_companion.run."
 version: "0.10.0"
 author: zhongwei

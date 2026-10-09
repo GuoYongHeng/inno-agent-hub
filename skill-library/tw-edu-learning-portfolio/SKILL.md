@@ -3,7 +3,7 @@ name: tw-edu-learning-portfolio
 description: "协助整理学习证据、反思与成果。适用于学习历程、成果反思。"
 version: 4.0.0
 author: 奇老师・数位叙事力社群
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

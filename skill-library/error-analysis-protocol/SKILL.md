@@ -65,7 +65,7 @@ chains_well_with:
   - "worked-example-fading-designer"
 teacher_time: "4 minutes"
 tags: ["error-analysis", "formative-assessment", "misconceptions", "diagnosis", "feedback"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

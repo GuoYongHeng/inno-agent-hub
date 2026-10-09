@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "元认知提示词设计器"
+category: 学习发展
 description: "Build a library of metacognitive prompts targeting planning, monitoring, or evaluation for a specific task. Use when developing students' thinking-about-thinking during independent work."
 disable-model-invocation: false
 user-invocable: true

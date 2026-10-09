@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: project-brief-designer
+category: 课程教学
 description: "设计包含驱动性问题、阶段里程碑和评价标准的项目式学习任务书。适用于规划项目式学习单元、探究项目或长期探究活动的场景。"
 disable-model-invocation: false
 user-invocable: true

@@ -1,5 +1,6 @@
 ---
 name: "家庭作业流程助手"
+category: 学习发展
 description: "家庭作业习惯帮家庭建立固定、轻量、可坚持的作业流程，让孩子知道先做什么、做到什么算完成。重点不是替家长管孩子，而是把家庭学习场景拆成可沟通、可执行、可复盘的小步骤。 Workflow: family_homework_routine.run."
 version: "0.10.0"
 author: zhongwei

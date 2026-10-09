@@ -62,7 +62,7 @@ chains_well_with:
   - "diagnostic-question-designer"
 teacher_time: "5 minutes"
 tags: ["analytics", "data", "formative", "Siemens", "Wiliam", "data-literacy", "assessment", "interpretation"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

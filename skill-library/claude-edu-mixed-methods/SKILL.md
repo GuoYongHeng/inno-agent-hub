@@ -2,7 +2,7 @@
 name: claude-edu-mixed-methods
 description: 【混合方法研究设计助手】整合量化與質性研究方法，發揮兩種方法的優勢，對複雜的教育現象進行更全面深入的探究。適用於研究方法相關的教學設計與實施場景。
 title: 混合研究方法 (Mixed Methods Research)
-category: 研究方法
+category: 教研科研
 source: ChatGPT3a01/claude-educational-ai-skills
 source_path: 研究方法/mixed-methods.md
 converted: 由平铺 Markdown 自动升级为标准 SKILL 结构

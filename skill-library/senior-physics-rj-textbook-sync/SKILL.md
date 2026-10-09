@@ -1,5 +1,6 @@
 ---
 name: "senior-physics-rj-textbook-sync"
+category: 课程教学
 description: "把人教版高中物理的年级、册别、单元和学习场景，转成预习、同步练习、错题追练、单元复习和考前巩固等可直接执行的学习任务。把物理教材同步变成现象-模型-证据-应用的清晰学习路径。"
 version: "0.14.0"
 author: zhongwei

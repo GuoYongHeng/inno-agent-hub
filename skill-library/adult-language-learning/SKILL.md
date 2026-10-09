@@ -1,5 +1,6 @@
 ---
 name: "成人场景语言教练"
+category: 学习发展
 description: "把成人语言学习从收藏资料变成真实场景输入、主动输出、纠错和复现。核心不是再推荐一堆资料，而是让用户今天能完成一个可检查的小成果。 Workflow: adult_language_learning.run."
 version: "0.10.0"
 author: zhongwei

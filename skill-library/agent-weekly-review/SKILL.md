@@ -1,5 +1,6 @@
 ---
 name: "学习周复盘助手"
+category: 学习发展
 description: "把一周学习从流水账整理成进步、问题、下周行动三件事，让学生和家长都知道下一步做什么。 Workflow: agent_weekly_review.run."
 version: "0.10.0"
 author: zhongwei

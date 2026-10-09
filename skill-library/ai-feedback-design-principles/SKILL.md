@@ -63,7 +63,7 @@ chains_well_with:
   - "technological-pedagogical-content-knowledge-developer"
 teacher_time: "4 minutes"
 tags: ["feedback", "AI-feedback", "formative", "Shute", "Narciss", "Hattie", "LLM", "automated-feedback"]
-category: 评
+category: 评价监测
 ---
 
 ## 语言与场景适配

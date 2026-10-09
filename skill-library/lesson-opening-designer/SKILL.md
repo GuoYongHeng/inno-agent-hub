@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: lesson-opening-designer
+category: 课程教学
 description: "设计能够激活先备知识、衔接已有学习与本课内容的课堂导入。适用于规划开课活动、提取练习式导入或先行组织者的场景。"
 disable-model-invocation: false
 user-invocable: true

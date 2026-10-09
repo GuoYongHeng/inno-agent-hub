@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: checking-for-understanding-protocol-designer
+category: 课程教学
 description: "设计课堂理解检测流程，为每个教学阶段提供具体方法。适用于在显性教学或直接教学中规划系统性理解检测的场景。"
 disable-model-invocation: false
 user-invocable: true

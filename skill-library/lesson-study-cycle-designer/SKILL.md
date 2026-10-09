@@ -69,7 +69,7 @@ chains_well_with:
   - "pedagogical-content-knowledge-developer"
 teacher_time: "5 minutes"
 tags: ["lesson-study", "jugyou-kenkyuu", "collaborative-planning", "research-lesson", "professional-learning"]
-category: 教研方法
+category: 教研科研
 ---
 
 **默认使用简体中文输出；用户明确指定其他语言时以用户指令为准。**
