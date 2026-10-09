@@ -1,5 +1,6 @@
 ---
 name: markitdown
+name-zh: "MarkItDown文档转换"
 category: 文档处理
 subject: 跨学科
 kind: 文档处理

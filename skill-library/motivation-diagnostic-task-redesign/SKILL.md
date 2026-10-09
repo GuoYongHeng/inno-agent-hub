@@ -1,6 +1,7 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "动机分析与任务改造"
+name-zh: "动机分析与任务改造"
 description: "Diagnose motivation problems in a task using self-determination theory and redesign for autonomy, competence, and relatedness. Use when students are disengaged, resistant, or going through the motions."
 disable-model-invocation: false
 user-invocable: true

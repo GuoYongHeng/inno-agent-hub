@@ -1,5 +1,6 @@
 ---
 name: stepwise-question-tutoring-skill
+name-zh: "拍题答疑辅导"
 description: 面向拍题答疑场景，根据题目和学生作答状态完成未作答分级提示、已作答错步诊断、相似练习题推荐与继续学习建议。由 Claude Code 直接根据工作流指令、学生输入和知识库执行诊断与推理。
 entryName: 拍题答疑辅导
 entryToken: "@拍题答疑辅导"

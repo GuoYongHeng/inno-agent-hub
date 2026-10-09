@@ -1,5 +1,6 @@
 ---
 name: "数据分析学习教练"
+name-zh: "数据分析学习教练"
 description: "把数据分析学习从工具教程变成业务问题、数据清洗、可视化、结论和报告表达。核心不是再推荐一堆资料，而是让用户今天能完成一个可检查的小成果。 Workflow: college_data_analysis.run."
 version: "0.10.0"
 author: zhongwei

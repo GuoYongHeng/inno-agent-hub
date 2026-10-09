@@ -1,5 +1,6 @@
 ---
 name: ian-xiaohei-illustrations
+name-zh: "小黑怪诞正文配图"
 category: 内容创作
 subject: 跨学科
 kind: 内容创作

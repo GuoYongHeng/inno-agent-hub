@@ -1,5 +1,6 @@
 ---
 name: pptx
+name-zh: "PPT演示文稿处理"
 category: 文档处理
 subject: 跨学科
 kind: 课件生成

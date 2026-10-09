@@ -1,5 +1,6 @@
 ---
 name: claude-api
+name-zh: "Claude API应用开发"
 category: 开发工具
 subject: 其它
 kind: 开发工具
