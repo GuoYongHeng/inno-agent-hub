@@ -1,7 +1,6 @@
 {
   "fallback": "创造",
   "featured": [
-    "k12-lesson-planning",
     "backwards-design-unit-planner",
     "homework-grader",
     "Exam2Knowledge",
@@ -16,7 +15,6 @@
     "tutor",
     "storm-research",
     "paper-lookup",
-    "citation-management",
     "markitdown",
     "algorithmic-art",
     "paper-to-xhs",
@@ -76,13 +74,6 @@
     }
   ],
   "skills": {
-    "k12-lesson-planning": {
-      "scenario": "备课",
-      "also": [
-        "讲课"
-      ],
-      "example": "用 k12-lesson-planning 备一节五年级数学「长除法」的课，要教案、学生用材料和课堂观察表。"
-    },
     "backwards-design-unit-planner": {
       "scenario": "备课",
       "also": [],
@@ -104,13 +95,6 @@
         "自学"
       ],
       "example": "用 differentiation-adapter 把这道课堂任务做分层，照顾学困生和学有余力的学生，但保持学习目标不变。"
-    },
-    "k12-lesson-differentiation": {
-      "scenario": "备课",
-      "also": [
-        "自学"
-      ],
-      "example": "用 k12-lesson-differentiation 把这节课按学生水平分成三层，输出可编辑的 Word 分层材料。"
     },
     "formative-assessment-technique-selector": {
       "scenario": "备课",
@@ -247,11 +231,6 @@
       "also": [],
       "example": "用 paper-lookup 检索近三年「生成式 AI 在中小学教学中的应用」相关的论文。"
     },
-    "citation-management": {
-      "scenario": "研究",
-      "also": [],
-      "example": "用 citation-management 帮我核对这几篇参考文献，并生成规范的 BibTeX。"
-    },
     "tavily-search": {
       "scenario": "研究",
       "also": [],
@@ -270,11 +249,6 @@
         "备课"
       ],
       "example": "用 pdf 把这份扫描的试卷做 OCR，并提取出里面所有题目。"
-    },
-    "baoyu-url-to-markdown": {
-      "scenario": "研究",
-      "also": [],
-      "example": "用 baoyu-url-to-markdown 把这篇文章抓下来转成 markdown 存进我的笔记。"
     },
     "baoyu-youtube-transcript": {
       "scenario": "研究",
@@ -351,11 +325,6 @@
       "scenario": "创造",
       "also": [],
       "example": "用 mcp-builder 把我们学校的教务 API 封装成一个 MCP 服务器。"
-    },
-    "claude-api": {
-      "scenario": "创造",
-      "also": [],
-      "example": "用 claude-api 帮我写一个调用 Claude 的批量批改脚本，加上 prompt 缓存降低成本。"
     },
     "email-sender": {
       "scenario": "创造",

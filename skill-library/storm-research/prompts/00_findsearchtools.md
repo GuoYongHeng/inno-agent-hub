@@ -42,7 +42,7 @@
     printf '%-26s %s\n' "$n" "$d"
   done | grep -iE '搜索|检索|抓取|爬|联网|网页|调研|search|scrape|crawl|fetch|retriev|browse|research|url'
   ```
-  机器粗筛后**逐个用描述精判**。实测能精准捞出 `mywebsearch`、`perplexity-search`、`scrape`、`url-reader`/`baoyu-url-to-markdown`、`browse`、`youtube-transcript`、`paper-reader` 等。
+  机器粗筛后**逐个用描述精判**。实测能精准捞出 `mywebsearch`、`perplexity-search`、`scrape`、`url-reader`、`browse`、`youtube-transcript`、`paper-reader` 等。
 - **子 agent**：同理**读 `description` 和 `tools` 字段**，不是只列文件名。判定标准（平台无关）：**`tools` 含网络搜索/抓取（WebSearch/WebFetch 或等价物），或 `description` 提"调研/research/搜索"** → 纳入（实测 `content-researcher`、`research-analyst`、`trend-analyst` 都带 WebSearch+WebFetch）。内置工具撞墙时，派发这类 agent 往往是最强、最现成的检索路径。
 
 **收口**

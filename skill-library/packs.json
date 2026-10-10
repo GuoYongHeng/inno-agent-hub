@@ -7,7 +7,6 @@
       "icon": "book-open",
       "subject": "跨学科",
       "skills": [
-        "k12-lesson-planning",
         "backwards-design-unit-planner",
         "explicit-instruction-sequence-builder",
         "differentiation-adapter",
@@ -41,7 +40,6 @@
         "homework-grader",
         "comment-on-docx",
         "Exam2Knowledge",
-        "k12-lesson-differentiation",
         "docx"
       ]
     },
@@ -67,7 +65,6 @@
       "skills": [
         "storm-research",
         "paper-lookup",
-        "citation-management",
         "markitdown",
         "education-topic-decomposition",
         "education-literature-map",

@@ -55,8 +55,6 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 
 | Skill | 类型 | 通过验证 | 一句话 | 引用 | 效果 |
 |---|---|---|---|---|---|
-| [k12-lesson-planning](./k12-lesson-planning/) | 收集 |  | K-12 从零备课：教案＋学生用材料＋课堂观察表，分学科（数学/ELA/科学/社会），输出可编辑 Word | [anthropics/k12-teacher-skills](https://github.com/anthropics/k12-teacher-skills/tree/main/plugin/skills/k12-lesson-planning) |  |
-| [k12-lesson-differentiation](./k12-lesson-differentiation/) | 收集 |  | 把已有 K-12 课按学生水平分层：1 份教师分层方案＋3 份学生分层材料，全为可编辑 Word | [anthropics/k12-teacher-skills](https://github.com/anthropics/k12-teacher-skills/tree/main/plugin/skills/k12-lesson-differentiation) |  |
 | [backwards-design-unit-planner](./backwards-design-unit-planner/) | 收集 |  | 逆向设计（UbD）：从学习成果倒推评估证据与学习活动，产出完整单元教学计划 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/curriculum-assessment/backwards-design-unit-planner) |  |
 | [scope-and-sequence-designer](./scope-and-sequence-designer/) | 收集 |  | 课程范围与进度：跨年级/学期的纵向进阶与横向衔接，带先修依赖与连贯性检查 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/curriculum-assessment/scope-and-sequence-designer) |  |
 | [explicit-instruction-sequence-builder](./explicit-instruction-sequence-builder/) | 收集 |  | 显性教学课时序列（I Do/We Do/You Do），含理解检查点与时间分配的可上课教案 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/explicit-instruction/explicit-instruction-sequence-builder) |  |
@@ -98,9 +96,7 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 | Skill | 类型 | 通过验证 | 一句话 | 引用 |
 |---|---|---|---|---|
 | [paper-lookup](./paper-lookup/) | 收集 |  | 通过 REST API 检索 PubMed、arXiv、OpenAlex 等 10 个学术论文库 | [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills/tree/HEAD/scientific-skills/paper-lookup) |
-| [citation-management](./citation-management/) | 收集 |  | 学术引用管理：检索 Google Scholar 与 PubMed，校验文献并生成 BibTeX | [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills/tree/HEAD/scientific-skills/citation-management) |
 | [baoyu-youtube-transcript](./baoyu-youtube-transcript/) | 收集 |  | 按 URL 或视频 ID 下载 YouTube 字幕与封面，支持翻译与分章 | [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills/tree/HEAD/skills/baoyu-youtube-transcript) |
-| [baoyu-url-to-markdown](./baoyu-url-to-markdown/) | 收集 |  | 用 baoyu-fetch 抓取任意 URL 转为 markdown，内置 X、YouTube 等适配器 | [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills/tree/HEAD/skills/baoyu-url-to-markdown) |
 | [understand](./understand/) | 收集 |  | 分析代码库生成交互式知识图谱，理解架构、组件与关系 | [Lum1104/Understand-Anything](https://github.com/Lum1104/Understand-Anything/tree/HEAD/understand-anything-plugin/skills/understand) |
 | [storm-research](./storm-research/) | 收集 |  | 多视角提问 + 联网检索 + 强制引用，产出维基百科式带来源的深度研究报告 | [openwhat007/storm-research](https://github.com/openwhat007/storm-research) |
 
@@ -177,7 +173,6 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 
 | Skill | 类型 | 通过验证 | 一句话 | 引用 |
 |---|---|---|---|---|
-| [claude-api](./claude-api/) | 收集 |  | 构建、调试与优化 Claude API / Anthropic SDK 应用，含 prompt caching 与版本迁移 | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/claude-api) |
 | [mcp-builder](./mcp-builder/) | 收集 |  | 构建高质量 MCP (Model Context Protocol) 服务器以让 LLM 接入外部服务 | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/mcp-builder) |
 | [web-artifacts-builder](./web-artifacts-builder/) | 收集 |  | 用 React、Tailwind CSS 与 shadcn/ui 构建复杂多组件的 claude.ai HTML artifact | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/web-artifacts-builder) |
 | [webapp-testing](./webapp-testing/) | 收集 |  | 用 Playwright 测试本地 Web 应用，验证前端功能、调试 UI 并截图取日志 | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/webapp-testing) |
