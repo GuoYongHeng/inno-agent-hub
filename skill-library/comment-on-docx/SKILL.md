@@ -1,7 +1,7 @@
 ---
 name: comment-on-docx
-name-zh: "Word文档批注"
-category: 教学辅导
+name-zh: "Word 批注反馈"
+category: 评价监测
 subject: 跨学科
 kind: 评价测评
 description: >-

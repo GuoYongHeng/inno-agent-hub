@@ -1,7 +1,7 @@
 ---
 name: webapp-testing
-name-zh: "Web应用测试"
-category: 开发工具
+name-zh: "网页交互件构建器"
+category: 系统工具
 subject: 其它
 kind: 开发工具
 description: >-

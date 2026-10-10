@@ -1,7 +1,7 @@
 ---
 name: skill-creator
 name-zh: "技能创建器"
-category: 开发工具
+category: 系统工具
 subject: 其它
 kind: 开发工具
 description: >-

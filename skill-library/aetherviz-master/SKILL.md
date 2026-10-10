@@ -1,6 +1,7 @@
 ---
 name: aetherviz-master
 name-zh: "互动教育可视化建筑师"
+category: 课程教学
 description: AetherViz Master - 互动教育可视化建筑师，将任意教学主题转化为极致美观、高度交互的专业教学网页
 ---
 

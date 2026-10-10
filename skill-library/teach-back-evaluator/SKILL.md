@@ -2,7 +2,7 @@
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: "反向教学检验教练"
 name-zh: "知识反讲评估助手"
-category: 学习发展
+category: 评价监测
 description: "The learner teaches the concept to the AI, which plays a curious novice peer and identifies gaps through authentic questions. Use when the learner wants to test their understanding — teaching forces a different kind of organisation than studying."
 disable-model-invocation: false
 user-invocable: true

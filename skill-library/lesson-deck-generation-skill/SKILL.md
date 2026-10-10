@@ -1,6 +1,7 @@
 ---
 name: lesson-deck-generation-skill
 name-zh: "课件生成"
+category: 课程教学
 description: 根据中小学教师的课题描述生成教育版课件。适用于课堂 PPT、结构化课堂大纲、教师逐字稿、ED 固定版式 HTML 预览、PPTX-ready 可编辑结构和投影友好课件任务；不用于商业演示稿美化、普通网页工具或创新教案本体生成。
 entryName: 课件生成
 entryToken: "@课件生成"

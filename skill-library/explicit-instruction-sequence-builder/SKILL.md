@@ -1,8 +1,8 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: explicit-instruction-sequence-builder
-name-zh: "显性教学序列构建器"
-category: 教学辅导
+name-zh: "显性教学课时序列生成器"
+category: 课程教学
 subject: 跨学科
 kind: 教学设计
 description: >-

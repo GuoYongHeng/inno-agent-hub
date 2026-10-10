@@ -1,8 +1,8 @@
 ---
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: scope-and-sequence-designer
-name-zh: "课程范围与序列设计器"
-category: 教学辅导
+name-zh: "课程范围与顺序设计器"
+category: 课程教学
 subject: 跨学科
 kind: 教学设计
 description: >-

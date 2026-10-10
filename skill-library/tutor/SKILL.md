@@ -1,7 +1,7 @@
 ---
 name: tutor
-name-zh: "导师"
-category: 教学辅导
+name-zh: "通用学科家教"
+category: 学习发展
 subject: 跨学科
 kind: 学习辅导
 description: >-

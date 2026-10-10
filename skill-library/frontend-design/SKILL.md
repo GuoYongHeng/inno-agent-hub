@@ -1,7 +1,7 @@
 ---
 name: frontend-design
-name-zh: "前端设计"
-category: 内容创作
+name-zh: "前端界面设计器"
+category: 系统工具
 subject: 其它
 kind: 开发工具
 description: >-

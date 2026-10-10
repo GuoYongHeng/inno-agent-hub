@@ -1,7 +1,7 @@
 ---
 name: socratic-tutor
-name-zh: "苏格拉底式导师"
-category: 教学辅导
+name-zh: "苏格拉底式编程导师"
+category: 学习发展
 subject: 信息技术
 kind: 学习辅导
 description: >-

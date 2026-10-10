@@ -1,6 +1,7 @@
 ---
 name: project-proposal-skill
 name-zh: "项目申报助手"
+category: 教研科研
 description: 根据项目材料抽取项目事实表，并生成项目申报书、结题报告、成果汇报或三文档集合的结构化正文、亮点提炼、预算规则提示和跨文档事实一致性检查。
 entryName: 项目申报助手
 entryToken: "@项目申报助手"

@@ -1,7 +1,7 @@
 ---
 name: smart-illustrator
-name-zh: "智能插画师"
-category: 内容创作
+name-zh: "智能配图生成器"
+category: 系统工具
 subject: 跨学科
 kind: 课件生成
 description: >-

@@ -1,6 +1,7 @@
 ---
 name: exercise-generation-skill
 name-zh: "出题"
+category: 评价监测
 description: 按课标、教材进度、知识点、题型和难度层级生成课堂练习、分层作业、单元测验、阶段测验和专题练习。适用于教师需要结构化题目、答案解析、错因标签、覆盖检查、难度报告、换题建议和超纲风险提示的任务；不用于拍题答疑、知识点讲解、课件生成或真实测量学等值组卷。
 entryName: 出题
 entryToken: "@出题"

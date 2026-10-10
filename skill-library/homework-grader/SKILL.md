@@ -1,7 +1,7 @@
 ---
 name: homework-grader
-name-zh: "作业批改器"
-category: 教学辅导
+name-zh: "AI 作业批改器"
+category: 评价监测
 subject: 跨学科
 kind: 评价测评
 version: 1.0.0

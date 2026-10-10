@@ -1,6 +1,7 @@
 ---
 name: literature-reading-skill
 name-zh: "文献阅读助手"
+category: 教研科研
 description: >
   面向教师的文献阅读全流程助手。场景：选题后不知该读什么、面对论文不知重点读什么、
   读完记不住怎么存、写作时找不到观点出处。支持五大模式——文献筛选(找该读的)、

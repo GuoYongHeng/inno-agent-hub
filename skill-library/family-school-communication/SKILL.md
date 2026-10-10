@@ -1,7 +1,7 @@
 ---
 name: 家校沟通准备助手
 name-zh: "家校沟通准备助手"
-category: 管理治理
+category: 学习发展
 description: "家校沟通准备帮家长把问题说清楚、语气放稳、目标对齐，提升和老师沟通的效率。重点不是替家长管孩子，而是把家庭学习场景拆成可沟通、可执行、可复盘的小步骤。 Workflow: family_school_communication.run."
 version: "0.10.0"
 author: zhongwei

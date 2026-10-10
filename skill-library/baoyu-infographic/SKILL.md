@@ -1,7 +1,7 @@
 ---
 name: baoyu-infographic
-name-zh: "宝玉信息图"
-category: 内容创作
+name-zh: "专业信息图生成"
+category: 系统工具
 subject: 跨学科
 kind: 课件生成
 description: >-

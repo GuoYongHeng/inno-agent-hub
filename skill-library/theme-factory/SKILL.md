@@ -1,7 +1,7 @@
 ---
 name: theme-factory
-name-zh: "主题工厂"
-category: 内容创作
+name-zh: "主题风格工厂"
+category: 系统工具
 subject: 跨学科
 kind: 课件生成
 description: >-

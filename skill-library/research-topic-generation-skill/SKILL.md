@@ -1,6 +1,7 @@
 ---
 name: research-topic-generation-skill
 name-zh: "研究选题生成"
+category: 教研科研
 description: 基于教师已有材料和最小教师画像生成总结性、规划性教育研究选题，并评估已有基础、差异化、创新点、可行性风险和下一步资料清单。支持 DKG（动态知识图谱）图计算管线发现研究缺口与 LLM 理解材料两种执行轨道。
 entryName: 研究选题生成
 entryToken: "@研究选题生成"

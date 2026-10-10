@@ -1,7 +1,7 @@
 ---
 name: baoyu-comic
-name-zh: "宝玉漫画"
-category: 内容创作
+name-zh: "知识漫画创作工具"
+category: 系统工具
 subject: 跨学科
 kind: 课件生成
 description: >-

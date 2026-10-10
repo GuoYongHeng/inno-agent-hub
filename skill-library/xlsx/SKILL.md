@@ -1,7 +1,7 @@
 ---
 name: xlsx
 name-zh: "Excel表格处理"
-category: 文档处理
+category: 系统工具
 subject: 跨学科
 kind: 文档处理
 description: >-

@@ -1,7 +1,7 @@
 ---
 name: storm-research
-name-zh: "风暴研究"
-category: 研究检索
+name-zh: "STORM深度研究"
+category: 教研科研
 subject: 跨学科
 kind: 教研科研
 description: 做带来源、可追溯的深度研究。多视角提问 + 真实联网检索 + 强制引用，产出维基百科式的完整研究报告。当用户说"深度调研""帮我研究一下 X 这个主题""写一篇带来源的综述""多角度研究"时触发。

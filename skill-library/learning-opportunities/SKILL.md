@@ -1,7 +1,7 @@
 ---
 name: learning-opportunities
-name-zh: "学习机会"
-category: 教学辅导
+name-zh: "编码学习练习生成器"
+category: 学习发展
 subject: 信息技术
 kind: 学习辅导
 argument-hint: '[orient]'

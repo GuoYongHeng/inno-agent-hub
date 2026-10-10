@@ -1,7 +1,7 @@
 ---
 name: markitdown
-name-zh: "MarkItDown文档转换"
-category: 文档处理
+name-zh: "把各类文件转成Markdown"
+category: 系统工具
 subject: 跨学科
 kind: 文档处理
 description: >-

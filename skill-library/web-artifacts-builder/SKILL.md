@@ -1,7 +1,7 @@
 ---
 name: web-artifacts-builder
-name-zh: "Web构件构建器"
-category: 内容创作
+name-zh: "网页应用测试器"
+category: 系统工具
 subject: 其它
 kind: 开发工具
 description: >-

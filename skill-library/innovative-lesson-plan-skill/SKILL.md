@@ -1,6 +1,7 @@
 ---
 name: innovative-lesson-plan-skill
 name-zh: "创新教案生成"
+category: 课程教学
 description: 生成 PBL、跨学科和 AI 融合三类创新教案。适用于教师需要把创新课想法转成可落地教案、驱动问题、融合节点、AI 使用边界、活动流程、评价量规和 Word-ready Markdown 的任务；不用于普通课件生成、课堂互动网页生成或商业演示稿制作。
 entryName: 创新教案生成
 entryToken: "@创新教案生成"

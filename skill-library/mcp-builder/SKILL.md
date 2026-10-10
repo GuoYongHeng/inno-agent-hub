@@ -1,7 +1,7 @@
 ---
 name: mcp-builder
-name-zh: "MCP服务器构建器"
-category: 开发工具
+name-zh: "MCP 服务器构建器"
+category: 系统工具
 subject: 其它
 kind: 开发工具
 description: >-

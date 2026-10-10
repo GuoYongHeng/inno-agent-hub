@@ -1,7 +1,7 @@
 ---
 name: ketang-choubei-moxie
-name-zh: "课堂抽背默写"
-category: 教学辅导
+name-zh: "课堂抽背默写生成器"
+category: 课程教学
 description: >-
   根据教师上传或粘贴的古诗、文言文、课文段落、英语单词、政治思考题等教学资料，以及可选的
   学生名单，整理并生成可离线打开的课堂抽背、默写、随机点名和打印练习 HTML。触发词：课堂抽背,

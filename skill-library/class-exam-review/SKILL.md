@@ -1,7 +1,7 @@
 ---
 name: class-exam-review
-name-zh: "试卷讲评与学情分析"
-category: 教学辅导
+name-zh: "班级试卷讲评分析"
+category: 评价监测
 description: >-
   根据教师上传的试卷、标准答案与评分标准、班级作答明细(Excel 成绩表)，生成班级学情分析、
   逐题分析、知识点掌握情况、讲评优先级与讲评课方案、重点题讲稿、典型错误展示、补偿练习

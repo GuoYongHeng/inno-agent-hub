@@ -1,7 +1,7 @@
 ---
 name: algorithmic-art
-name-zh: "算法艺术"
-category: 内容创作
+name-zh: "算法生成艺术"
+category: 系统工具
 subject: 艺术
 kind: 内容创作
 description: >-

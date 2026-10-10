@@ -1,7 +1,7 @@
 ---
 name: paper-lookup
-name-zh: "论文检索"
-category: 研究检索
+name-zh: "学术论文检索器"
+category: 教研科研
 subject: 跨学科
 kind: 教研科研
 description: >-

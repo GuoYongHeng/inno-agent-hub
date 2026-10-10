@@ -1,7 +1,7 @@
 ---
 name: canvas-design
-name-zh: "画布设计"
-category: 内容创作
+name-zh: "平面视觉设计器"
+category: 系统工具
 subject: 艺术
 kind: 内容创作
 description: >-

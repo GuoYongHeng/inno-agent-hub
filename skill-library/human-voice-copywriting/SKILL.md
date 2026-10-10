@@ -1,7 +1,7 @@
 ---
 name: 公文腔去除改写助手
 name-zh: "公文腔去除改写助手"
-category: 管理治理
+category: 系统工具
 description: 把公文腔、品牌腔、AI 腔的中文文案改写成"像一个真人在对一个真人说话"的活人感文案；提供三条判据、场景细节+行动指令+情绪锚点公式、体检脚本、正反案例库与分场景骨架。This skill should be used when writing or rewriting 通知/公告/故障与道歉说明/产品卖点/落地页/详情页/服务承诺/招聘帖/客服话术/公众号与小红书文案, or whenever the user says 太官方、太生硬、没人味、太 AI、像机器人写的、说人话、活人感、有温度、有人情味.
 ---
 
