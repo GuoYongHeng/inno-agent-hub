@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-10",
-  "count": 142,
+  "count": 141,
   "repo": "https://github.com/Chloris-Blaxk/inno-agent-hub",
   "site": "https://chloris-blaxk.github.io/inno-agent-hub/",
   "categories": [
@@ -27,10 +27,6 @@
     {
       "name": "管理治理",
       "count": 9
-    },
-    {
-      "name": "研究检索",
-      "count": 1
     }
   ],
   "scenarios": [
@@ -82,7 +78,7 @@
         "fg": "#736846",
         "ink": "#5c5338"
       },
-      "count": 6,
+      "count": 5,
       "x": 1352,
       "y": 798
     },
@@ -138,8 +134,8 @@
       "rot": -1.31,
       "num": "01",
       "featured": false,
-      "x": 457.1,
-      "y": 805.5
+      "x": 498.1,
+      "y": 867.0
     },
     {
       "id": "adult-language-learning",
@@ -172,8 +168,8 @@
       "rot": -0.97,
       "num": "02",
       "featured": false,
-      "x": 1578.5,
-      "y": 1053.3
+      "x": 1770.5,
+      "y": 782.4
     },
     {
       "id": "aetherviz-master",
@@ -206,8 +202,8 @@
       "rot": -0.71,
       "num": "03",
       "featured": false,
-      "x": 1415.2,
-      "y": 537.9
+      "x": 1799.3,
+      "y": 1012.3
     },
     {
       "id": "agent-focus-training",
@@ -240,8 +236,8 @@
       "rot": -1.25,
       "num": "04",
       "featured": false,
-      "x": 1022.4,
-      "y": 265.0
+      "x": 1452.2,
+      "y": 317.0
     },
     {
       "id": "agent-learning-habit",
@@ -274,8 +270,8 @@
       "rot": 0.01,
       "num": "05",
       "featured": false,
-      "x": 800.5,
-      "y": 830.3
+      "x": 1070.7,
+      "y": 679.1
     },
     {
       "id": "agent-memory-method",
@@ -308,7 +304,7 @@
       "rot": 0.92,
       "num": "06",
       "featured": false,
-      "x": 707.5,
+      "x": 807.4,
       "y": 68.0
     },
     {
@@ -342,8 +338,8 @@
       "rot": -0.26,
       "num": "07",
       "featured": false,
-      "x": 1778.3,
-      "y": 65.0
+      "x": 1349.6,
+      "y": 389.2
     },
     {
       "id": "agent-photo-question",
@@ -376,8 +372,8 @@
       "rot": 0.75,
       "num": "08",
       "featured": false,
-      "x": 954.1,
-      "y": 774.9
+      "x": 986.6,
+      "y": 920.9
     },
     {
       "id": "agent-review-assistant",
@@ -410,8 +406,8 @@
       "rot": 1.46,
       "num": "09",
       "featured": false,
-      "x": 782.9,
-      "y": 70.5
+      "x": 722.2,
+      "y": 339.8
     },
     {
       "id": "agent-study-plan",
@@ -444,8 +440,8 @@
       "rot": 1.3,
       "num": "10",
       "featured": false,
-      "x": 1213.1,
-      "y": 647.0
+      "x": 1387.3,
+      "y": 726.0
     },
     {
       "id": "agent-weakness-boost",
@@ -478,8 +474,8 @@
       "rot": 0.89,
       "num": "11",
       "featured": false,
-      "x": 823.8,
-      "y": 706.3
+      "x": 1232.7,
+      "y": 67.0
     },
     {
       "id": "agent-weekly-review",
@@ -546,8 +542,8 @@
       "rot": 0.21,
       "num": "13",
       "featured": false,
-      "x": 1243.4,
-      "y": 953.4
+      "x": 1594.2,
+      "y": 986.0
     },
     {
       "id": "ai-hallucination-fact-check-protocol",
@@ -580,8 +576,8 @@
       "rot": -0.7,
       "num": "14",
       "featured": false,
-      "x": 937.5,
-      "y": 591.2
+      "x": 833.5,
+      "y": 334.6
     },
     {
       "id": "algorithmic-art",
@@ -616,8 +612,8 @@
       "rot": -0.0,
       "num": "15",
       "featured": false,
-      "x": 1548.9,
-      "y": 305.4
+      "x": 1773.6,
+      "y": 491.1
     },
     {
       "id": "argument-structure-scaffold-generator",
@@ -650,8 +646,8 @@
       "rot": 0.04,
       "num": "16",
       "featured": false,
-      "x": 730.1,
-      "y": 645.5
+      "x": 765.1,
+      "y": 695.2
     },
     {
       "id": "assessment-design-orchestrator",
@@ -684,8 +680,8 @@
       "rot": -1.05,
       "num": "17",
       "featured": false,
-      "x": 1525.4,
-      "y": 422.4
+      "x": 1159.8,
+      "y": 740.5
     },
     {
       "id": "assessment-validity-checker",
@@ -718,8 +714,8 @@
       "rot": -0.76,
       "num": "18",
       "featured": false,
-      "x": 1906.0,
-      "y": 648.0
+      "x": 1778.0,
+      "y": 1119.0
     },
     {
       "id": "backwards-design-unit-planner",
@@ -752,7 +748,7 @@
       "rot": 0.91,
       "num": "19",
       "featured": false,
-      "x": 196.5,
+      "x": 201.4,
       "y": 683.7
     },
     {
@@ -788,8 +784,8 @@
       "rot": -1.23,
       "num": "20",
       "featured": false,
-      "x": 678.8,
-      "y": 378.5
+      "x": 492.2,
+      "y": 513.3
     },
     {
       "id": "baoyu-infographic",
@@ -824,8 +820,8 @@
       "rot": 1.17,
       "num": "21",
       "featured": false,
-      "x": 446.5,
-      "y": 402.6
+      "x": 382.6,
+      "y": 357.1
     },
     {
       "id": "baoyu-slide-deck",
@@ -860,8 +856,8 @@
       "rot": 1.52,
       "num": "22",
       "featured": false,
-      "x": 258.2,
-      "y": 190.0
+      "x": 361.5,
+      "y": 90.9
     },
     {
       "id": "canvas-design",
@@ -896,7 +892,7 @@
       "rot": 0.34,
       "num": "23",
       "featured": false,
-      "x": 784.6,
+      "x": 619.5,
       "y": 329.4
     },
     {
@@ -930,8 +926,8 @@
       "rot": -0.86,
       "num": "24",
       "featured": false,
-      "x": 1599.6,
-      "y": 773.8
+      "x": 1571.3,
+      "y": 535.1
     },
     {
       "id": "checking-for-understanding-protocol-designer",
@@ -964,8 +960,8 @@
       "rot": 1.53,
       "num": "25",
       "featured": false,
-      "x": 1554.3,
-      "y": 658.2
+      "x": 1788.9,
+      "y": 251.0
     },
     {
       "id": "class-artifacts",
@@ -998,7 +994,7 @@
       "rot": -1.14,
       "num": "26",
       "featured": false,
-      "x": 602.3,
+      "x": 711.4,
       "y": 68.0
     },
     {
@@ -1033,7 +1029,7 @@
       "num": "27",
       "featured": false,
       "x": 1909.5,
-      "y": 583.9
+      "y": 432.4
     },
     {
       "id": "class-exam-review",
@@ -1066,8 +1062,8 @@
       "rot": 0.98,
       "num": "28",
       "featured": true,
-      "x": 917.8,
-      "y": 1103.1
+      "x": 864.2,
+      "y": 936.8
     },
     {
       "id": "class-teacher-assistant",
@@ -1100,8 +1096,8 @@
       "rot": 0.37,
       "num": "29",
       "featured": false,
-      "x": 1376.6,
-      "y": 175.4
+      "x": 955.6,
+      "y": 337.6
     },
     {
       "id": "claude-edu-adaptive-learning-design",
@@ -1134,8 +1130,8 @@
       "rot": -0.98,
       "num": "30",
       "featured": false,
-      "x": 1316.9,
-      "y": 810.2
+      "x": 1913.5,
+      "y": 478.1
     },
     {
       "id": "cognitive-load-analyser",
@@ -1168,8 +1164,8 @@
       "rot": 0.62,
       "num": "31",
       "featured": false,
-      "x": 1313.0,
-      "y": 628.9
+      "x": 1272.7,
+      "y": 832.0
     },
     {
       "id": "coherent-rubric-logic-builder",
@@ -1202,8 +1198,8 @@
       "rot": -0.06,
       "num": "32",
       "featured": false,
-      "x": 1921.0,
-      "y": 477.7
+      "x": 1219.1,
+      "y": 331.2
     },
     {
       "id": "college-cs-python",
@@ -1236,8 +1232,8 @@
       "rot": -1.14,
       "num": "33",
       "featured": false,
-      "x": 1530.1,
-      "y": 535.1
+      "x": 1722.0,
+      "y": 699.0
     },
     {
       "id": "college-data-analysis",
@@ -1270,7 +1266,7 @@
       "rot": -0.17,
       "num": "34",
       "featured": false,
-      "x": 1160.1,
+      "x": 1546.8,
       "y": 60.5
     },
     {
@@ -1306,7 +1302,7 @@
       "rot": 0.52,
       "num": "35",
       "featured": false,
-      "x": 191.9,
+      "x": 163.9,
       "y": 427.5
     },
     {
@@ -1340,8 +1336,8 @@
       "rot": 1.5,
       "num": "36",
       "featured": false,
-      "x": 1800.8,
-      "y": 1058.0
+      "x": 1907.5,
+      "y": 663.9
     },
     {
       "id": "criterion-referenced-rubric-generator",
@@ -1374,8 +1370,8 @@
       "rot": -0.78,
       "num": "37",
       "featured": false,
-      "x": 699.3,
-      "y": 509.0
+      "x": 836.6,
+      "y": 690.0
     },
     {
       "id": "dialogic-teaching-move-generator",
@@ -1408,7 +1404,7 @@
       "rot": 0.62,
       "num": "38",
       "featured": false,
-      "x": 1355.1,
+      "x": 1704.2,
       "y": 65.5
     },
     {
@@ -1444,7 +1440,7 @@
       "rot": 0.5,
       "num": "39",
       "featured": false,
-      "x": 299.2,
+      "x": 313.8,
       "y": 684.5
     },
     {
@@ -1478,8 +1474,8 @@
       "rot": -0.93,
       "num": "40",
       "featured": false,
-      "x": 1314.2,
-      "y": 725.7
+      "x": 1161.0,
+      "y": 683.6
     },
     {
       "id": "dispositional-knowledge-assessment-designer",
@@ -1512,7 +1508,7 @@
       "rot": 0.37,
       "num": "41",
       "featured": false,
-      "x": 994.6,
+      "x": 1157.9,
       "y": 65.0
     },
     {
@@ -1548,8 +1544,8 @@
       "rot": -1.23,
       "num": "42",
       "featured": false,
-      "x": 1019.9,
-      "y": 885.1
+      "x": 1118.3,
+      "y": 930.3
     },
     {
       "id": "document-based-lesson-designer",
@@ -1582,8 +1578,8 @@
       "rot": -0.21,
       "num": "43",
       "featured": false,
-      "x": 1403.0,
-      "y": 68.5
+      "x": 1798.6,
+      "y": 677.5
     },
     {
       "id": "docx",
@@ -1654,8 +1650,8 @@
       "rot": 0.62,
       "num": "45",
       "featured": true,
-      "x": 563.1,
-      "y": 403.9
+      "x": 395.1,
+      "y": 517.7
     },
     {
       "id": "edu-solid-geometry",
@@ -1690,8 +1686,8 @@
       "rot": -1.16,
       "num": "46",
       "featured": true,
-      "x": 544.2,
-      "y": 292.4
+      "x": 490.5,
+      "y": 413.7
     },
     {
       "id": "email-sender",
@@ -1726,8 +1722,8 @@
       "rot": -1.5,
       "num": "47",
       "featured": false,
-      "x": 1140.6,
-      "y": 882.7
+      "x": 945.9,
+      "y": 714.5
     },
     {
       "id": "erroneous-example-designer",
@@ -1760,8 +1756,8 @@
       "rot": 1.34,
       "num": "48",
       "featured": false,
-      "x": 1088.3,
-      "y": 66.5
+      "x": 1672.6,
+      "y": 384.0
     },
     {
       "id": "error-analysis-protocol",
@@ -1794,8 +1790,8 @@
       "rot": 1.47,
       "num": "49",
       "featured": false,
-      "x": 1484.3,
-      "y": 1005.5
+      "x": 1910.5,
+      "y": 711.8
     },
     {
       "id": "exercise-generation-skill",
@@ -1828,8 +1824,8 @@
       "rot": 0.46,
       "num": "50",
       "featured": false,
-      "x": 1060.8,
-      "y": 561.0
+      "x": 1912.5,
+      "y": 138.3
     },
     {
       "id": "explain-first-interrogator",
@@ -1862,8 +1858,8 @@
       "rot": -1.42,
       "num": "51",
       "featured": false,
-      "x": 1695.6,
-      "y": 301.1
+      "x": 1618.6,
+      "y": 64.0
     },
     {
       "id": "explicit-instruction-sequence-builder",
@@ -1896,7 +1892,7 @@
       "rot": 1.16,
       "num": "52",
       "featured": false,
-      "x": 317.3,
+      "x": 263.1,
       "y": 432.0
     },
     {
@@ -1930,8 +1926,8 @@
       "rot": -1.34,
       "num": "53",
       "featured": false,
-      "x": 1554.1,
-      "y": 894.5
+      "x": 1699.8,
+      "y": 1017.8
     },
     {
       "id": "family-homework-routine",
@@ -1964,8 +1960,8 @@
       "rot": 0.34,
       "num": "54",
       "featured": false,
-      "x": 1175.5,
-      "y": 528.5
+      "x": 1206.8,
+      "y": 264.1
     },
     {
       "id": "family-reading-companion",
@@ -2032,7 +2028,7 @@
       "rot": -0.43,
       "num": "56",
       "featured": false,
-      "x": 878.6,
+      "x": 911.4,
       "y": 70.0
     },
     {
@@ -2066,8 +2062,8 @@
       "rot": -1.51,
       "num": "57",
       "featured": false,
-      "x": 1246.6,
-      "y": 73.5
+      "x": 930.3,
+      "y": 456.8
     },
     {
       "id": "find-your-level",
@@ -2100,8 +2096,8 @@
       "rot": 1.08,
       "num": "58",
       "featured": false,
-      "x": 1409.1,
-      "y": 788.0
+      "x": 1699.0,
+      "y": 907.6
     },
     {
       "id": "flow-state-condition-designer",
@@ -2134,7 +2130,7 @@
       "rot": -0.47,
       "num": "59",
       "featured": false,
-      "x": 364.1,
+      "x": 476.4,
       "y": 68.0
     },
     {
@@ -2168,7 +2164,7 @@
       "rot": -1.24,
       "num": "60",
       "featured": false,
-      "x": 343.8,
+      "x": 381.1,
       "y": 798.0
     },
     {
@@ -2202,8 +2198,8 @@
       "rot": -1.2,
       "num": "61",
       "featured": false,
-      "x": 1791.1,
-      "y": 699.8
+      "x": 1560.4,
+      "y": 314.5
     },
     {
       "id": "frontend-slides",
@@ -2238,8 +2234,8 @@
       "rot": -0.75,
       "num": "62",
       "featured": false,
-      "x": 893.0,
-      "y": 174.9
+      "x": 598.8,
+      "y": 455.1
     },
     {
       "id": "gap-analysis-from-student-work",
@@ -2272,8 +2268,8 @@
       "rot": 1.17,
       "num": "63",
       "featured": false,
-      "x": 1462.3,
-      "y": 904.0
+      "x": 1355.1,
+      "y": 967.7
     },
     {
       "id": "goal-setting-protocol-designer",
@@ -2306,8 +2302,8 @@
       "rot": -0.95,
       "num": "64",
       "featured": false,
-      "x": 490.7,
-      "y": 114.5
+      "x": 501.5,
+      "y": 307.2
     },
     {
       "id": "historical-thinking-assessment-designer",
@@ -2340,8 +2336,8 @@
       "rot": -1.58,
       "num": "65",
       "featured": false,
-      "x": 1520.6,
-      "y": 781.0
+      "x": 1114.3,
+      "y": 566.7
     },
     {
       "id": "homework-grader",
@@ -2374,7 +2370,7 @@
       "rot": -0.34,
       "num": "66",
       "featured": false,
-      "x": 74.9,
+      "x": 66.5,
       "y": 401.6
     },
     {
@@ -2408,8 +2404,8 @@
       "rot": 1.11,
       "num": "67",
       "featured": false,
-      "x": 1292.1,
-      "y": 526.8
+      "x": 912.4,
+      "y": 195.5
     },
     {
       "id": "ian-xiaohei-illustrations",
@@ -2444,8 +2440,8 @@
       "rot": -0.33,
       "num": "68",
       "featured": false,
-      "x": 1488.8,
-      "y": 65.0
+      "x": 960.2,
+      "y": 630.2
     },
     {
       "id": "ielts-prep",
@@ -2478,8 +2474,8 @@
       "rot": 0.96,
       "num": "69",
       "featured": false,
-      "x": 946.8,
-      "y": 684.9
+      "x": 1290.2,
+      "y": 717.7
     },
     {
       "id": "innovative-lesson-plan-skill",
@@ -2512,8 +2508,8 @@
       "rot": -1.55,
       "num": "70",
       "featured": false,
-      "x": 1662.9,
-      "y": 935.1
+      "x": 704.8,
+      "y": 463.6
     },
     {
       "id": "instructional-coaching-conversation-guide",
@@ -2547,7 +2543,7 @@
       "num": "71",
       "featured": false,
       "x": 1910.5,
-      "y": 840.2
+      "y": 345.9
     },
     {
       "id": "junior-chinese-modern-reading",
@@ -2580,8 +2576,8 @@
       "rot": 0.84,
       "num": "72",
       "featured": false,
-      "x": 903.4,
-      "y": 891.3
+      "x": 1170.7,
+      "y": 837.3
     },
     {
       "id": "junior-math-rj-textbook-sync",
@@ -2614,8 +2610,8 @@
       "rot": 1.2,
       "num": "73",
       "featured": false,
-      "x": 1919.5,
-      "y": 372.3
+      "x": 1503.4,
+      "y": 540.1
     },
     {
       "id": "ketang-choubei-moxie",
@@ -2648,8 +2644,8 @@
       "rot": 0.18,
       "num": "74",
       "featured": true,
-      "x": 1861.7,
-      "y": 463.3
+      "x": 1321.6,
+      "y": 610.1
     },
     {
       "id": "knowledge-explanation-skill",
@@ -2682,8 +2678,8 @@
       "rot": -1.24,
       "num": "75",
       "featured": false,
-      "x": 794.7,
-      "y": 453.4
+      "x": 1012.5,
+      "y": 532.5
     },
     {
       "id": "learning-analytics-interpretation-guide",
@@ -2716,8 +2712,8 @@
       "rot": -0.24,
       "num": "76",
       "featured": false,
-      "x": 1422.4,
-      "y": 427.8
+      "x": 1335.0,
+      "y": 71.5
     },
     {
       "id": "learning-opportunities",
@@ -2752,7 +2748,7 @@
       "rot": -1.01,
       "num": "77",
       "featured": false,
-      "x": 665.0,
+      "x": 637.2,
       "y": 1038.0
     },
     {
@@ -2786,8 +2782,8 @@
       "rot": -0.54,
       "num": "78",
       "featured": false,
-      "x": 1791.0,
-      "y": 608.8
+      "x": 1374.4,
+      "y": 846.7
     },
     {
       "id": "lesson-deck-generation-skill",
@@ -2820,8 +2816,8 @@
       "rot": -0.28,
       "num": "79",
       "featured": false,
-      "x": 1040.0,
-      "y": 347.1
+      "x": 1367.6,
+      "y": 480.0
     },
     {
       "id": "lesson-observation-protocol-designer",
@@ -2854,8 +2850,8 @@
       "rot": 0.45,
       "num": "80",
       "featured": false,
-      "x": 1759.8,
-      "y": 501.8
+      "x": 1907.5,
+      "y": 869.7
     },
     {
       "id": "lesson-opening-designer",
@@ -2888,8 +2884,8 @@
       "rot": 1.17,
       "num": "81",
       "featured": false,
-      "x": 521.7,
-      "y": 635.4
+      "x": 562.0,
+      "y": 740.6
     },
     {
       "id": "lesson-study-cycle-designer",
@@ -2922,8 +2918,8 @@
       "rot": 1.32,
       "num": "82",
       "featured": false,
-      "x": 1684.6,
-      "y": 1048.8
+      "x": 1682.3,
+      "y": 277.4
     },
     {
       "id": "literature-reading-skill",
@@ -2956,8 +2952,8 @@
       "rot": -1.32,
       "num": "83",
       "featured": false,
-      "x": 1700.2,
-      "y": 823.6
+      "x": 831.3,
+      "y": 577.8
     },
     {
       "id": "lx-education-diagnosis",
@@ -2990,8 +2986,8 @@
       "rot": 0.58,
       "num": "84",
       "featured": false,
-      "x": 1284.6,
-      "y": 174.0
+      "x": 599.7,
+      "y": 68.5
     },
     {
       "id": "markitdown",
@@ -3026,7 +3022,7 @@
       "rot": 0.03,
       "num": "85",
       "featured": false,
-      "x": 1167.7,
+      "x": 1121.6,
       "y": 1110.0
     },
     {
@@ -3060,7 +3056,7 @@
       "rot": 1.53,
       "num": "86",
       "featured": false,
-      "x": 534.2,
+      "x": 505.3,
       "y": 1033.0
     },
     {
@@ -3094,8 +3090,8 @@
       "rot": 0.79,
       "num": "87",
       "featured": false,
-      "x": 1605.8,
-      "y": 301.3
+      "x": 1818.5,
+      "y": 162.5
     },
     {
       "id": "meeting-notes",
@@ -3128,8 +3124,8 @@
       "rot": 0.12,
       "num": "88",
       "featured": false,
-      "x": 1076.9,
-      "y": 776.9
+      "x": 1662.2,
+      "y": 513.5
     },
     {
       "id": "metacognitive-prompt-library",
@@ -3162,8 +3158,8 @@
       "rot": -1.01,
       "num": "89",
       "featured": false,
-      "x": 1576.4,
-      "y": 73.0
+      "x": 1328.2,
+      "y": 284.2
     },
     {
       "id": "motivation-diagnostic-task-redesign",
@@ -3196,8 +3192,8 @@
       "rot": -0.83,
       "num": "90",
       "featured": false,
-      "x": 1435.9,
-      "y": 656.5
+      "x": 1797.1,
+      "y": 433.4
     },
     {
       "id": "official-document-skill",
@@ -3230,8 +3226,8 @@
       "rot": -0.03,
       "num": "91",
       "featured": false,
-      "x": 778.4,
-      "y": 186.0
+      "x": 1019.2,
+      "y": 431.4
     },
     {
       "id": "paper-lookup",
@@ -3264,8 +3260,8 @@
       "rot": 0.12,
       "num": "92",
       "featured": false,
-      "x": 819.6,
-      "y": 575.7
+      "x": 669.2,
+      "y": 738.1
     },
     {
       "id": "paper-writing-skill",
@@ -3298,8 +3294,8 @@
       "rot": -0.15,
       "num": "93",
       "featured": false,
-      "x": 1906.5,
-      "y": 167.1
+      "x": 1566.6,
+      "y": 185.5
     },
     {
       "id": "pdf",
@@ -3334,8 +3330,8 @@
       "rot": 1.18,
       "num": "94",
       "featured": false,
-      "x": 1447.0,
-      "y": 1113.0
+      "x": 1238.8,
+      "y": 967.9
     },
     {
       "id": "pptx",
@@ -3370,8 +3366,8 @@
       "rot": -1.5,
       "num": "95",
       "featured": false,
-      "x": 448.3,
-      "y": 516.9
+      "x": 564.4,
+      "y": 622.1
     },
     {
       "id": "practice-problem-sequence-designer",
@@ -3404,8 +3400,8 @@
       "rot": -0.84,
       "num": "96",
       "featured": false,
-      "x": 1336.8,
-      "y": 919.4
+      "x": 1480.6,
+      "y": 978.9
     },
     {
       "id": "preschool-literacy-daily",
@@ -3438,8 +3434,8 @@
       "rot": -0.06,
       "num": "97",
       "featured": false,
-      "x": 1297.5,
-      "y": 411.2
+      "x": 638.8,
+      "y": 192.5
     },
     {
       "id": "primary-chinese-tongbian-textbook-sync",
@@ -3472,8 +3468,8 @@
       "rot": 0.6,
       "num": "98",
       "featured": false,
-      "x": 1915.0,
-      "y": 1044.6
+      "x": 1621.2,
+      "y": 658.6
     },
     {
       "id": "primary-math-mental-arithmetic",
@@ -3506,8 +3502,8 @@
       "rot": -1.07,
       "num": "99",
       "featured": false,
-      "x": 927.6,
-      "y": 485.5
+      "x": 1250.1,
+      "y": 455.3
     },
     {
       "id": "primary-reading-daily",
@@ -3540,8 +3536,8 @@
       "rot": 0.07,
       "num": "100",
       "featured": false,
-      "x": 1049.3,
-      "y": 478.6
+      "x": 1041.1,
+      "y": 73.5
     },
     {
       "id": "productive-failure-protocol",
@@ -3574,8 +3570,8 @@
       "rot": -0.74,
       "num": "101",
       "featured": false,
-      "x": 1909.5,
-      "y": 739.3
+      "x": 1613.6,
+      "y": 844.5
     },
     {
       "id": "professional-development-session-designer",
@@ -3608,8 +3604,8 @@
       "rot": 0.01,
       "num": "102",
       "featured": false,
-      "x": 1466.7,
-      "y": 302.3
+      "x": 488.6,
+      "y": 177.7
     },
     {
       "id": "progressive-hint-ladder",
@@ -3642,8 +3638,8 @@
       "rot": 0.61,
       "num": "103",
       "featured": false,
-      "x": 1900.0,
-      "y": 283.1
+      "x": 1313.4,
+      "y": 164.2
     },
     {
       "id": "project-brief-designer",
@@ -3676,8 +3672,8 @@
       "rot": 1.14,
       "num": "104",
       "featured": false,
-      "x": 1199.9,
-      "y": 770.9
+      "x": 1485.1,
+      "y": 847.9
     },
     {
       "id": "project-proposal-skill",
@@ -3710,8 +3706,8 @@
       "rot": -0.99,
       "num": "105",
       "featured": false,
-      "x": 907.6,
-      "y": 282.2
+      "x": 1040.0,
+      "y": 142.8
     },
     {
       "id": "prompt-engineer",
@@ -3744,8 +3740,8 @@
       "rot": 1.35,
       "num": "106",
       "featured": false,
-      "x": 1672.0,
-      "y": 630.0
+      "x": 1799.8,
+      "y": 310.9
     },
     {
       "id": "prompt-literacy-sequence-designer",
@@ -3778,8 +3774,8 @@
       "rot": 0.3,
       "num": "107",
       "featured": false,
-      "x": 1091.8,
-      "y": 653.4
+      "x": 1061.0,
+      "y": 237.8
     },
     {
       "id": "research-topic-generation-skill",
@@ -3812,7 +3808,7 @@
       "rot": 1.05,
       "num": "108",
       "featured": false,
-      "x": 1832.0,
+      "x": 1825.7,
       "y": 64.0
     },
     {
@@ -3846,8 +3842,8 @@
       "rot": 1.42,
       "num": "109",
       "featured": false,
-      "x": 1806.9,
-      "y": 817.3
+      "x": 1414.8,
+      "y": 606.5
     },
     {
       "id": "ruler-emotional-literacy-sequence",
@@ -3880,8 +3876,8 @@
       "rot": -1.35,
       "num": "110",
       "featured": false,
-      "x": 660.4,
-      "y": 192.5
+      "x": 1054.1,
+      "y": 803.1
     },
     {
       "id": "scope-and-sequence-designer",
@@ -3914,8 +3910,8 @@
       "rot": -0.1,
       "num": "111",
       "featured": false,
-      "x": 412.3,
-      "y": 680.0
+      "x": 431.5,
+      "y": 679.2
     },
     {
       "id": "self-efficacy-builder-sequence",
@@ -3948,8 +3944,8 @@
       "rot": -1.28,
       "num": "112",
       "featured": false,
-      "x": 1904.0,
-      "y": 937.9
+      "x": 1496.2,
+      "y": 726.5
     },
     {
       "id": "self-regulation-scaffold-generator",
@@ -3982,8 +3978,8 @@
       "rot": 0.62,
       "num": "113",
       "featured": false,
-      "x": 641.7,
-      "y": 634.6
+      "x": 1211.1,
+      "y": 580.8
     },
     {
       "id": "senior-chinese-essay",
@@ -4016,8 +4012,8 @@
       "rot": 0.65,
       "num": "114",
       "featured": false,
-      "x": 1716.7,
-      "y": 183.6
+      "x": 1449.8,
+      "y": 70.5
     },
     {
       "id": "senior-physics-rj-textbook-sync",
@@ -4050,8 +4046,8 @@
       "rot": -1.46,
       "num": "115",
       "featured": false,
-      "x": 1247.1,
-      "y": 282.2
+      "x": 1919.5,
+      "y": 1075.6
     },
     {
       "id": "single-point-rubric-designer",
@@ -4084,8 +4080,8 @@
       "rot": 1.12,
       "num": "116",
       "featured": false,
-      "x": 581.3,
-      "y": 515.4
+      "x": 697.4,
+      "y": 576.5
     },
     {
       "id": "skill-creator",
@@ -4120,8 +4116,8 @@
       "rot": 1.32,
       "num": "117",
       "featured": false,
-      "x": 1787.1,
-      "y": 289.2
+      "x": 1190.2,
+      "y": 138.2
     },
     {
       "id": "smart-illustrator",
@@ -4156,8 +4152,8 @@
       "rot": -0.29,
       "num": "118",
       "featured": false,
-      "x": 240.6,
-      "y": 71.5
+      "x": 235.0,
+      "y": 88.3
     },
     {
       "id": "socratic-tutor",
@@ -4192,8 +4188,8 @@
       "rot": 0.8,
       "num": "119",
       "featured": false,
-      "x": 566.8,
-      "y": 765.9
+      "x": 613.6,
+      "y": 871.1
     },
     {
       "id": "storm-research",
@@ -4226,7 +4222,7 @@
       "rot": -1.05,
       "num": "120",
       "featured": false,
-      "x": 781.9,
+      "x": 756.2,
       "y": 980.0
     },
     {
@@ -4260,8 +4256,8 @@
       "rot": 0.34,
       "num": "121",
       "featured": false,
-      "x": 1149.1,
-      "y": 989.8
+      "x": 942.0,
+      "y": 834.5
     },
     {
       "id": "study-strategy-selector",
@@ -4294,42 +4290,8 @@
       "rot": 0.23,
       "num": "122",
       "featured": false,
-      "x": 1173.7,
-      "y": 408.3
-    },
-    {
-      "id": "tavily-search",
-      "name": "tavily-search",
-      "category": "研究检索",
-      "color": {
-        "bg": "#e6e0cd",
-        "fg": "#736846"
-      },
-      "tagline": "实时网络搜索，补充过时信息（需申请 [Tavily API Key](https://www.tavily.com/)，免费 1000 次/月）",
-      "description": "通过 Tavily API 进行实时联网搜索，获取模型训练截止日期之后的最新信息。 当用户询问近期事件、实时数据、当前状态、价格、版本号等容易过时的事实， 或明确要求「搜一下 / 查一下 / 帮我搜索」时使用；纯概念解释、闲聊、 基于已有上下文即可完成的推理不要调用。",
-      "type": "原创",
-      "verified": false,
-      "group": "🌐 工具 · 信息获取",
-      "refText": "",
-      "refUrl": "",
-      "demo": "",
-      "hasDemo": false,
-      "scenario": "研究",
-      "also": [],
-      "example": "用 tavily-search 查一下今年最新的中小学人工智能课程相关政策。",
-      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 79 59\" width=\"79\" height=\"59\" shape-rendering=\"crispEdges\"><rect width=\"79\" height=\"59\" fill=\"#f7f4ed\"/><rect width=\"79\" height=\"59\" fill=\"#f0e5c8\"/><g stroke=\"#a58535\" stroke-width=\"1.4\" fill=\"none\"><path d=\"M0.0 0V59\"/><path d=\"M9.9 0V59\"/><path d=\"M19.8 0V59\"/><path d=\"M29.6 0V59\"/><path d=\"M39.5 0V59\"/><path d=\"M49.4 0V59\"/><path d=\"M59.2 0V59\"/><path d=\"M69.1 0V59\"/><path d=\"M79.0 0V59\"/><path d=\"M0 0.0H79\"/><path d=\"M0 9.9H79\"/><path d=\"M0 19.8H79\"/><path d=\"M0 29.6H79\"/><path d=\"M0 39.5H79\"/><path d=\"M0 49.4H79\"/></g><g transform=\"translate(-2.2 -1.5)\" style=\"mix-blend-mode:multiply\" opacity=\"0.55\"><rect x=\"7.1\" y=\"24.9\" width=\"46.2\" height=\"25.5\" fill=\"#e0c583\"/></g><rect width=\"79\" height=\"59\" fill=\"url(#grain)\"/></svg>",
-      "w": 79,
-      "h": 59,
-      "pattern": "grid",
-      "fx": -11,
-      "fy": -22.3,
-      "dur": 7.0,
-      "delay": 2.5,
-      "rot": 1.48,
-      "num": "123",
-      "featured": false,
-      "x": 1357.3,
-      "y": 1039.9
+      "x": 1137.6,
+      "y": 450.8
     },
     {
       "id": "teach-back-evaluator",
@@ -4360,10 +4322,10 @@
       "dur": 8.3,
       "delay": 3.7,
       "rot": 1.57,
-      "num": "124",
+      "num": "123",
       "featured": false,
-      "x": 1735.3,
-      "y": 400.4
+      "x": 1900.5,
+      "y": 550.4
     },
     {
       "id": "teacher-homework-generation",
@@ -4394,10 +4356,10 @@
       "dur": 9.1,
       "delay": 3.7,
       "rot": 0.5,
-      "num": "125",
+      "num": "124",
       "featured": false,
-      "x": 690.8,
-      "y": 771.5
+      "x": 822.0,
+      "y": 820.8
     },
     {
       "id": "teacher-inquiry-cycle-designer",
@@ -4428,10 +4390,10 @@
       "dur": 9.9,
       "delay": 2.9,
       "rot": 1.03,
-      "num": "126",
+      "num": "125",
       "featured": false,
-      "x": 1693.9,
-      "y": 68.0
+      "x": 1797.5,
+      "y": 898.1
     },
     {
       "id": "teacher-parent-report-lite",
@@ -4462,10 +4424,10 @@
       "dur": 12.3,
       "delay": 6.1,
       "rot": 0.0,
-      "num": "127",
+      "num": "126",
       "featured": false,
-      "x": 1780.4,
-      "y": 933.3
+      "x": 1645.5,
+      "y": 1118.5
     },
     {
       "id": "text-complexity-analyser",
@@ -4496,10 +4458,10 @@
       "dur": 7.8,
       "delay": 2.9,
       "rot": -0.51,
-      "num": "128",
+      "num": "127",
       "featured": false,
-      "x": 371.2,
-      "y": 185.4
+      "x": 380.6,
+      "y": 207.8
     },
     {
       "id": "theme-factory",
@@ -4532,10 +4494,10 @@
       "dur": 6.2,
       "delay": 1.3,
       "rot": -0.47,
-      "num": "129",
+      "num": "128",
       "featured": false,
-      "x": 912.8,
-      "y": 387.4
+      "x": 1073.8,
+      "y": 337.3
     },
     {
       "id": "think-aloud-script-generator",
@@ -4566,10 +4528,10 @@
       "dur": 6.1,
       "delay": 0.8,
       "rot": -0.64,
-      "num": "130",
+      "num": "129",
       "featured": false,
-      "x": 1821.4,
-      "y": 171.2
+      "x": 1774.7,
+      "y": 570.0
     },
     {
       "id": "timetable-generator",
@@ -4600,9 +4562,9 @@
       "dur": 12.6,
       "delay": 2.3,
       "rot": -0.32,
-      "num": "131",
+      "num": "130",
       "featured": false,
-      "x": 1042.2,
+      "x": 968.1,
       "y": 1108.5
     },
     {
@@ -4634,10 +4596,10 @@
       "dur": 10.0,
       "delay": 4.9,
       "rot": -1.18,
-      "num": "132",
+      "num": "131",
       "featured": false,
-      "x": 1012.0,
-      "y": 166.7
+      "x": 1454.9,
+      "y": 191.0
     },
     {
       "id": "tutor",
@@ -4668,9 +4630,9 @@
       "dur": 12.2,
       "delay": 3.1,
       "rot": 0.19,
-      "num": "133",
+      "num": "132",
       "featured": false,
-      "x": 802.8,
+      "x": 845.6,
       "y": 1104.5
     },
     {
@@ -4702,10 +4664,10 @@
       "dur": 11.7,
       "delay": 3.4,
       "rot": -1.13,
-      "num": "134",
+      "num": "133",
       "featured": false,
-      "x": 1487.4,
-      "y": 180.5
+      "x": 1904.0,
+      "y": 784.1
     },
     {
       "id": "understand",
@@ -4738,10 +4700,10 @@
       "dur": 12.4,
       "delay": 0.7,
       "rot": 1.07,
-      "num": "135",
+      "num": "134",
       "featured": false,
-      "x": 1151.0,
-      "y": 292.5
+      "x": 834.3,
+      "y": 460.8
     },
     {
       "id": "variation-theory-task-designer",
@@ -4772,10 +4734,10 @@
       "dur": 11.0,
       "delay": 6.0,
       "rot": 1.01,
-      "num": "136",
+      "num": "135",
       "featured": false,
-      "x": 1617.4,
-      "y": 187.8
+      "x": 1910.0,
+      "y": 222.4
     },
     {
       "id": "vocabulary-tiering-tool",
@@ -4806,10 +4768,10 @@
       "dur": 8.5,
       "delay": 1.1,
       "rot": -0.17,
-      "num": "137",
+      "num": "136",
       "featured": false,
-      "x": 1032.3,
-      "y": 1002.0
+      "x": 1113.6,
+      "y": 1021.2
     },
     {
       "id": "weak-area-tracker",
@@ -4840,10 +4802,10 @@
       "dur": 11.5,
       "delay": 2.3,
       "rot": -1.58,
-      "num": "138",
+      "num": "137",
       "featured": false,
-      "x": 1155.5,
-      "y": 176.5
+      "x": 776.3,
+      "y": 185.9
     },
     {
       "id": "web-artifacts-builder",
@@ -4876,10 +4838,10 @@
       "dur": 11.9,
       "delay": 5.5,
       "rot": 0.92,
-      "num": "139",
+      "num": "138",
       "featured": false,
-      "x": 1634.8,
-      "y": 511.9
+      "x": 1911.5,
+      "y": 955.1
     },
     {
       "id": "webapp-testing",
@@ -4910,10 +4872,10 @@
       "dur": 11.4,
       "delay": 2.7,
       "rot": 0.15,
-      "num": "140",
+      "num": "139",
       "featured": false,
-      "x": 904.3,
-      "y": 997.1
+      "x": 985.6,
+      "y": 1012.2
     },
     {
       "id": "worked-example-fading-designer",
@@ -4944,10 +4906,10 @@
       "dur": 6.5,
       "delay": 6.7,
       "rot": -0.71,
-      "num": "141",
+      "num": "140",
       "featured": false,
-      "x": 1369.6,
-      "y": 292.0
+      "x": 1702.1,
+      "y": 159.7
     },
     {
       "id": "xlsx",
@@ -4980,7 +4942,7 @@
       "dur": 10.2,
       "delay": 5.7,
       "rot": -1.17,
-      "num": "142",
+      "num": "141",
       "featured": false,
       "x": 75.5,
       "y": 691.9

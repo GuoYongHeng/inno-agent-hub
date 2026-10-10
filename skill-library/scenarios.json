@@ -231,11 +231,6 @@
       "also": [],
       "example": "用 paper-lookup 检索近三年「生成式 AI 在中小学教学中的应用」相关的论文。"
     },
-    "tavily-search": {
-      "scenario": "研究",
-      "also": [],
-      "example": "用 tavily-search 查一下今年最新的中小学人工智能课程相关政策。"
-    },
     "markitdown": {
       "scenario": "研究",
       "also": [

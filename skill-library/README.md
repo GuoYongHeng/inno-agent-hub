@@ -32,12 +32,6 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 
 > ⚠️ **新增 Skill 必须在 frontmatter 加 `category`、`subject`、`kind` 三个标签**(取值表见仓库根目录 README「学科与用途标签」一节)。`category` —— Inno Agent 客户端按 `category` 分组并支持搜索,缺失会落到「未分类」组。可用分类: `教学辅导` / `内容创作` / `文档处理` / `研究检索` / `开发工具`。详细约定见仓库根目录 [README.md 的「分类标签 (必填)」](../README.md#分类标签-必填) 一节。
 
-### 🌐 工具 · 信息获取
-
-| Skill | 类型 | 一句话 |
-|---|---|---|
-| [tavily-search](./tavily-search/) | 原创 | 实时网络搜索，补充过时信息（需申请 [Tavily API Key](https://www.tavily.com/)，免费 1000 次/月） |
-
 ### 📐 教育 · 数学
 
 | Skill | 类型 | 一句话 | 引用 | 效果 |
