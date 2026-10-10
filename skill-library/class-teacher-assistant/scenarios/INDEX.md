@@ -1,0 +1,625 @@
+# 班主任场景索引
+
+这个目录把班主任 skill 拆成一组可单独复用的小场景。
+
+## 已完成场景
+
+### 01. 家长群日常通知
+路径：`scenarios/01-parent-daily-notice/`
+
+适合：
+- 升旗、调课、集合、带物品、着装提醒
+- 普通班务通知
+- 需要家长确认收到的通知
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 02. 一对一家长沟通
+路径：`scenarios/02-parent-1on1-message/`
+
+适合：
+- 私聊家长说明学生近况
+- 沟通问题、建议和合作方式
+- 做到既直接又不失分寸
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 03. 学生期末评语 / 阶段评语
+路径：`scenarios/03-student-comments/`
+
+适合：
+- 根据优点、问题、进步点生成评语
+- 输出自然、克制、可交付的学生评价
+- 做期末评语或阶段反馈初稿
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 04. 成绩分析结论输出
+路径：`scenarios/04-grade-analysis-summary/`
+
+适合：
+- 把成绩、排名、变化趋势整理成结论稿
+- 输出老师可直接看的分析摘要
+- 快速识别重点关注对象
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 05. 家长会发言提纲
+路径：`scenarios/05-parent-meeting-outline/`
+
+适合：
+- 输出家长会发言提纲
+- 汇总班级整体情况与家校配合建议
+- 先出结构，再决定是否扩成讲稿
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 06. 班级周计划 / 班务提醒
+路径：`scenarios/06-weekly-class-plan/`
+
+适合：
+- 整理每周重点任务和班务安排
+- 输出提醒事项和执行节奏
+- 为老师做一版周度工作骨架
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 07. 谈话记录
+路径：`scenarios/07-conversation-record/`
+
+适合：
+- 学生谈话留痕
+- 记录背景、内容、约定、跟进计划
+- 做成长档案或后续回访准备
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 08. 突发事件上报 / 情况说明
+路径：`scenarios/08-incident-report/`
+
+适合：
+- 内部情况上报
+- 向学校或家长说明经过与处理动作
+- 快速生成一版客观说明稿
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 09. 作业未交 / 迟交汇总
+路径：`scenarios/09-homework-missing-summary/`
+
+适合：
+- 汇总未交、迟交、补交情况
+- 生成班级统一提醒或一对一提醒
+- 内部留存作业完成情况记录
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 10. 班会提纲
+路径：`scenarios/10-class-meeting-outline/`
+
+适合：
+- 每周常规班会准备
+- 安全、纪律、学习习惯等专题班会
+- 先输出提纲，再决定是否扩成讲稿
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 11. 活动流程单
+路径：`scenarios/11-activity-runbook/`
+
+适合：
+- 班级活动时间线与分工整理
+- 输出老师现场可执行的流程单
+- 检查物料、节点和收尾事项
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 12. 值日 / 轮值安排
+路径：`scenarios/12-duty-roster/`
+
+适合：
+- 排教室值日、岗位轮值
+- 生成按周或按日的安排表
+- 形成可发布、可调整的轮值说明
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 13. 班级日报
+路径：`scenarios/13-daily-class-report/`
+
+适合：
+- 汇总当天出勤、学习、纪律与异常情况
+- 做内部留痕、交接或后续跟进依据
+- 把零散记录整理成结构化日报
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 14. 班级周报
+路径：`scenarios/14-weekly-class-report/`
+
+适合：
+- 汇总一周整体情况
+- 提炼亮点、问题与下周重点
+- 作为月报或阶段复盘素材
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 15. 班级月报
+路径：`scenarios/15-monthly-class-report/`
+
+适合：
+- 做月度整体复盘
+- 提炼学习、纪律、活动和家校沟通趋势
+- 为下月计划或家长会准备素材
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 16. 请假登记 / 请假说明
+路径：`scenarios/16-leave-record/`
+
+适合：
+- 家长请假后快速登记
+- 向科任老师同步请假情况
+- 为返校、补作业做后续跟进
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 17. 家访记录
+路径：`scenarios/17-home-visit-record/`
+
+适合：
+- 家访结束后整理留档
+- 提炼家校沟通内容与共识
+- 明确后续跟进安排
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 18. 违纪情况记录
+路径：`scenarios/18-discipline-record/`
+
+适合：
+- 课堂违纪、常规问题留痕
+- 家长沟通前先整理事实底稿
+- 形成后续谈话与跟进依据
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 19. 表扬通报 / 班级激励
+路径：`scenarios/19-praise-and-encouragement/`
+
+适合：
+- 表扬学生或班级正向表现
+- 生成自然不过度的鼓励稿
+- 用于班级群、私聊家长或班内反馈
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 20. 考前提醒 / 考后总结
+路径：`scenarios/20-exam-reminder-summary/`
+
+适合：
+- 考前准备提醒
+- 考后班级层面简要复盘
+- 给学生或家长同步考试相关安排
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 21. 重点学生跟踪清单
+路径：`scenarios/21-key-student-tracking/`
+
+适合：
+- 整理需要持续关注的学生名单
+- 记录已做跟进与下一步动作
+- 为班主任长期追踪留出统一格式
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 22. 班级日报
+路径：`scenarios/22-daily-class-report/`
+
+适合：
+- 汇总当天班级运行情况
+- 做内部留痕、交接或异常事项归档
+- 把零散记录整理成结构化日报
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 23. 班级周报
+路径：`scenarios/23-weekly-class-report/`
+
+适合：
+- 汇总一周整体情况
+- 提炼亮点、问题与下周重点
+- 为月报或阶段复盘提供素材
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 24. 班级月报
+路径：`scenarios/24-monthly-class-report/`
+
+适合：
+- 做月度整体复盘
+- 提炼趋势、亮点与持续关注事项
+- 为下月计划或家长会准备素材
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 25. 家长会总结与后续跟进
+路径：`scenarios/25-parent-meeting-summary-followup/`
+
+适合：
+- 家长会后整理纪要与后续动作
+- 提炼家长关注点与老师提醒
+- 明确需单独跟进的对象与事项
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 26. 家校沟通台账
+路径：`scenarios/26-parent-communication-ledger/`
+
+适合：
+- 连续记录和家长的沟通情况
+- 做敏感事项留痕和月度复盘
+- 快速形成待跟进事项表
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 27. 作业催交跟进表
+路径：`scenarios/27-homework-followup-ledger/`
+
+适合：
+- 跟踪未交、迟交、补交和催交状态
+- 识别重复未交学生
+- 给家校沟通和周复盘提供依据
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 28. 请假返校补课跟进表
+路径：`scenarios/28-leave-return-followup/`
+
+适合：
+- 跟进请假学生返校后的补作业、补课与确认状态
+- 减少返校后的信息断层
+- 给班主任和科任协作提供统一表格
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 29. 重点学生阶段观察卡
+路径：`scenarios/29-key-student-observation-card/`
+
+适合：
+- 对重点学生做固定字段阶段观察
+- 为谈话、家校沟通和阶段复盘沉淀依据
+- 避免长期跟进只靠印象
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 30. 班级事务待办清单
+路径：`scenarios/30-class-task-checklist/`
+
+适合：
+- 汇总缴费、回执、提醒、活动准备和值日安排等杂项事务
+- 形成日清单、周清单和待确认事项表
+- 减少遗漏与重复提醒
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 31. 班级数据周统计
+路径：`scenarios/31-weekly-class-metrics/`
+
+适合：
+- 从出勤、作业、纪律、表扬等数据复盘一周班情
+- 识别异常指标和趋势变化
+- 为周报、年级汇报或家长会素材做准备
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 32. 班级数据月统计
+路径：`scenarios/32-monthly-class-metrics/`
+
+适合：
+- 沉淀月度班级运行趋势
+- 为月报、家长会和阶段总结准备数据材料
+- 识别长期异常和持续改善点
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 33. 座位编排 / 调座方案
+路径：`scenarios/33-seat-arrangement/`
+
+适合：
+- 新学期排座或阶段性调座
+- 兼顾视力、身高、纪律、男女搭配等规则
+- 输出可执行座位表与调座说明
+
+包含：
+- `README.md`
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 34. 分组编排 / 学习小组分配
+路径：`scenarios/34-group-assignment/`
+
+适合：
+- 新学期建学习小组或阶段性重新分组
+- 兼顾成绩层次、性格、纪律和男女搭配
+- 输出可执行分组表与分工建议
+
+包含：
+- `README.md`
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 35. 班干部岗位分配
+路径：`scenarios/35-class-cadre-assignment/`
+
+适合：
+- 新学期确定班干部或阶段性调岗
+- 兼顾责任心、组织力、纪律示范和培养梯队
+- 输出可执行岗位安排与公布说明
+
+包含：
+- `README.md`
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 36. 小组任务分工 / 课堂分工安排
+路径：`scenarios/36-classroom-task-assignment/`
+
+适合：
+- 课堂合作任务、项目学习或活动分工
+- 兼顾表达、记录、执行、合作与纪律提醒
+- 输出可执行分工表与学生执行版
+
+包含：
+- `README.md`
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 37. 学生互助结对 / 帮扶对象分配
+路径：`scenarios/37-peer-support-pairing/`
+
+适合：
+- 新学期建互助对子或一帮一帮扶
+- 兼顾学习层次、责任心、沟通能力与稳定性
+- 输出可执行结对表与跟进说明
+
+包含：
+- `README.md`
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 38. 小组轮岗 / 值周岗位轮换
+路径：`scenarios/38-rotation-duty-schedule/`
+
+适合：
+- 小组内角色轮换或值周岗位轮换
+- 兼顾公平性、稳定性、培养机会与执行节奏
+- 输出可执行轮岗表与学生执行版
+
+包含：
+- `README.md`
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 39. 积分量化管理系统
+路径：`scenarios/39-points-reward-system/`
+
+适合：
+- 建立班级积分量化管理制度
+- 设计加减分规则、收集流程与公示方案
+- 引入游戏化"班级大富翁"机制提升学生积极性
+- 明确课代表、值日班长打分权限与操作流程
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 40. 班级编排方案（分组 / 座位 / 值日 / 班委一体化）
+路径：`scenarios/40-class-arrangement/`
+
+适合：
+- 新学期或新阶段一次性完成分组、座位、值日、班委编排
+- 引入积分、货币、游戏化（如大富翁主题）管理模式
+- 已有部分编排框架，需要补充缺失环节
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 41. 课题申报 / 教育科研项目申报
+路径：`scenarios/41-research-proposal/`
+
+适合：
+- 省/市/区级教育科学规划课题申报
+- 教师数字素养、教育评价改革等专项课题申报
+- 课题开题报告、结题报告撰写
+- 教育评价改革典型案例撰写
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 42. 游戏化班级管理 / 大富翁式班级管理系统
+路径：`scenarios/42-gamified-class-management/`
+
+适合：
+- 引入大富翁机制的游戏化班级管理
+- 货币、职位、地产、卡片、排行榜全系统设计
+- 用游戏化思维激发学生内驱力
+- 需要正向激励替代简单惩罚
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+
+### 43. 智能座位编排系统
+路径：`scenarios/43-smart-seat-grouping/`
+
+适合：
+- 基于多维评分的智能座位编排，实现组内优势互补、组间实力均衡
+- 新学期排座、期中调座、分组调整
+- 1+4 配对、2+3 配对的学业异质互补
+- 话多+安静、领导力强+被动、偏科互补、情绪不稳定+稳定的性格对冲
+- 需要输出分组方案、编排理由、座位图的完整方案
+
+包含：
+- `SCENARIO.md`
+- `templates.md`
+- `examples/input.sample.md`
+- `examples/output.sample.md`
+- `scripts/smart_seat_arrangement.py`
+
+## 设计原则
+- 一个场景解决一类高频任务
+- 每个场景都提供：说明、模板、输入输出样例
+- 默认先生成草稿，不直接外发
+- 默认不处理未经核实的敏感信息
