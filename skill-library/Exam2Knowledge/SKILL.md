@@ -1,6 +1,6 @@
 ---
 name: Exam2Knowledge
-name-zh: "试题考点拆解器"
+name-zh: "试题考点变式题生成"
 category: 学习发展
 subject: 跨学科
 kind: 评价测评

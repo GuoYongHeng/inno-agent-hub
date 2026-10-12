@@ -1,6 +1,6 @@
 ---
 name: webapp-testing
-name-zh: "网页交互件构建器"
+name-zh: "交互式网页生成工具"
 category: 系统工具
 subject: 其它
 kind: 开发工具

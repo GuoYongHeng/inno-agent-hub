@@ -1,6 +1,6 @@
 ---
 name: docx
-name-zh: "Word文档处理"
+name-zh: "Word工具"
 category: 系统工具
 subject: 跨学科
 kind: 文档处理

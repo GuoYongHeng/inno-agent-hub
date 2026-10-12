@@ -1,6 +1,6 @@
 ---
 name: pptx
-name-zh: "PPT演示文稿处理"
+name-zh: "PPT工具"
 category: 系统工具
 subject: 跨学科
 kind: 课件生成

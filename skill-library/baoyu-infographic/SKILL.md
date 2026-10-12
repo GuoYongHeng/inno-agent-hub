@@ -1,6 +1,6 @@
 ---
 name: baoyu-infographic
-name-zh: "专业信息图生成"
+name-zh: "知识卡片生成"
 category: 系统工具
 subject: 跨学科
 kind: 课件生成

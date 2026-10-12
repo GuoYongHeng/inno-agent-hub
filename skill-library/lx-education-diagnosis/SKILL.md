@@ -1,6 +1,6 @@
 ---
 name: 学生教育诊断助手
-name-zh: "学生教育诊断助手"
+name-zh: "学生德育助手"
 category: 管理治理
 description: 面向学生、家长、教师和班主任的全局教育诊断与教育选择、具体事件复盘。通过分轮访谈还原学生状态、家庭支持、学校情境、学习任务、关系、数字设备与AI使用，判断一次管教或教学选择“是否合适”，并区分当下止损与面向未来的教育价值。用于孩子不爱学习、成绩下降、作业拖延、手机冲突、亲子争吵、家长吼骂后悔、教师批评、学习动力、AI教育方式，以及“我这样做对不对、该怎么选”等问题。Also use for education diagnosis, parenting or teaching decision review, and learning-system analysis in English. 不用于心理或医学诊断，也不依据单方陈述贴标签。
 ---

@@ -1,6 +1,6 @@
 ---
 name: edu-solid-geometry
-name-zh: "立体几何交互解题"
+name-zh: "立体几何助讲器"
 category: 课程教学
 subject: 数学
 kind: 课件生成

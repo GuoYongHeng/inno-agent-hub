@@ -1,6 +1,6 @@
 ---
 name: frontend-slides
-name-zh: "网页幻灯片生成器"
+name-zh: "网页PPT生成"
 category: 系统工具
 subject: 跨学科
 kind: 课件生成

@@ -1,6 +1,6 @@
 ---
 name: storm-research
-name-zh: "STORM深度研究"
+name-zh: "深度研究"
 category: 教研科研
 subject: 跨学科
 kind: 教研科研

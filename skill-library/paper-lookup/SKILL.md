@@ -1,6 +1,6 @@
 ---
 name: paper-lookup
-name-zh: "学术论文检索器"
+name-zh: "论文检索助手"
 category: 教研科研
 subject: 跨学科
 kind: 教研科研

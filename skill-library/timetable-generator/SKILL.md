@@ -1,6 +1,6 @@
 ---
 name: 学校课表排课助手
-name-zh: "学校课表排课助手"
+name-zh: "排课助手"
 category: 管理治理
 description: "School timetable auto-generation system. Use when users need to generate school schedules, timetables, or course schedules (排课、课表、课程表、timetable、schedule). Reads Excel course lists and produces complete timetables satisfying 20 constraint rules (teacher conflicts, P1 distribution, no consecutive same-subject, no core subjects in last period, morning priority for Chinese/Math, art-music merged scheduling, odd/even week restrictions, daily teacher coverage). Outputs Excel with grade schedules, teacher timetables, and constraint check reports."
 license: MIT

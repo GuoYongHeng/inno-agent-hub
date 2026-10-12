@@ -1,6 +1,6 @@
 ---
 name: 学情反馈报告助手
-name-zh: "学情反馈报告助手"
+name-zh: "家校沟通学情反馈报告生成"
 category: 管理治理
 description: "帮助老师把学习表现转成家长听得懂、愿意配合、不过度焦虑的反馈报告。 Workflow: teacher_parent_report_lite.run."
 version: "0.10.0"

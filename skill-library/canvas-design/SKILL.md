@@ -1,6 +1,6 @@
 ---
 name: canvas-design
-name-zh: "平面视觉设计器"
+name-zh: "海报生成器"
 category: 系统工具
 subject: 艺术
 kind: 内容创作

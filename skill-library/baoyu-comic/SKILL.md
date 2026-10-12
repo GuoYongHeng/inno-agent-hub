@@ -1,6 +1,6 @@
 ---
 name: baoyu-comic
-name-zh: "知识漫画创作工具"
+name-zh: "教育漫画生成"
 category: 系统工具
 subject: 跨学科
 kind: 课件生成

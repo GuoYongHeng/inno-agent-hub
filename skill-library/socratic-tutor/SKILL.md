@@ -1,6 +1,6 @@
 ---
 name: socratic-tutor
-name-zh: "苏格拉底式编程导师"
+name-zh: "编程助教"
 category: 学习发展
 subject: 信息技术
 kind: 学习辅导

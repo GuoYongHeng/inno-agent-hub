@@ -1,6 +1,6 @@
 ---
 name: knowledge-explanation-skill
-name-zh: "知识点讲解"
+name-zh: "知识点讲解助手"
 category: 学习发展
 description: >
   以指定或默认讲解风格，围绕具体知识点、概念、规则/原理、适用条件、易混边界或学习卡点做学生向交互式讲解。
