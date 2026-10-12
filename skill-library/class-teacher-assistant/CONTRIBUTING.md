@@ -43,7 +43,6 @@
 - `scripts/`：脚本
 - `examples/`：脱敏示例
 - `scenarios/`：场景目录
-- `companion/`：配套说明型 skill
 - `data/`：本地私有，默认不进仓库
 
 ## 对贡献者最重要的一条

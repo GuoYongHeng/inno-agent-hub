@@ -4,7 +4,6 @@
     "backwards-design-unit-planner",
     "homework-grader",
     "Exam2Knowledge",
-    "comment-on-docx",
     "edu-solid-geometry",
     "edu-analytic-geometry",
     "frontend-slides",
@@ -12,14 +11,11 @@
     "baoyu-infographic",
     "math-tutor",
     "socratic-tutor",
-    "tutor",
     "storm-research",
     "paper-lookup",
     "markitdown",
-    "algorithmic-art",
     "paper-to-xhs",
-    "paper-to-dialogue-video",
-    "ian-xiaohei-illustrations"
+    "paper-to-dialogue-video"
   ],
   "scenarios": [
     {
@@ -79,11 +75,6 @@
       "also": [],
       "example": "用 backwards-design-unit-planner 帮我备「二次函数」这个单元的教案，初三，6 课时，目标是学生能根据图象说出性质并解决实际问题。"
     },
-    "explicit-instruction-sequence-builder": {
-      "scenario": "备课",
-      "also": [],
-      "example": "用 explicit-instruction-sequence-builder 做一节「分数除法」的课时教案，I do / we do / you do 结构，带时间分配和随堂检查点。"
-    },
     "scope-and-sequence-designer": {
       "scenario": "备课",
       "also": [],
@@ -100,13 +91,6 @@
       "scenario": "备课",
       "also": [],
       "example": "用 formative-assessment-technique-selector 帮我挑几个课中检查学生是否听懂的随堂检测方法。"
-    },
-    "comment-on-docx": {
-      "scenario": "备课",
-      "also": [
-        "自学"
-      ],
-      "example": "用 comment-on-docx 批改这篇作文：按议论文标准，在具体句子上加批注指出论点、论据、结构的问题，不要改我的原文。"
     },
     "homework-grader": {
       "scenario": "备课",
@@ -162,13 +146,6 @@
       ],
       "example": "用 pptx 把这份教案做成一套可编辑的 PPT 课件。"
     },
-    "baoyu-slide-deck": {
-      "scenario": "讲课",
-      "also": [
-        "创造"
-      ],
-      "example": "用 baoyu-slide-deck 把这份教研汇报做成一套带统一风格的幻灯片。"
-    },
     "baoyu-comic": {
       "scenario": "讲课",
       "also": [
@@ -209,18 +186,6 @@
       ],
       "example": "用 socratic-tutor 引导我理解这段递归代码，只给提示别直接告诉我答案。"
     },
-    "tutor": {
-      "scenario": "自学",
-      "also": [],
-      "example": "用 tutor 教我理解「细胞呼吸」，像人类家教那样一步步来，先问我已经知道什么。"
-    },
-    "learning-opportunities": {
-      "scenario": "自学",
-      "also": [
-        "创造"
-      ],
-      "example": "用 learning-opportunities 在我写完这段代码之后，给我出几个循证的学习练习巩固一下。"
-    },
     "storm-research": {
       "scenario": "研究",
       "also": [],
@@ -252,33 +217,12 @@
       ],
       "example": "用 baoyu-youtube-transcript 下载这个公开课视频的中文字幕，并按章节整理成文稿。"
     },
-    "doc-coauthoring": {
-      "scenario": "研究",
-      "also": [
-        "备课"
-      ],
-      "example": "用 doc-coauthoring 和我一起把这份教学设计规范逐节写完整。"
-    },
-    "algorithmic-art": {
-      "scenario": "创造",
-      "also": [
-        "讲课"
-      ],
-      "example": "用 algorithmic-art 生成一群会跟着鼠标游动的发光水母，能调数量、颜色和游动速度，背景是深海渐变。"
-    },
     "canvas-design": {
       "scenario": "创造",
       "also": [
         "讲课"
       ],
       "example": "用 canvas-design 做一张「校园读书节」的活动海报，输出 PDF 可直接拿去打印。"
-    },
-    "ian-xiaohei-illustrations": {
-      "scenario": "创造",
-      "also": [
-        "讲课"
-      ],
-      "example": "用 ian-xiaohei-illustrations 给这篇公众号文章配几张小黑风格的解释图。"
     },
     "frontend-design": {
       "scenario": "创造",
@@ -297,13 +241,6 @@
       "also": [],
       "example": "用 webapp-testing 帮我测一下这个页面功能是否正常，顺便截图并把控制台报错抓出来。"
     },
-    "understand": {
-      "scenario": "创造",
-      "also": [
-        "研究"
-      ],
-      "example": "用 understand 分析这个项目，生成一张交互式的代码知识图谱。"
-    },
     "skill-creator": {
       "scenario": "创造",
       "also": [
@@ -311,22 +248,10 @@
       ],
       "example": "用 skill-creator 把我这套备课流程做成一个可复用的 skill。"
     },
-    "prompt-engineer": {
-      "scenario": "创造",
-      "also": [],
-      "example": "用 prompt-engineer 帮我把这个批改提示词重写得更稳定，并配一套测试用例。"
-    },
     "mcp-builder": {
       "scenario": "创造",
       "also": [],
       "example": "用 mcp-builder 把我们学校的教务 API 封装成一个 MCP 服务器。"
-    },
-    "email-sender": {
-      "scenario": "创造",
-      "also": [
-        "备课"
-      ],
-      "example": "用 email-sender 把这份家长会通知发到班级邮件组。"
     }
   }
 }

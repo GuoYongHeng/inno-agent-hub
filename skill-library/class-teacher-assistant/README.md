@@ -120,9 +120,7 @@ scenarios/01-parent-daily-notice/
 │   └── INDEX.md
 ├── references/                 ← 可公开模板与流程材料
 ├── scripts/                    ← 成绩分析 / 考勤汇总 / 学生跟踪脚本
-├── examples/                   ← 脱敏样例数据
-└── companion/
-    └── class-teacher-market-scan/  ← 配套说明型 skill（能力摸底与方案调研笔记）
+└── examples/                   ← 脱敏样例数据
 ```
 
 ## 接入自己的系统

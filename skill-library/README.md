@@ -51,7 +51,6 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 |---|---|---|---|---|---|
 | [backwards-design-unit-planner](./backwards-design-unit-planner/) | 收集 |  | 逆向设计（UbD）：从学习成果倒推评估证据与学习活动，产出完整单元教学计划 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/curriculum-assessment/backwards-design-unit-planner) |  |
 | [scope-and-sequence-designer](./scope-and-sequence-designer/) | 收集 |  | 课程范围与进度：跨年级/学期的纵向进阶与横向衔接，带先修依赖与连贯性检查 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/curriculum-assessment/scope-and-sequence-designer) |  |
-| [explicit-instruction-sequence-builder](./explicit-instruction-sequence-builder/) | 收集 |  | 显性教学课时序列（I Do/We Do/You Do），含理解检查点与时间分配的可上课教案 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/explicit-instruction/explicit-instruction-sequence-builder) |  |
 | [differentiation-adapter](./differentiation-adapter/) | 收集 |  | 同一任务按学困/超常/多动/读写障碍等差异化适配，保持学习目标不变 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/curriculum-assessment/differentiation-adapter) |  |
 | [formative-assessment-technique-selector](./formative-assessment-technique-selector/) | 收集 |  | 按教学时刻挑随堂检测/形成性评估技术，含实施步骤与学生应答解读 | [GarethManning/education-agent-skills](https://github.com/GarethManning/education-agent-skills/tree/main/skills/curriculum-assessment/formative-assessment-technique-selector) |  |
 | [class-exam-review](./class-exam-review/) | 原创 |  | 试卷＋答案＋评分标准＋班级答题 Excel → 班级学情分析、逐题分析、讲评课方案、重点题讲稿、补偿练习、个人订正单 |  | [demo](./assets/class-exam-review/02-summary.png) |
@@ -61,17 +60,14 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 
 | Skill | 类型 | 通过验证 | 一句话 | 引用 |
 |---|---|---|---|---|
-| [comment-on-docx](./comment-on-docx/) | 收集 |  | 给 Word（.docx）加原生批注式反馈，定位到具体词句、不改原文，适合作文/论文/作业批改 | [tim-hua-01/comment-on-docx](https://github.com/tim-hua-01/comment-on-docx) |
 | [homework-grader](./homework-grader/) | 收集 |  | 量规驱动批改作业：证据引用打分、批量处理、生成评语、师生评分校准、导出 Excel | [ChantillyAn/homework-grader](https://github.com/ChantillyAn/homework-grader) |
 
 ### 🎓 教育 · 自学与辅导
 
 | Skill | 类型 | 通过验证 | 一句话 | 引用 |
 |---|---|---|---|---|
-| [tutor](./tutor/) | 收集 |  | 像优秀人类家教一样教任何学科，建立可迁移的真正理解而非直接给答案 | [cdmorozov/claude-tutors](https://github.com/cdmorozov/claude-tutors) |
 | [math-tutor](./math-tutor/) | 收集 |  | 数学自学家教：引导建立真正理解，检查解法/证明而非直接给步骤 | [cdmorozov/claude-tutors](https://github.com/cdmorozov/claude-tutors) |
 | [socratic-tutor](./socratic-tutor/) | 收集 |  | 苏格拉底式引导讲题：0-4 级提示阶梯，绝不直接给完整答案（编程教学） | [Pyroxin/opinionated-claude-skills](https://github.com/Pyroxin/opinionated-claude-skills) |
-| [learning-opportunities](./learning-opportunities/) | 收集 |  | AI 辅助编码后塞入循证学习练习，对抗 vibe coding 的能力退化 | [DrCatHicks/learning-opportunities](https://github.com/DrCatHicks/learning-opportunities) |
 
 ### 📄 文档 · 办公与转换
 
@@ -91,7 +87,6 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 |---|---|---|---|---|
 | [paper-lookup](./paper-lookup/) | 收集 |  | 通过 REST API 检索 PubMed、arXiv、OpenAlex 等 10 个学术论文库 | [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills/tree/HEAD/scientific-skills/paper-lookup) |
 | [baoyu-youtube-transcript](./baoyu-youtube-transcript/) | 收集 |  | 按 URL 或视频 ID 下载 YouTube 字幕与封面，支持翻译与分章 | [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills/tree/HEAD/skills/baoyu-youtube-transcript) |
-| [understand](./understand/) | 收集 |  | 分析代码库生成交互式知识图谱，理解架构、组件与关系 | [Lum1104/Understand-Anything](https://github.com/Lum1104/Understand-Anything/tree/HEAD/understand-anything-plugin/skills/understand) |
 | [storm-research](./storm-research/) | 收集 |  | 多视角提问 + 联网检索 + 强制引用，产出维基百科式带来源的深度研究报告 | [openwhat007/storm-research](https://github.com/openwhat007/storm-research) |
 
 ### 🎓 教育 · 研究设计与分析
@@ -135,9 +130,7 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 |---|---|---|---|---|
 | [baoyu-comic](./baoyu-comic/) | 收集 |  | 知识漫画创作，支持多种画风与基调，分镜排版并按序生成图像 | [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills/tree/HEAD/skills/baoyu-comic) |
 | [baoyu-infographic](./baoyu-infographic/) | 收集 |  | 用 21 种布局与 21 种风格生成可发布的专业信息图 | [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills/tree/HEAD/skills/baoyu-infographic) |
-| [baoyu-slide-deck](./baoyu-slide-deck/) | 收集 |  | 从内容生成专业幻灯片图像，先出带风格的提纲再逐页生图 | [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills/tree/HEAD/skills/baoyu-slide-deck) |
 | [smart-illustrator](./smart-illustrator/) | 收集 |  | 智能配图与 PPT 信息图生成器，三种模式（文章配图 / 批量信息图 / 封面图） | [axtonliu/smart-illustrator](https://github.com/axtonliu/smart-illustrator) |
-| [ian-xiaohei-illustrations](./ian-xiaohei-illustrations/) | 收集 |  | 生成 Ian「小黑」风格的中文正文配图（手绘、怪诞、16:9 解释图） | [helloianneo/ian-xiaohei-illustrations](https://github.com/helloianneo/ian-xiaohei-illustrations) |
 | [paper-to-xhs](./paper-to-xhs/) | 收集 |  | 论文 → 小红书科研笔记：证据核对层＋千字内发布文案＋4–6 张截图主导的 3:4 卡片图 | [youzizzz1028/Paper2Share](https://github.com/youzizzz1028/Paper2Share/tree/main/skills/paper-to-xhs) |
 | [paper-to-dialogue-video](./paper-to-dialogue-video/) | 收集 |  | 论文 → 中文双人播客视频：核对版讲稿＋双声部配音＋同步字幕＋HTML 动画与 MP4 导出 | [youzizzz1028/Paper2Share](https://github.com/youzizzz1028/Paper2Share/tree/main/skills/paper-to-dialogue-video) |
 
@@ -146,22 +139,14 @@ Inno Agent Skill 集合整理 —— 每个 Skill 是独立目录，可直接下
 | Skill | 类型 | 通过验证 | 一句话 | 引用 |
 |---|---|---|---|---|
 | [skill-creator](./skill-creator/) | 收集 |  | 创建、修改、优化 skill 并运行评测衡量其表现（自带 Apache-2.0 LICENSE） | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/skill-creator) |
-| [prompt-engineer](./prompt-engineer/) | 收集 |  | 编写、重构与评估 LLM 提示词，产出优化模板、结构化输出 schema 与测试套件 | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills/tree/HEAD/skills/prompt-engineer) |
 
 ### 🎨 创作 · 视觉与设计
 
 | Skill | 类型 | 通过验证 | 一句话 | 引用 |
 |---|---|---|---|---|
-| [algorithmic-art](./algorithmic-art/) | 收集 |  | 用 p5.js 创作算法生成艺术，支持随机种子与交互式参数探索 | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/algorithmic-art) |
 | [canvas-design](./canvas-design/) | 收集 |  | 运用设计理念创作海报、艺术品等静态视觉作品，输出 PNG 与 PDF | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/canvas-design) |
 | [theme-factory](./theme-factory/) | 收集 |  | 用预设主题为幻灯片、文档、HTML 落地页等产物统一配色与字体 | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/theme-factory) |
 | [frontend-slides](./frontend-slides/) | 收集 |  | 一句话 / PPT → 零依赖单文件动画网页幻灯片，内置 12 配色预设 + 34 设计模板 | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
-
-### 📝 写作 · 文档协作
-
-| Skill | 类型 | 通过验证 | 一句话 | 引用 |
-|---|---|---|---|---|
-| [doc-coauthoring](./doc-coauthoring/) | 收集 |  | 引导结构化协作流程，共同撰写技术文档与规范 | [anthropics/skills](https://github.com/anthropics/skills/tree/HEAD/skills/doc-coauthoring) |
 
 ### 💻 开发 · 构建与测试
 

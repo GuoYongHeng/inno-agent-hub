@@ -50,7 +50,7 @@ PALETTE = {
 }
 DEFAULT_COLOR = {"bg": "#dcdcdc", "fg": "#555555"}
 
-FEATURED_HINT = ["comment-on-docx", "frontend-slides", "algorithmic-art"]
+FEATURED_HINT = ["frontend-slides"]
 
 MD_LINK = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 
