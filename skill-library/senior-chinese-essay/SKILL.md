@@ -1,7 +1,7 @@
 ---
 name: "senior-chinese-essay"
 name-zh: "高中写作辅导助手"
-category: 课程教学
+category: 学习辅导
 description: "高中作文提升帮助学生把作文辅导从“代写一篇”变成审题、立意、选材、结构、语言和修改的全过程指导，输出可修改、可复盘、可继续练的阅读/写作任务，而不是替用户一次性完成任务。"
 version: "0.10.0"
 author: zhongwei

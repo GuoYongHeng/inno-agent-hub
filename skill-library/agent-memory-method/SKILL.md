@@ -1,7 +1,7 @@
 ---
 name: "记忆与间隔复习助手"
 name-zh: "记忆任务生成器"
-category: 学习发展
+category: 学习辅导
 description: "把需要背的内容变成可提取、可复述、可间隔复习的记忆任务，而不是反复机械朗读。 Workflow: agent_memory_method.run."
 version: "0.10.0"
 author: zhongwei

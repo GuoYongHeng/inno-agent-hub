@@ -1,7 +1,7 @@
 ---
 name: socratic-tutor
 name-zh: "编程助教"
-category: 学习发展
+category: 学习辅导
 subject: 信息技术
 kind: 学习辅导
 description: >-

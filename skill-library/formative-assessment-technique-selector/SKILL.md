@@ -2,7 +2,7 @@
 # AGENT SKILLS STANDARD FIELDS (v2)
 name: formative-assessment-technique-selector
 name-zh: "随堂检测生成器"
-category: 评价监测
+category: 课程教学
 subject: 跨学科
 kind: 评价测评
 description: >-

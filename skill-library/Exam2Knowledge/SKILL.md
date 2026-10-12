@@ -1,7 +1,7 @@
 ---
 name: Exam2Knowledge
 name-zh: "试题考点变式题生成"
-category: 学习发展
+category: 课程教学
 subject: 跨学科
 kind: 评价测评
 description: >-
