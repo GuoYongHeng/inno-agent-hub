@@ -11,15 +11,17 @@
   "topic": "校园节水方案设计",
   "innovationType": null,
   "durationMin": 40,
+  "textbookVersion": null,
   "constraints": ["普通教室", "可使用平板", "小组合作"],
   "requirements": null
 }
 ```
 
 **说明**：
-- `innovationType` 为 `null` 表示教师未明确创新类型，需要进入类型引导决策。
+- `innovationType` 为 `null` 表示教师未明确创新类型，需要进入类型引导决策（读 `references/innovation-type-guide.json`）。
 - `requirements` 为 `null` 时，主控模型（Controller）应通过追问补齐。
 - `subject` 和 `grade` 也可能为 `null`，但属于基本槽位，通常在入口解析时就能提取。
+- `textbookVersion` 为 `null` 时必须按 `references/textbook-versions.json` 让教师确认，不得默认某一版本；**该学科只有一个可选版本时也要提问确认**，提问本身就是确认动作。
 
 ### 阶段一确认后的完整请求 JSON
 
@@ -32,6 +34,7 @@
   "topic": "校园节水方案设计",
   "innovationType": "PBL",
   "durationMin": 40,
+  "textbookVersion": "教科版",
   "constraints": ["普通教室", "可使用平板", "小组合作"],
   "requirements": "生成一份 PBL 教案，包含驱动问题、活动流程、阶段产出和评价量规。",
   "confirmedContext": {
@@ -65,9 +68,10 @@
 阶段二生成脚本会对完整请求做预检：
 
 - `subject`、`grade`、`topic`、`innovationType`、`durationMin` 必须存在且非空。
-- `innovationType` 会归一化为 `PBL`、`interdisciplinary`、`ai_integrated` 三种之一。
+- `innovationType` 会归一化为 `PBL`、`interdisciplinary`、`ai_integrated` 三种之一（中文写法如「项目化学习」「跨学科融合」「AI融合」同样被识别）。
+- `textbookVersion` 缺失时请求预检直接失败（必须先向教师提问确认，学科只有一个版本时也不例外）；已填写但与学科可选清单不匹配时，校验器给 warning。
 - `confirmedContext` 必须是对象；若缺少类型专属字段，脚本会给出警告但仍允许生成。
-- 生成模型必须显式吸收 `confirmedContext`，本地校验器会对覆盖度给出警告，可用严格模式转为失败。
+- 生成模型必须显式吸收 `confirmedContext`，本地校验器会对覆盖度给出警告，可用 `--strict-context` 转为失败。
 
 ## 阶段二：输出 JSON
 
@@ -79,7 +83,10 @@
     "topic": "",
     "innovationType": "PBL",
     "durationMin": 40,
-    "lessonType": ""
+    "textbookVersion": "",
+    "linkedSubject": "",
+    "lessonType": "",
+    "periodNo": ""
   },
   "backgroundAnalysis": {},
   "studentAnalysis": {},
@@ -140,6 +147,24 @@
   }
 }
 ```
+
+### 根字段契约
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `lessonMeta` | object | 学科、年级、课题、创新类型、课时长、教材版本（教师确认值）、关联学科（跨学科）、学校表述的课型、第几课时 |
+| `backgroundAnalysis` | object | 课题背景，三类各有专属结构，见下 |
+| `studentAnalysis` | object | 学情分析，PBL 可合入 `backgroundAnalysis`，跨学科与 AI 融合必填 |
+| `coreCompetencies` | array | 核心素养目标，每项含 `id`、`dimension`、`target` |
+| `objectives` | array | 教学目标，每项含 `id`、`description`、`behaviorVerb`、`linkedActivities`、`assessmentEvidence` |
+| `teachingFocus` | string | 教学重点，必须对齐主目标 |
+| `teachingDifficulty` | string | 教学难点，必须在流程中有支架 |
+| `innovationDesign` | object | 类型专属设计，见下 |
+| `activityFlow` | array | 教学流程，每项含 `id`、`stage`、`durationMin`、`teacherActions`、`studentActions`、`outputs`、`assessmentLinks` |
+| `assessmentRubric` | array | 评价量规，每项含 `id`、`dimension`、`excellent`、`qualified`、`needsImprovement`、`evidence` |
+| `resources` | array | 教学资源，每项含 `type`、`name`、`usage` |
+| `export` | object | 导出信息：`format` 固定 `markdown`，`deliverable` 与 `filename` 为交付的 docx 文件名，`markdown` 供校验器使用 |
+| `qualityReport` | object | 校验结果，含 `checks` 与 `warnings` |
 
 ### backgroundAnalysis 类型专属结构
 
@@ -281,5 +306,33 @@
       { "activityId": "", "taskDescription": "", "evidenceExpected": "" }
     ]
   }
+}
+```
+
+### 交付契约
+
+一次生成只交付一个 Word 文件，文件名用中文派生：
+
+- 交付物：`<输出目录>/<中文文件名>.docx`，名字规则是「{年级}{学科}《{课题}》{创新类型中文}教案」
+  （例：`六年级科学《校园节水方案设计》项目化学习教案.docx`、`七年级生物+数学《校园环境提升计划》跨学科融合教案.docx`），可用 `--file-name` 覆盖。
+- 中间产物：`<输出目录>/中间产物/<同名>.json` 与 `<同名>.md`，只用于校验、二次修改与 DOCX 渲染，**不列入交付清单**。
+- DOCX 导出失败（既无 pandoc 又无 python-docx）时按交付失败处理，退出码 `1`，并在 `qualityReport` 中说明。
+
+### 统一信封
+
+Controller 面向下游汇总时建议使用（**内部结构，不直接展示给教师**；发给教师的内容须按 `SKILL.md` 的「面向教师的汇报规范」改写）：
+
+```json
+{
+  "skillId": "innovative-lesson-plan-skill",
+  "taskIntent": "PBL",
+  "status": "pass|warn|failed",
+  "inputSummary": {},
+  "result": {},
+  "artifacts": [],
+  "handoff": {},
+  "qualityReport": {},
+  "warnings": [],
+  "nextActions": []
 }
 ```

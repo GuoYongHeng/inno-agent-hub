@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "dataType": "curated",
+    "description": "阶段一：课型决策与追问脚本。教师通常不知道自己要说的是哪种课型术语，所以用教学目的和课堂形态引导，而不是甩出四个名词让对方选。"
+  },
+  "typeDecisionGuide": {
+    "description": "当教师未明确 lessonType 时，通过课堂的「起点—过程—落点」特征判断课型，而非直接展示术语选项。",
+    "decisionQuestions": [
+      {
+        "id": "dq-new",
+        "signal": "学生要第一次学习某个新概念或新方法，课的重点是把新知识讲清搭实",
+        "recommendedType": "new",
+        "clarificationQuestion": "这节课学生是第一次接触这个内容，重点是学新知识吗？",
+        "exampleTrigger": ["新授课", "讲新课", "第一次学", "概念课", "原理课"]
+      },
+      {
+        "id": "dq-review",
+        "signal": "知识已经学过，课的重点是把零散知识串成结构并提升综合运用能力",
+        "recommendedType": "review",
+        "clarificationQuestion": "这节课是把学过的一个单元内容串起来复习，还是重讲新内容？",
+        "exampleTrigger": ["复习课", "单元复习", "章末复习", "知识梳理", "期中复习"]
+      },
+      {
+        "id": "dq-commentary",
+        "signal": "刚完成一次测验、作业或练习，课的重点是分析错误并做补偿教学",
+        "recommendedType": "commentary",
+        "clarificationQuestion": "这节课是围绕刚批改完的试卷或作业来讲评吗？",
+        "exampleTrigger": ["讲评课", "试卷讲评", "作业讲评", "错题分析", "考后分析"]
+      },
+      {
+        "id": "dq-lab",
+        "signal": "学生要亲自动手操作、观察记录并处理数据，课的重点是实验或实践活动本身",
+        "recommendedType": "lab",
+        "clarificationQuestion": "这节课要学生动手做实验或开展实践活动吗？",
+        "exampleTrigger": ["实验课", "实验探究", "动手操作", "实践课", "分组实验"]
+      }
+    ],
+    "multiTypeHint": "如果一节课既要复习又要讲评，先追问：'本节课最花时间、最需要解决的核心任务是什么？'按核心任务定主课型，另一部分是辅助环节。不要一节课同时套两种课型的完整结构。"
+  },
+  "typeSpecificPrompts": {
+    "description": "各课型在阶段一需要向教师确认的专属信息，以及该课型最容易踩的坑。",
+    "new": {
+      "goalLabel": "让学生在已有经验上完成新概念或新方法的建构，并能独立完成基本应用",
+      "questions": [
+        {
+          "id": "new-q1",
+          "field": "conceptAnchor",
+          "question": "这个新知识你打算怎么引入？有没有想用的生活情境、旧知识或演示实验？",
+          "purpose": "确定情境导入的锚点，避免直接给定义导致学生无处挂接",
+          "fallbackIfUnknown": "生成模型将根据课题和学段推荐一个低成本、可在普通教室实现的情境"
+        },
+        {
+          "id": "new-q2",
+          "field": "coreObstacle",
+          "question": "过去教这个内容时，学生最容易卡在什么地方？",
+          "purpose": "确定教学难点与支架设计位置",
+          "fallbackIfUnknown": "由生成模型依据自身学科知识给出该知识点的常见认知困难，并在教案中提示教师按班级实际核对"
+        },
+        {
+          "id": "new-q3",
+          "field": "practiceLadder",
+          "question": "课堂练习希望怎么安排？直接做课本习题，还是想有从模仿到变式的进阶？",
+          "purpose": "确定练习梯度与课堂容量的匹配",
+          "fallbackIfUnknown": "默认按「模仿练习—变式练习」两级设计，总量控制在课堂可完成范围内"
+        }
+      ],
+      "pitfallReminder": "新授课最容易变成「教师讲完好学生都会、中下学生全没跟上」。判断标准：如果教学过程中没有一处让学生先自己试、再由教师点破，这节课就没有真正的建构环节。"
+    },
+    "review": {
+      "goalLabel": "把零散知识重建为可迁移的结构，并用综合问题检验真实掌握程度",
+      "questions": [
+        {
+          "id": "rev-q1",
+          "field": "structureTool",
+          "question": "知识梳理你希望用什么形式？知识树、思维导图、对比表格，还是由学生自己先画你再补？",
+          "purpose": "确定知识结构化的呈现方式与学生参与度",
+          "fallbackIfUnknown": "默认采用「学生先自主梳理，教师用思维导图归并」的方式"
+        },
+        {
+          "id": "rev-q2",
+          "field": "mistakeData",
+          "question": "这个单元学生集中出错的地方是哪些？有没有作业或测验数据可以支撑？",
+          "purpose": "让复习靶向真实薄弱点，而不是平均用力",
+          "fallbackIfUnknown": "由生成模型依据自身学科知识推断该单元的常见薄弱点，并在教案中提示教师按本班数据核对"
+        },
+        {
+          "id": "rev-q3",
+          "field": "layeredPractice",
+          "question": "课堂练习要不要分层？基础巩固、综合提升、拓展迁移大概各占多少？",
+          "purpose": "确定分层练习的比例与难度跨度",
+          "fallbackIfUnknown": "默认按基础 50%、综合 35%、拓展 15% 设计"
+        }
+      ],
+      "pitfallReminder": "复习课最容易退化成「再把新课讲一遍」或「连着做一张卷子」。判断标准：如果学生没有机会自己先把知识结构化，这节课就只是加量的新授课。"
+    },
+    "commentary": {
+      "goalLabel": "定位典型错误背后的认知原因，并通过变式再练完成补偿教学",
+      "questions": [
+        {
+          "id": "com-q1",
+          "field": "dataSource",
+          "question": "这次要讲评的是试卷、作业还是课堂练习？有没有得分率或错误人数等数据？",
+          "purpose": "确定讲评的事实依据，避免凭印象挑题",
+          "fallbackIfUnknown": "按「高频错题优先」的通用原则安排讲评顺序，并标注数据为假设"
+        },
+        {
+          "id": "com-q2",
+          "field": "errorFocus",
+          "question": "你最想解决的是哪一类错误？是知识没记住、方法不会用，还是审题与表达丢分？",
+          "purpose": "决定错因归类的主线和讲评深度",
+          "fallbackIfUnknown": "默认按「知识性错误—方法性错误—规范性错误」三类归类"
+        },
+        {
+          "id": "com-q3",
+          "field": "compensation",
+          "question": "讲评后要不要留时间做同类变式再练？还是主要放到课后补偿作业里？",
+          "purpose": "确定课堂补偿的形态，避免讲评只有讲没有练",
+          "fallbackIfUnknown": "默认课堂内安排一组同类变式（约 8 分钟），课后配一组补偿性作业"
+        }
+      ],
+      "pitfallReminder": "讲评课最容易变成「按题号从头讲到尾」。判断标准：如果一节课没有对错误做归类，学生只会记住这道题的答案，换个数字还是错。"
+    },
+    "lab": {
+      "goalLabel": "让学生亲手完成一次完整的实验或实践过程，并基于记录的数据得出结论",
+      "questions": [
+        {
+          "id": "lab-q1",
+          "field": "apparatusAvailability",
+          "question": "实验器材准备情况如何？是分组做还是教师演示？每组几人？",
+          "purpose": "确定实验组织形式与操作方式，直接决定流程设计",
+          "fallbackIfUnknown": "默认按 4 人一组、器材够 10 组配置；若条件不足则降级为「教师演示 + 学生记录与分析」"
+        },
+        {
+          "id": "lab-q2",
+          "field": "recordRequirement",
+          "question": "学生要记录哪些数据？用现成的实验记录单，还是让学生自己设计表格？",
+          "purpose": "确定记录单的介入程度与科学方法训练重点",
+          "fallbackIfUnknown": "默认提供半开放记录单（表头已给、数据自填）"
+        },
+        {
+          "id": "lab-q3",
+          "field": "safetyLevel",
+          "question": "这个实验涉及明火、加热、药品或其他安全风险吗？你们学校的实验室安全规定有什么要写进教案的？",
+          "purpose": "安全提示必须来自实际规定，不能由模型想当然生成",
+          "fallbackIfUnknown": "仅写入通用安全提示，并在 qualityReport 中标注安全条目需教师按校规补充"
+        }
+      ],
+      "pitfallReminder": "实验课最容易变成「学生照着步骤做一遍，却不知道为什么要这样做」。判断标准：如果实验目标只有操作规范，没有数据分析或误差讨论，这节课就退化成了操作训练。"
+    }
+  },
+  "textbookConfirmation": {
+    "description": "阶段一的教材版本确认。教材版本是教案中唯一的教材坐标，不能由模型猜测，也不能默认「人教版」；学科一确定就要定版本。清单的硬拷贝在 references/textbook-versions.json，此处只定义提问方式。",
+    "questionTemplate": "这节课用哪个版本的教材？（{subject}可选：{versions}）",
+    "rules": [
+      "教师已明确指定版本时直接采用，不重复问。",
+      "教师未指定时，只能把该学科在 textbook-versions.json 中的版本作为选项，不自行扩充版本。",
+      "教师报出的版本不在清单内时，如实记录并提示核对，不替教师改成相近版本。",
+      "版本与学段有关时（如科学：人教版限小学、浙教版限初中），追问学段后再定。"
+    ],
+    "fallbackIfUnknown": "不得默认某个版本：先按学科给出清单让教师选；教师实在无法确定时，才用「待教师确认」占位并记入 qualityReport.warnings。"
+  },
+  "confirmationTemplate": {
+    "description": "阶段一结束时向教师复述确认的模板。复述的作用是让教师能一眼发现自己没说清或说错的地方，而不是让教师读一遍术语。",
+    "template": "我理解为：{grade}{subject}《{topic}》，属于{lessonTypeLabel}，课时 {durationMin} 分钟，教材版本为{textbookVersion}，主要条件是 {constraints}。这节课的核心任务是{coreTask}。如果哪里不对，你直接说，我改完就生成。",
+    "typeSpecificSummaryTemplate": {
+      "new": "新知识通过“{conceptAnchor}”引入，教学难点定在“{coreObstacle}”，课堂练习按“{practiceLadder}”安排。",
+      "review": "知识梳理采用“{structureTool}”，复习靶向的薄弱点是“{mistakeData}”，分层练习比例为“{layeredPractice}”。",
+      "commentary": "讲评素材来自“{dataSource}”，错因主线是“{errorFocus}”，课堂补偿方式为“{compensation}”。",
+      "lab": "实验以“{apparatusAvailability}”的方式组织，数据记录采用“{recordRequirement}”，安全要求为“{safetyLevel}”。"
+    }
+  }
+}

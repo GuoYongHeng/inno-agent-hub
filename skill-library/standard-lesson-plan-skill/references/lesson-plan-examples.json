@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "dataType": "curated",
+    "description": "高质量教案 few-shot 样例。每类课型两例，用于让生成模型对齐结构、颗粒度与语言风格。样例内容为示意，不绑定具体教材页码；其中的教材定位须替换为教师确认的教材版本。"
+  },
+  "examples": [
+    {
+      "lessonPlanId": "ex-new-phy-lever",
+      "lessonType": "new",
+      "subject": "物理",
+      "grade": "八年级",
+      "topic": "杠杆",
+      "durationMin": 40,
+      "coreTask": "从撬棒等生活工具中抽象出杠杆模型，理解力臂概念并会画力臂",
+      "objectives": [
+        "说出杠杆的五要素名称，并在示意图上标注支点、动力、阻力及其力臂",
+        "通过比较不同施力方向的效果，解释力臂是支点到力的作用线的距离",
+        "运用杠杆模型分析生活中至少两个工具的省力或费力情况"
+      ],
+      "activities": [
+        { "stage": "情境导入", "durationMin": 4, "focus": "用撬石头与开瓶器两个动作引入，让学生尝试说明为什么更省力" },
+        { "stage": "模型建构", "durationMin": 12, "focus": "由实物抽象出硬棒模型，学生先画自己认为的力臂，再对照规范画法" },
+        { "stage": "难点突破", "durationMin": 10, "focus": "改变施力方向观察效果差异，把力臂与力作用线建立联系" },
+        { "stage": "变式应用", "durationMin": 10, "focus": "判断剪刀、镊子、钓鱼竿属于哪类杠杆并说明理由" },
+        { "stage": "课堂小结", "durationMin": 4, "focus": "学生复述力臂定义的三个关键点" }
+      ],
+      "assessmentTasks": ["力臂作图正确率", "生活工具分类的理由表述", "力臂概念的复述准确性"]
+    },
+    {
+      "lessonPlanId": "ex-new-cn-imagery",
+      "lessonType": "new",
+      "subject": "语文",
+      "grade": "七年级",
+      "topic": "说明方法及其作用",
+      "durationMin": 40,
+      "coreTask": "能在说明性语段中辨识常见说明方法并说明其表达效果",
+      "objectives": [
+        "列举举例子、列数字、作比较、打比方四种常见说明方法",
+        "结合具体语句解释某种说明方法在文中的作用",
+        "比较两段同类说明文字的差异并评价哪种表达更清晰"
+      ],
+      "activities": [
+        { "stage": "情境导入", "durationMin": 4, "focus": "呈现介绍同一事物的两种说法，让学生判断哪种更清楚并说理由" },
+        { "stage": "方法辨识", "durationMin": 12, "focus": "从语段中圈出说明方法，教师归并并给出规范的判断依据" },
+        { "stage": "效果分析", "durationMin": 12, "focus": "用固定句式“这里用了……，把……说明得更……”练习完整表达" },
+        { "stage": "对比评价", "durationMin": 8, "focus": "两段文字对比，说明方法使用差异与表达效果差异" },
+        { "stage": "课堂小结", "durationMin": 4, "focus": "学生归纳分析说明方法作用的三步思路" }
+      ],
+      "assessmentTasks": ["说明方法辨识的准确率", "作用分析的表达完整度", "对比评价中的理由支撑"]
+    },
+    {
+      "lessonPlanId": "ex-review-math-function",
+      "lessonType": "review",
+      "subject": "数学",
+      "grade": "八年级",
+      "topic": "一次函数单元复习",
+      "durationMin": 40,
+      "coreTask": "把一次函数的概念、图象、性质与实际应用串成结构，并能在综合问题中选用合适方法",
+      "objectives": [
+        "归纳一次函数的概念、图象特征与k、b的作用，形成结构化知识图",
+        "分析综合问题中的已知条件，选择图象法或解析式法解决问题",
+        "迁移一次函数模型解决一个新的实际情境问题"
+      ],
+      "activities": [
+        { "stage": "自主梳理", "durationMin": 8, "focus": "无提示状态下画出本单元知识结构图，暴露连接缺失" },
+        { "stage": "结构归并", "durationMin": 8, "focus": "教师用思维导图归并，重点补上k、b与图象位置的关系" },
+        { "stage": "综合精讲", "durationMin": 10, "focus": "一道同时涉及待定系数法与图象判断的题目，讲清路径选择依据" },
+        { "stage": "分层练习", "durationMin": 10, "focus": "基础巩固、综合提升、拓展迁移三层，明确各层目标学生" },
+        { "stage": "修订结构", "durationMin": 4, "focus": "学生修订自己的知识图，形成可带走的复习成果" }
+      ],
+      "assessmentTasks": ["知识结构图的完整度", "综合题路径选择的合理性", "各层练习达标率"]
+    },
+    {
+      "lessonPlanId": "ex-review-geo-climate",
+      "lessonType": "review",
+      "subject": "地理",
+      "grade": "七年级",
+      "topic": "气温与降水图表判读复习",
+      "durationMin": 40,
+      "coreTask": "形成判读气温曲线与降水柱状图的稳定流程，并能归纳气候特征",
+      "objectives": [
+        "描述判读气温曲线图与降水柱状图的步骤，并说明每一步要读什么",
+        "比较两种气候类型的图表特征，归纳差异的关键指标",
+        "运用判读流程分析一个新的城市气候资料并说明其对生产生活的影响"
+      ],
+      "activities": [
+        { "stage": "自主梳理", "durationMin": 7, "focus": "写出自己判读气候图表的步骤，暴露读图顺序混乱的问题" },
+        { "stage": "流程归并", "durationMin": 8, "focus": "归并为“看最高最低温—看降水季节分配—判断南北半球—定类型”四步" },
+        { "stage": "对比精讲", "durationMin": 10, "focus": "两种气候类型图表对比，明确判读的关键分界指标" },
+        { "stage": "分层练习", "durationMin": 11, "focus": "基础判读、对比归纳、区域影响分析三层" },
+        { "stage": "修订结构", "durationMin": 4, "focus": "把四步流程固化为个人读图卡" }
+      ],
+      "assessmentTasks": ["判读步骤的完整性", "对比归纳中关键指标的准确性", "区域影响分析的合理性"]
+    },
+    {
+      "lessonPlanId": "ex-commentary-cn-argument",
+      "lessonType": "commentary",
+      "subject": "语文",
+      "grade": "九年级",
+      "topic": "议论文写作练习讲评",
+      "durationMin": 40,
+      "coreTask": "定位议论文写作中的典型失分点，并通过变式再练纠正论证脱节问题",
+      "objectives": [
+        "区分论点不清、论据与论点脱节、分析缺失三类典型失分表现",
+        "分析样例段落中论据与论点脱节的具体位置并说明原因",
+        "迁移修改方法，为一个新论点补写一段完整论证"
+      ],
+      "activities": [
+        { "stage": "数据呈现", "durationMin": 4, "focus": "只用匿名统计说明本次整体情况，不作个人评价" },
+        { "stage": "错因归类", "durationMin": 10, "focus": "学生先按标准归类错误样例，教师补充归类框架" },
+        { "stage": "典型精讲", "durationMin": 10, "focus": "选一道论证脱节的典型段落，示范补写分析句的完整过程" },
+        { "stage": "变式再练", "durationMin": 12, "focus": "换一个新论点，当堂补写一段论证，检验错因是否纠正" },
+        { "stage": "规范提示", "durationMin": 4, "focus": "列出本题最易丢分的三个规范性细节" }
+      ],
+      "assessmentTasks": ["错因归类准确率", "变式段落中的论证完整性", "规范性细节的落实"]
+    },
+    {
+      "lessonPlanId": "ex-commentary-math-exam",
+      "lessonType": "commentary",
+      "subject": "数学",
+      "grade": "八年级",
+      "topic": "期中试卷讲评",
+      "durationMin": 40,
+      "coreTask": "按错因归类解决期中试卷暴露的问题，并通过同类变式完成补偿",
+      "objectives": [
+        "区分知识性、方法性、规范性三类错误，并说明各自的表现特征",
+        "分析典型错题的错因，指出错误发生的具体步骤",
+        "运用同类变式独立完成再练，正确率达到本层要求"
+      ],
+      "activities": [
+        { "stage": "数据呈现", "durationMin": 4, "focus": "分题得分区间统计，学生自我定位" },
+        { "stage": "错因归类", "durationMin": 8, "focus": "把错题按三类归因，挑选每类代表题" },
+        { "stage": "典型精讲", "durationMin": 12, "focus": "解题路径的选取依据 + 规范书写过程" },
+        { "stage": "变式再练", "durationMin": 12, "focus": "每类一道同类变式当堂完成并互评" },
+        { "stage": "补偿布置", "durationMin": 4, "focus": "只针对本次薄弱点布置小量补偿作业" }
+      ],
+      "assessmentTasks": ["归因准确率", "变式再练正确率", "书写规范达标情况"]
+    },
+    {
+      "lessonPlanId": "ex-lab-chem-oxygen",
+      "lessonType": "lab",
+      "subject": "化学",
+      "grade": "九年级",
+      "topic": "氧气的实验室制取与检验",
+      "durationMin": 40,
+      "coreTask": "完成一次加热高锰酸钾制取氧气的完整实验，并基于现象说明装置选择的依据",
+      "objectives": [
+        "说出制取氧气的装置选择依据，并指认装置各部分的名称与作用",
+        "按规范顺序完成组装、检查气密性、加热与收集操作",
+        "分析操作顺序错误可能导致的后果，说明误差或失败的常见原因"
+      ],
+      "activities": [
+        { "stage": "问题明确", "durationMin": 5, "focus": "明确本节课要回答的问题：为什么这样选装置、这样定顺序" },
+        { "stage": "操作示范", "durationMin": 8, "focus": "示范关键步骤与三处常见错误操作及其后果" },
+        { "stage": "分组实验", "durationMin": 15, "focus": "四人一组分工操作，边做边填记录单，教师巡视纠偏" },
+        { "stage": "数据与现象分析", "durationMin": 8, "focus": "整理收集到的现象与检验结果，与假设对照" },
+        { "stage": "误差讨论", "durationMin": 4, "focus": "讨论失败组的可能原因，形成安全与规范要点清单" }
+      ],
+      "assessmentTasks": ["操作规范与安全达标", "记录单完整性", "装置选择依据的表述准确度"]
+    },
+    {
+      "lessonPlanId": "ex-lab-sci-water",
+      "lessonType": "lab",
+      "subject": "科学",
+      "grade": "六年级",
+      "topic": "校园用水量调查实践",
+      "durationMin": 40,
+      "coreTask": "通过实测与记录获得校园某处用水量数据，并基于数据提出节水建议",
+      "objectives": [
+        "描述测量用水量的方法，并说明测量中要控制哪些条件",
+        "按记录单要求完成规定次数的测量并整理成表格",
+        "依据数据提出至少一条可执行的节水建议，并说明数据依据"
+      ],
+      "activities": [
+        { "stage": "问题明确", "durationMin": 5, "focus": "明确要回答的问题：校园水主要用在哪里、浪费发生在哪一环" },
+        { "stage": "方法示范", "durationMin": 7, "focus": "示范用容器与秒表测量流量的方法，强调控制条件" },
+        { "stage": "分组测量", "durationMin": 15, "focus": "分组到指定点位测量并记录，教师巡视" },
+        { "stage": "数据整理", "durationMin": 8, "focus": "把记录数据整理成表格，寻找规律" },
+        { "stage": "建议形成", "durationMin": 5, "focus": "基于数据提出节水建议并说明依据" }
+      ],
+      "assessmentTasks": ["测量方法的规范性与条件控制", "记录表数据完整度", "建议与数据的对应关系"]
+    }
+  ]
+}

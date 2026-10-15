@@ -1,0 +1,16 @@
+{
+  "subject": "物理",
+  "grade": "八年级",
+  "topic": "杠杆",
+  "lessonType": "new",
+  "durationMin": 40,
+  "textbookVersion": "人教版",
+  "periodNo": "第1课时",
+  "constraints": ["普通教室", "有杠杆演示教具", "小组合作"],
+  "requirements": "生成一份新授课教案，包含情境导入、概念建构、变式应用、分层作业和评价量规。",
+  "confirmedContext": {
+    "conceptAnchor": "用撬棒撬石头和开瓶器开瓶两个动作引入，让学生先说说为什么更省力",
+    "coreObstacle": "学生总把力臂当成支点到力作用点的距离，忽略力臂是到力的作用线的距离",
+    "practiceLadder": "模仿画力臂—改变施力方向再画力臂—判断剪刀镊子钓鱼竿属于哪类杠杆"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "metadata": {
+    "dataType": "curated",
+    "description": "教学环节模式库：导入、新授、巩固、小结、板书五类可复用模式，供生成教学流程时选择并具体化。模式只提供骨架，生成时必须结合具体课题填充内容，不能照抄模式名。"
+  },
+  "leadInPatterns": [
+    {
+      "patternId": "leadin-prior-knowledge",
+      "name": "旧知迁移式导入",
+      "applicableLessonType": ["new"],
+      "fitWhen": "新知识与已学内容有明确的生长关系",
+      "structure": "回顾旧知识 → 提出旧知识解决不了的新问题 → 引出本节课任务",
+      "costMin": 3,
+      "risk": "回顾时间过长会挤占新授时间"
+    },
+    {
+      "patternId": "leadin-real-context",
+      "name": "真实情境式导入",
+      "applicableLessonType": ["new", "lab"],
+      "fitWhen": "概念在生活或生产中有可直接观察的应用",
+      "structure": "呈现真实情境 → 学生尝试解释 → 暴露解释中的困难 → 引出新知",
+      "costMin": 3,
+      "risk": "情境与核心概念无因果关系时会变成无效装饰"
+    },
+    {
+      "patternId": "leadin-demonstration",
+      "name": "演示实验式导入",
+      "applicableLessonType": ["new", "lab"],
+      "fitWhen": "现象直观、可在 2 分钟内完成，且能制造认知冲突",
+      "structure": "教师演示 → 学生描述现象 → 提出解释需求 → 引出课题",
+      "costMin": 4,
+      "risk": "演示时间不可控，需提前试做并准备失败预案"
+    },
+    {
+      "patternId": "leadin-mistake-review",
+      "name": "错例回顾式导入",
+      "applicableLessonType": ["commentary", "review"],
+      "fitWhen": "存在学生集中出错的题目或典型错误认知",
+      "structure": "呈现典型错解 → 学生判断对错并说明理由 → 归因 → 引出本节要解决的问题",
+      "costMin": 3,
+      "risk": "呈现错解时若不匿名，可能伤害出错学生的动机"
+    },
+    {
+      "patternId": "leadin-structure-gap",
+      "name": "结构缺口式导入",
+      "applicableLessonType": ["review"],
+      "fitWhen": "学生已学过零散知识，但缺少整体结构",
+      "structure": "给出不完整的知识框架 → 学生补全 → 暴露连接缺失 → 明确复习重点",
+      "costMin": 4,
+      "risk": "框架过细会变成教师给答案，学生只填空"
+    }
+  ],
+  "instructionPatterns": [
+    {
+      "patternId": "inst-expose-then-reveal",
+      "name": "先暴露后揭示",
+      "applicableLessonType": ["new", "review"],
+      "fitWhen": "学生存在前概念或模糊理解，需要被看见才能被修正",
+      "structure": "学生先独立尝试 → 展示不同答案 → 教师揭示规范表述并对照差别",
+      "costMin": 10,
+      "risk": "需要教师快速判断学生答案类型，否则会变成随机点名"
+    },
+    {
+      "patternId": "inst-worked-example",
+      "name": "样例示范",
+      "applicableLessonType": ["new", "review", "commentary"],
+      "fitWhen": "新方法有固定步骤，需要清晰的过程示范",
+      "structure": "完整示范一道典型题 → 边做边说出每步依据 → 提炼可复用的步骤清单",
+      "costMin": 8,
+      "risk": "只示范不提炼，学生记住了这道题但迁移不了"
+    },
+    {
+      "patternId": "inst-guided-practice",
+      "name": "引导练习",
+      "applicableLessonType": ["new", "review", "lab"],
+      "fitWhen": "学生刚开始独立应用，需要在有支持的情况下试做",
+      "structure": "教师给出部分支架 → 学生合作完成 → 逐步撤除支架 → 独立完成",
+      "costMin": 10,
+      "risk": "支架撤除过快，学生会卡在中间步骤"
+    },
+    {
+      "patternId": "inst-error-classification",
+      "name": "错因归类",
+      "applicableLessonType": ["commentary", "review"],
+      "fitWhen": "存在多种类型错误，需要让学生看清错误的结构",
+      "structure": "呈现错误集合 → 学生按标准归类 → 教师补充归类框架 → 每类挑一例精讲",
+      "costMin": 12,
+      "risk": "分类标准若由教师直接给出，学生失去归因过程"
+    },
+    {
+      "patternId": "inst-structured-summary",
+      "name": "结构化归纳",
+      "applicableLessonType": ["new", "review"],
+      "fitWhen": "一节课涉及多个知识点，需要建立联系",
+      "structure": "学生尝试回顾本节要点 → 教师用结构图归并 → 标出知识与知识的连接",
+      "costMin": 6,
+      "risk": "归纳变成教师单方面复述，学生只做旁观者"
+    },
+    {
+      "patternId": "inst-operation-standard",
+      "name": "操作规范示范",
+      "applicableLessonType": ["lab"],
+      "fitWhen": "实验涉及易错操作或安全风险",
+      "structure": "教师示范关键步骤 → 指出常见错误操作及后果 → 学生复述要点 → 分组动手",
+      "costMin": 8,
+      "risk": "示范时间过长会压缩学生动手时间"
+    },
+    {
+      "patternId": "inst-data-analysis",
+      "name": "数据分析与结论",
+      "applicableLessonType": ["lab", "review"],
+      "fitWhen": "有可整理成表格或图象的记录数据",
+      "structure": "整理数据 → 寻找规律 → 与假设对照 → 说明结论的适用条件",
+      "costMin": 10,
+      "risk": "若记录单设计不当，数据无法支撑结论"
+    }
+  ],
+  "boardDesignPatterns": [
+    {
+      "patternId": "board-outline",
+      "name": "提纲式",
+      "fitWhen": "知识之间有清晰的层级与顺序关系",
+      "structure": "左侧主干概念纵向排列，右侧对应要点与示例",
+      "pitfall": "层级过多会失去可读性，建议不超过三层"
+    },
+    {
+      "patternId": "board-table",
+      "name": "表格式",
+      "fitWhen": "存在需要对照比较的多个对象或类别",
+      "structure": "横向为比较维度，纵向为比较对象，留白供课堂即时填写",
+      "pitfall": "表格若无留白，学生会变成抄板书而不是参与归纳"
+    },
+    {
+      "patternId": "board-diagram",
+      "name": "图解式",
+      "fitWhen": "涉及过程、结构或装置，图像比文字更经济",
+      "structure": "主体图形居中，标注说明分布四周，动态部分分步补画",
+      "pitfall": "课前画满整块黑板会失去生成过程的教学价值"
+    },
+    {
+      "patternId": "board-mindmap",
+      "name": "思维导图式",
+      "fitWhen": "复习课需要呈现知识的整体结构与连接",
+      "structure": "中心主题居中，一级分支为模块，二级分支为知识点，用连线标注关系",
+      "pitfall": "由教师一次性画完会削弱学生的结构化参与"
+    }
+  ],
+  "homeworkPatterns": [
+    {
+      "patternId": "hw-layered",
+      "name": "分层作业",
+      "fitWhen": "班级基础差异明显",
+      "structure": "基础层面向全体必做，提升层面向大部分学生，拓展层面向学有余力者选做",
+      "pitfall": "分层若公开贴标签，会让基础层学生产生挫败感"
+    },
+    {
+      "patternId": "hw-variation",
+      "name": "变式巩固作业",
+      "fitWhen": "课堂暴露了方法性错误，需要同类再练",
+      "structure": "保留课堂例题的方法内核，改变情境与条件，数量控制在 3 题以内",
+      "pitfall": "只换数字的变式起不到巩固方法的作用"
+    },
+    {
+      "patternId": "hw-practice-record",
+      "name": "实践记录作业",
+      "fitWhen": "实验课或实践活动后需要延伸观察",
+      "structure": "给出观察任务与记录要求，产出为记录表或简短分析",
+      "pitfall": "任务描述模糊会导致学生无法完成或敷衍提交"
+    },
+    {
+      "patternId": "hw-compensation",
+      "name": "补偿性作业",
+      "fitWhen": "讲评课暴露了明确的知识或规范漏洞",
+      "structure": "只针对本次暴露的薄弱点，题量小、目标单一，不引入新内容",
+      "pitfall": "补偿作业若变成整张练习卷，就失去了补救的针对性"
+    }
+  ]
+}

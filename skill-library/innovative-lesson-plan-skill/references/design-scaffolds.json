@@ -1,14 +1,18 @@
 {
   "metadata": {
-    "dataType": "mock",
-    "description": "PBL、跨学科、AI 融合课堂三类创新教案设计脚手架。供生成模型（Generator）在阶段二生成时参考。阶段一的引导决策数据见 innovation-type-guide.json。"
+    "dataType": "curated",
+    "description": "PBL、跨学科、AI 融合三类创新教案的设计脚手架（教学法知识，非教材或课标原文）。供生成模型在阶段二生成时参考；阶段一的引导决策数据见 innovation-type-guide.json。"
   },
   "scaffolds": [
     {
       "methodId": "method-pbl-v1",
       "innovationType": "PBL",
       "methodName": "项目化学习",
-      "applicableLessonType": ["综合实践课", "科学探究课", "单元项目课"],
+      "applicableLessonType": [
+        "综合实践课",
+        "科学探究课",
+        "单元项目课"
+      ],
       "designSteps": [
         "提出与真实情境相关的驱动问题",
         "将问题拆解为可完成的里程碑任务",
@@ -16,14 +20,29 @@
         "形成可展示、可评价的最终产出",
         "使用量规评价过程证据与最终作品"
       ],
-      "requiredFields": ["drivingQuestion", "milestones", "finalProduct"],
-      "commonPitfalls": ["问题太大无法探究", "只做资料搜集", "最终产出不可评价"],
+      "requiredFields": [
+        "drivingQuestion",
+        "milestones",
+        "finalProduct",
+        "designIntent"
+      ],
+      "commonPitfalls": [
+        "问题太大无法探究",
+        "只做资料搜集",
+        "最终产出不可评价",
+        "环节只记录教师做了什么、没有写设计意图，教师无法判断这个环节能不能删"
+      ],
       "pitfallDetection": {
         "问题太大": "驱动问题涉及的范围超出单课时或学段能力，如'解决全球气候变暖'",
         "只做资料搜集": "学生只需搜索复制即可完成任务，没有探究、分析或设计的环节",
         "产出不可评价": "最终产出没有明确评价标准和可观察的证据"
       },
-      "evaluationFocus": ["问题理解", "证据使用", "方案可行性", "合作表达"],
+      "evaluationFocus": [
+        "问题理解",
+        "证据使用",
+        "方案可行性",
+        "合作表达"
+      ],
       "drivingQuestionDesign": {
         "goodPatterns": [
           "我们能否……",
@@ -63,15 +82,36 @@
       },
       "finalProductDesign": {
         "goodExamples": [
-          {"type": "方案海报", "description": "包含问题分析、数据支撑、具体措施和预期效果"},
-          {"type": "调查报告", "description": "包含调查方法、数据分析、结论和建议"},
-          {"type": "改进方案", "description": "包含现状分析、改进措施、原理说明和验证计划"},
-          {"type": "科普作品", "description": "面向特定受众，用准确语言解释科学现象或原理"}
+          {
+            "type": "方案海报",
+            "description": "包含问题分析、数据支撑、具体措施和预期效果"
+          },
+          {
+            "type": "调查报告",
+            "description": "包含调查方法、数据分析、结论和建议"
+          },
+          {
+            "type": "改进方案",
+            "description": "包含现状分析、改进措施、原理说明和验证计划"
+          },
+          {
+            "type": "科普作品",
+            "description": "面向特定受众，用准确语言解释科学现象或原理"
+          }
         ],
         "badExamples": [
-          {"type": "手抄报", "reason": "通常只是资料拼贴，缺少分析和设计思维"},
-          {"type": "PPT 汇报", "reason": "如果没有明确评价标准，容易变成信息搬运"},
-          {"type": "思维导图", "reason": "如果只是罗列知识点，缺少问题解决过程"}
+          {
+            "type": "手抄报",
+            "reason": "通常只是资料拼贴，缺少分析和设计思维"
+          },
+          {
+            "type": "PPT 汇报",
+            "reason": "如果没有明确评价标准，容易变成信息搬运"
+          },
+          {
+            "type": "思维导图",
+            "reason": "如果只是罗列知识点，缺少问题解决过程"
+          }
         ]
       }
     },
@@ -79,7 +119,11 @@
       "methodId": "method-interdisciplinary-v1",
       "innovationType": "interdisciplinary",
       "methodName": "跨学科融合",
-      "applicableLessonType": ["综合实践课", "主题探究课", "项目课"],
+      "applicableLessonType": [
+        "综合实践课",
+        "主题探究课",
+        "项目课"
+      ],
       "designSteps": [
         "确定主学科目标",
         "选择真实且必要的关联学科知识",
@@ -87,14 +131,30 @@
         "形成共同产出",
         "说明适用边界和评价维度"
       ],
-      "requiredFields": ["disciplineConnections", "integrationNodes", "commonProduct", "applicableBoundary"],
-      "commonPitfalls": ["跨学科关联牵强", "两个学科任务互不依赖", "共同产出不清晰"],
+      "requiredFields": [
+        "disciplineConnections",
+        "integrationNodes",
+        "commonProduct",
+        "applicableBoundary",
+        "designIntent"
+      ],
+      "commonPitfalls": [
+        "跨学科关联牵强",
+        "两个学科任务互不依赖",
+        "共同产出不清晰",
+        "环节只记录教师做了什么、没有写设计意图，教师无法判断这个环节能不能删"
+      ],
       "pitfallDetection": {
         "关联牵强": "关联学科的知识对核心任务不是必需的，去掉也不影响完成",
         "互不依赖": "两个学科的任务可以独立完成，不需要在某个环节交汇",
         "产出不清晰": "共同产出只是两个学科产出的简单拼接，而非融合的统一作品"
       },
-      "evaluationFocus": ["学科目标达成", "融合必要性", "共同产出质量", "解释与表达"],
+      "evaluationFocus": [
+        "学科目标达成",
+        "融合必要性",
+        "共同产出质量",
+        "解释与表达"
+      ],
       "integrationNodeDesign": {
         "goodPatterns": [
           "学生用 A 学科的方法呈现 B 学科的发现",
@@ -121,37 +181,56 @@
           "primary": "物理",
           "linked": "数学",
           "connection": "物理提供实验数据和现象，数学提供计算和建模方法",
-          "exampleTopics": ["光的折射与三角函数", "杠杆原理与比例关系", "速度与函数图像"]
+          "exampleTopics": [
+            "光的折射与三角函数",
+            "杠杆原理与比例关系",
+            "速度与函数图像"
+          ]
         },
         {
           "primary": "语文",
           "linked": "历史",
           "connection": "语文提供论证和表达方法，历史提供史料和时空观念",
-          "exampleTopics": ["围绕历史事件的论证写作", "说明文中的历史资料筛选"]
+          "exampleTopics": [
+            "围绕历史事件的论证写作",
+            "说明文中的历史资料筛选"
+          ]
         },
         {
           "primary": "地理",
           "linked": "数学",
           "connection": "地理提供真实数据和空间问题，数学提供数据处理和图表方法",
-          "exampleTopics": ["气候数据分析", "人口统计与地图标注"]
+          "exampleTopics": [
+            "气候数据分析",
+            "人口统计与地图标注"
+          ]
         },
         {
           "primary": "生物",
           "linked": "语文",
           "connection": "生物提供观察和分类方法，语文提供说明文写作框架",
-          "exampleTopics": ["生物多样性调查报告", "生态系统说明文"]
+          "exampleTopics": [
+            "生物多样性调查报告",
+            "生态系统说明文"
+          ]
         },
         {
           "primary": "生物",
           "linked": "地理",
           "connection": "生物关注物种和生态，地理提供空间分布和环境分析视角",
-          "exampleTopics": ["校园生态地图", "物种分布与环境因素分析"]
+          "exampleTopics": [
+            "校园生态地图",
+            "物种分布与环境因素分析"
+          ]
         },
         {
           "primary": "历史",
           "linked": "地理",
           "connection": "历史提供时间线索和事件，地理提供空间视角和人地关系",
-          "exampleTopics": ["本地历史遗迹调查", "历史事件的地理背景分析"]
+          "exampleTopics": [
+            "本地历史遗迹调查",
+            "历史事件的地理背景分析"
+          ]
         }
       ]
     },
@@ -159,7 +238,12 @@
       "methodId": "method-ai-integrated-v1",
       "innovationType": "ai_integrated",
       "methodName": "AI 融合课堂",
-      "applicableLessonType": ["写作课", "探究课", "资料整理课", "复习课"],
+      "applicableLessonType": [
+        "写作课",
+        "探究课",
+        "资料整理课",
+        "复习课"
+      ],
       "designSteps": [
         "明确 AI 工具服务的教学目标",
         "选择介入环节和工具角色",
@@ -167,14 +251,30 @@
         "设计学生审辨 AI 输出的任务",
         "保留学生独立思考和表达证据"
       ],
-      "requiredFields": ["aiToolRoles", "interventionStages", "useBoundaries", "studentCritiqueTasks"],
-      "commonPitfalls": ["AI 代替学生思考", "只展示工具功能", "缺少审辨和改写环节"],
+      "requiredFields": [
+        "aiToolRoles",
+        "interventionStages",
+        "useBoundaries",
+        "studentCritiqueTasks",
+        "designIntent"
+      ],
+      "commonPitfalls": [
+        "AI 代替学生思考",
+        "只展示工具功能",
+        "缺少审辨和改写环节",
+        "环节只记录教师做了什么、没有写设计意图，教师无法判断这个环节能不能删"
+      ],
       "pitfallDetection": {
         "代替思考": "AI 完成了本应由学生独立完成的核心认知任务",
         "展示功能": "AI 只在课堂中做演示，学生没有实际使用和审辨",
         "缺审辨": "学生直接采用 AI 输出，没有比较、质疑、改写的环节"
       },
-      "evaluationFocus": ["目标服务度", "审辨质量", "表达改进", "过程证据"],
+      "evaluationFocus": [
+        "目标服务度",
+        "审辨质量",
+        "表达改进",
+        "过程证据"
+      ],
       "aiRoleMatching": {
         "资料整理": "资料筛选助手 — AI 提供候选资料和筛选建议，学生核对来源并取舍",
         "草稿修改": "表达反馈伙伴 — AI 评价清楚/准确/条理，学生决定采纳或拒绝",
@@ -216,11 +316,21 @@
           "如果去掉 AI 后学习目标仍能达成，说明 AI 是辅助而非替代"
         ],
         "examples": [
-          {"boundary": "AI 只提供候选资料，学生必须自己核对来源并说明取舍理由"},
-          {"boundary": "AI 只评价表达的清楚和准确，不替学生生成最终文本"},
-          {"boundary": "AI 生成的问题必须由学生筛选，教师确认是否符合课标"},
-          {"boundary": "AI 帮助整理数据格式，学生必须自己选择图表类型并解释数据"},
-          {"boundary": "AI 提供实验方案建议，学生必须评估可行性和变量控制"}
+          {
+            "boundary": "AI 只提供候选资料，学生必须自己核对来源并说明取舍理由"
+          },
+          {
+            "boundary": "AI 只评价表达的清楚和准确，不替学生生成最终文本"
+          },
+          {
+            "boundary": "AI 生成的问题必须由学生筛选，教师确认是否符合课标"
+          },
+          {
+            "boundary": "AI 帮助整理数据格式，学生必须自己选择图表类型并解释数据"
+          },
+          {
+            "boundary": "AI 提供实验方案建议，学生必须评估可行性和变量控制"
+          }
         ]
       }
     }

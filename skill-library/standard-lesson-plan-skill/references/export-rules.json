@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "dataType": "curated",
+    "description": "Word-ready Markdown 导出规则。定义各课型教案的章节顺序、章节说明、表格列名与模板文件。导出章节顺序是强约束：教师拿到教案后的阅读顺序应当是备课顺序。"
+  },
+  "sharedRules": [
+    "输出的 Markdown 必须能被直接粘贴进 Word 使用，不使用 HTML 标签或复杂嵌套",
+    "一级标题只用于教案标题，二级标题对应各章节，不出现三级以下标题",
+    "所有表格使用标准 Markdown 表格语法，单元格内不换行，多项内容用「；」分隔",
+    "章节顺序按备课顺序固定，不因课型随意调整",
+    "教师课后填写的部分（教学反思）保留空白填写区，不代写内容"
+  ],
+  "templates": {
+    "new": {
+      "label": "新授课教案",
+      "sections": [
+        "基本信息",
+        "教材分析",
+        "学情分析",
+        "教学目标",
+        "教学重点与难点",
+        "教学准备",
+        "教学过程",
+        "板书设计",
+        "作业设计",
+        "评价量规",
+        "教学反思"
+      ],
+      "sectionDescriptions": {
+        "教材分析": "说明本课内容在教材中的位置、与前后知识的联系、课标对应要求",
+        "学情分析": "说明学生已具备的基础、认知特点、可能出现的困难",
+        "教学过程": "按环节给出时间、教师活动、学生活动与设计意图",
+        "板书设计": "给出板书的整体布局与生成时机"
+      },
+      "activityFlowColumns": ["环节", "时间", "教师活动", "学生活动", "设计意图"],
+      "rubricStructure": "single",
+      "objectivesColumns": ["维度", "学习目标", "行为动词", "对应环节", "评价证据"],
+      "extraTables": ["homeworkDesign"],
+      "templateFile": "assets/template-new-lesson.md"
+    },
+    "review": {
+      "label": "复习课教案",
+      "sections": [
+        "基本信息",
+        "复习内容与依据",
+        "学情分析",
+        "复习目标",
+        "复习重点与难点",
+        "教学准备",
+        "教学过程",
+        "板书设计",
+        "分层练习设计",
+        "作业设计",
+        "评价量规",
+        "教学反思"
+      ],
+      "sectionDescriptions": {
+        "复习内容与依据": "说明复习覆盖的知识范围、依据的薄弱点数据、与课标的对应",
+        "教学过程": "突出自主梳理与结构归并两个关键环节的先后关系",
+        "分层练习设计": "给出基础、综合、拓展三层的题量配比与目标学生"
+      },
+      "activityFlowColumns": ["环节", "时间", "教师活动", "学生活动", "设计意图"],
+      "rubricStructure": "single",
+      "objectivesColumns": ["维度", "复习目标", "行为动词", "对应环节", "评价证据"],
+      "extraTables": ["layeredPractice", "homeworkDesign"],
+      "templateFile": "assets/template-review-lesson.md"
+    },
+    "commentary": {
+      "label": "讲评课教案",
+      "sections": [
+        "基本信息",
+        "讲评素材与数据",
+        "学情分析",
+        "讲评目标",
+        "讲评重点与难点",
+        "教学准备",
+        "讲评过程",
+        "错因归类表",
+        "板书设计",
+        "补偿作业设计",
+        "评价量规",
+        "教学反思"
+      ],
+      "sectionDescriptions": {
+        "讲评素材与数据": "说明讲评对象、数据来源与统计口径；无真实数据时必须标注为假设",
+        "错因归类表": "按知识性、方法性、规范性等类别列出典型错误与对应题号",
+        "讲评过程": "必须包含讲评后的当堂变式再练环节"
+      },
+      "activityFlowColumns": ["环节", "时间", "教师活动", "学生活动", "设计意图"],
+      "rubricStructure": "single",
+      "objectivesColumns": ["维度", "讲评目标", "行为动词", "对应环节", "评价证据"],
+      "extraTables": ["errorClassification", "homeworkDesign"],
+      "templateFile": "assets/template-commentary-lesson.md"
+    },
+    "lab": {
+      "label": "实验实践课教案",
+      "sections": [
+        "基本信息",
+        "教材分析",
+        "学情分析",
+        "实验目标",
+        "实验重点与难点",
+        "实验器材与安全须知",
+        "教学准备",
+        "实验教学流程",
+        "实验记录单",
+        "板书设计",
+        "作业设计",
+        "评价量规",
+        "教学反思"
+      ],
+      "sectionDescriptions": {
+        "实验器材与安全须知": "列出器材清单与安全要求；安全条目必须提示按学校实验室规定核对",
+        "实验教学流程": "必须包含问题明确、操作示范、分组实验、数据分析、误差讨论四个以上环节",
+        "实验记录单": "给出可直接打印使用的表格结构"
+      },
+      "activityFlowColumns": ["环节", "时间", "教师活动", "学生活动", "设计意图"],
+      "rubricStructure": "single",
+      "objectivesColumns": ["维度", "实验目标", "行为动词", "对应环节", "评价证据"],
+      "extraTables": ["apparatusList", "recordSheet", "homeworkDesign"],
+      "templateFile": "assets/template-lab-lesson.md"
+    }
+  }
+}

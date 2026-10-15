@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "dataType": "curated",
+    "description": "学习目标行为动词层级表。用于约束教学目标的写法：动词可观察、可评价，且不超出学段认知上限。"
+  },
+  "allowedVerbs": [
+    { "verb": "说出", "level": 1, "description": "口头再现事实、名称或结论" },
+    { "verb": "列举", "level": 1, "description": "按一定线索罗列若干项" },
+    { "verb": "指认", "level": 1, "description": "在给定材料中辨认出指定对象" },
+    { "verb": "复述", "level": 1, "description": "按原意重述内容要点" },
+    { "verb": "默写", "level": 1, "description": "不借助材料写出规定内容" },
+    { "verb": "标注", "level": 1, "description": "在图上或文中做出规定记号" },
+    { "verb": "描述", "level": 2, "description": "有条理地说出观察到的现象或特征" },
+    { "verb": "解释", "level": 2, "description": "说明事物为什么如此，指出因果联系" },
+    { "verb": "说明", "level": 2, "description": "讲清概念含义、方法用途或操作理由" },
+    { "verb": "归纳", "level": 2, "description": "从若干实例中概括出共同规律" },
+    { "verb": "区分", "level": 2, "description": "辨别相似概念或做法的差别" },
+    { "verb": "举例", "level": 2, "description": "用具体实例支撑某一说法" },
+    { "verb": "计算", "level": 3, "description": "按规则完成数量关系运算" },
+    { "verb": "运用", "level": 3, "description": "把所学方法用于新的具体情境" },
+    { "verb": "分析", "level": 3, "description": "分解材料或问题，找出各部分的联系" },
+    { "verb": "比较", "level": 3, "description": "依据标准指出对象的异同" },
+    { "verb": "推断", "level": 3, "description": "根据已知条件推测未知结论" },
+    { "verb": "证明", "level": 3, "description": "用逻辑步骤说明结论成立" },
+    { "verb": "建模", "level": 3, "description": "用数学或图形语言表达实际情境" },
+    { "verb": "设计", "level": 4, "description": "按要求规划出方案、装置或流程" },
+    { "verb": "评价", "level": 4, "description": "依据标准对方案或作品做出判断" },
+    { "verb": "论证", "level": 4, "description": "围绕观点用证据形成完整说理" },
+    { "verb": "迁移", "level": 4, "description": "把方法应用到结构不同的新问题中" },
+    { "verb": "改进", "level": 4, "description": "针对不足提出并实施优化" },
+    { "verb": "质疑", "level": 4, "description": "对结论或做法提出有依据的疑问" }
+  ],
+  "maxLevelByAgeBand": {
+    "lower-primary": 2,
+    "upper-primary": 2,
+    "middle-school": 3,
+    "high-school": 4
+  },
+  "discouragedVagueVerbs": [
+    "了解",
+    "掌握",
+    "培养",
+    "提高",
+    "体会",
+    "认识",
+    "熟悉",
+    "懂得"
+  ]
+}

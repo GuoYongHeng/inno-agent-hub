@@ -1,0 +1,16 @@
+{
+  "subject": "语文",
+  "grade": "九年级",
+  "topic": "议论文写作练习讲评",
+  "lessonType": "commentary",
+  "durationMin": 40,
+  "textbookVersion": "统编版",
+  "periodNo": "第1课时",
+  "constraints": ["普通教室", "已完成一次议论文片段写作练习"],
+  "requirements": "生成一份讲评课教案。不要按题号从头讲到尾，要先做错因归类，再给当堂变式再练。",
+  "confirmedContext": {
+    "dataSource": "本次练习共 42 份，数据为教师手工统计的假设数据：论点不清 6 人，论据与论点脱节 19 人，缺少分析句 27 人，语句规范问题 11 人",
+    "errorFocus": "主线是论据与论点脱节和缺少分析句，这两类占了绝大多数；另有少量审题与规范问题",
+    "compensation": "课堂内安排 12 分钟换一个新论点补写一段论证，课后只布置针对这两类问题的小量补偿作业"
+  }
+}

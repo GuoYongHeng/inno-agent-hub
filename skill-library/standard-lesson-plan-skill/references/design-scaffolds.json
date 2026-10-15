@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "dataType": "curated",
+    "description": "四类课型的教学设计脚手架。每个脚手架给出可执行的设计步骤、生成时必须填的字段、常见坑及其检测方法、评价焦点。"
+  },
+  "scaffolds": [
+    {
+      "methodId": "method-new-lesson-v1",
+      "lessonType": "new",
+      "methodName": "新授课：情境引入—概念建构—变式应用",
+      "applicableLessonType": ["概念新授", "原理新授", "方法新授"],
+      "designSteps": [
+        "用学生已有的经验或旧知识制造认知冲突，让新知识有挂接点，不提「今天我们学……」式的空导入",
+        "给出可观察的实例或演示，让学生先表达初步想法，暴露前概念",
+        "由教师揭示规范表述，并与学生的初步想法对照，说清差别在哪里",
+        "用一道标准例题示范完整思路，边做边讲清每一步的依据",
+        "给一组变式练习，改变条件或情境但保留方法内核，检验是否真正理解",
+        "回扣导入时的问题，让学生用新知识重新解释一遍"
+      ],
+      "requiredFields": ["situationIntro", "conceptBuilding", "variationTraining"],
+      "commonPitfalls": [
+        "导入与新知无关，只为活跃气氛",
+        "直接给出定义或公式，缺少学生尝试的环节",
+        "例题与变式练习只是换了数字，没有真正改变情境或条件",
+        "难点没有支架，指望学生自己跨过去"
+      ],
+      "pitfallDetection": {
+        "importMismatch": "检查 situationIntro 是否在结尾环节被重新引用；若导入内容与核心概念无因果关系，判为无效导入",
+        "noStudentAttempt": "检查 conceptBuilding 中教师的揭示动作之前，是否有学生先表达或先尝试的环节",
+        "fakeVariation": "检查 variationTraining 中变式题与例题的可变维度是否只有数值"
+      },
+      "evaluationFocus": ["概念表述的准确性", "例题思路的可复述性", "变式练习中方法迁移是否发生"]
+    },
+    {
+      "methodId": "method-review-lesson-v1",
+      "lessonType": "review",
+      "methodName": "复习课：自主梳理—结构归并—分层提升",
+      "applicableLessonType": ["单元复习", "章末复习", "期中期末复习"],
+      "designSteps": [
+        "给出一个结构性任务（画知识树、填对比表、补全思维导图），让学生在无提示状态下先暴露记忆与理解漏洞",
+        "教师基于学生的梳理结果归并出结构，重点补上知识之间的连接，而不是重讲每个知识点",
+        "选一道能贯通多个知识点的综合题精讲，讲清解题路径的选取依据",
+        "给分层练习：基础巩固、综合提升、拓展迁移，明确各层对应的目标学生",
+        "留出时间让学生修订自己的知识结构图，形成可带走的复习成果"
+      ],
+      "requiredFields": ["knowledgeStructureTool", "typicalProblemSelection", "layeredPractice"],
+      "commonPitfalls": [
+        "把复习课上成新授课的加快版",
+        "知识梳理由教师直接呈现，学生只是抄写",
+        "练习题量大但层次不清，优等生与薄弱生做同一份",
+        "缺少综合题，无法检验知识点之间的连接是否建立"
+      ],
+      "pitfallDetection": {
+        "lectureRelapse": "检查 knowledgeStructureTool 环节中学生的动作是否先于教师的呈现动作",
+        "noLayer": "检查 layeredPractice 是否给出各层占比、难度与目标学生",
+        "noSynthesis": "检查 typicalProblemSelection 选出的题目是否同时涉及两个以上知识点"
+      },
+      "evaluationFocus": ["知识结构的完整性与连接度", "综合题中的方法选择能力", "各层学生的达标情况"]
+    },
+    {
+      "methodId": "method-commentary-lesson-v1",
+      "lessonType": "commentary",
+      "methodName": "讲评课：数据定位—错因归类—变式补偿",
+      "applicableLessonType": ["试卷讲评", "作业讲评", "练习讲评"],
+      "designSteps": [
+        "用数据呈现本次整体情况，只说事实不评价学生，让学生自己建立位置感",
+        "按错因归类讲评：把错误分成知识性、方法性、规范性几类，每类挑一道最典型的题",
+        "每讲完一类，立刻给一道同类变式让学生当堂再练，检验错因是否真的纠正",
+        "示范规范表达：把解题或答题的过程完整写出来，指出常见的丢分细节",
+        "布置补偿性作业，只针对本次暴露的薄弱点，不增加新内容负担"
+      ],
+      "requiredFields": ["dataAnalysis", "errorClassification", "compensatoryDesign"],
+      "commonPitfalls": [
+        "按题号顺序逐题讲，没有归类",
+        "只讲正确答案，不讲错误是怎么产生的",
+        "讲完就下课，没有当堂的变式再练",
+        "对成绩做公开评价或排名，伤害学习动机"
+      ],
+      "pitfallDetection": {
+        "serialCommentary": "检查 errorClassification 是否先给出归类框架，再映射到具体题目",
+        "noRetry": "检查 activityFlow 中是否在讲评后有学生当堂再练的独立环节",
+        "publicRanking": "检查 dataAnalysis 中是否出现个人成绩、排名或带贬义的学生分类表述"
+      },
+      "evaluationFocus": ["错因归类的准确性", "变式再练的正确率变化", "规范表达的可迁移性"]
+    },
+    {
+      "methodId": "method-lab-lesson-v1",
+      "lessonType": "lab",
+      "methodName": "实验实践课：明确问题—规范操作—数据论证",
+      "applicableLessonType": ["分组实验", "演示实验", "实践活动"],
+      "designSteps": [
+        "先明确要探究的问题与假设，让学生知道收集数据是为了回答什么，再动手",
+        "讲清操作要点与安全要求，必要时教师先做关键步骤的示范",
+        "小组分工后动手操作，边做边记录，教师巡视并对典型操作偏差做即时纠正",
+        "处理数据：把记录的数据整理成表格或图象，寻找规律并与假设对照",
+        "讨论误差来源与实验改进点，形成结论并说明结论的适用条件"
+      ],
+      "requiredFields": ["experimentGoal", "apparatusList", "safetyNotes", "recordSheet", "errorAnalysis"],
+      "commonPitfalls": [
+        "直接发器材让学生照步骤做，学生不知道要探究什么",
+        "没有记录单或记录单过于开放，导致数据无法用于分析",
+        "把实验课变成操作考核，不讨论结论与误差",
+        "安全提示由模型凭空生成，与学校实验室规定不符"
+      ],
+      "pitfallDetection": {
+        "goalMissing": "检查 experimentGoal 是否在数据分析和结论环节被回扣",
+        "noRecord": "检查 recordSheet 是否给出可填写的表格结构或明确的记录要求",
+        "safetyUnverified": "检查 safetyNotes 是否标注需按学校实验室规定核对；若为通用提示，需在 qualityReport 中给 warning"
+      },
+      "evaluationFocus": ["操作规范与安全意识", "数据记录的完整性", "基于数据的结论与误差讨论质量"]
+    }
+  ]
+}

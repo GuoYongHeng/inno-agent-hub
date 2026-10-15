@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "dataType": "mock",
-    "description": "AI 融合点模式和跨学科关联样例。供生成模型（Generator）在阶段二生成时参考。"
+    "dataType": "curated",
+    "description": "AI 融合点模式与跨学科关联样例（教学法知识，非教材或课标原文）。供生成模型在阶段二生成时参考，用来判断某个融合是否真的是完成核心任务的必要条件。"
   },
   "aiIntegrationPatterns": [
     {
@@ -9,7 +9,12 @@
       "toolType": "通用大模型或搜索增强问答工具",
       "toolRole": "资料筛选助手",
       "interventionStage": "资料整理",
-      "applicableSubject": ["语文", "社会", "历史", "地理"],
+      "applicableSubject": [
+        "语文",
+        "社会",
+        "历史",
+        "地理"
+      ],
       "useBoundary": "AI 只提供候选资料和筛选建议，学生必须核对来源并说明取舍理由。",
       "studentCritiqueTask": "标注 AI 建议中可靠、存疑和不适用的信息，并写出判断依据。"
     },
@@ -18,7 +23,10 @@
       "toolType": "通用大模型",
       "toolRole": "表达反馈伙伴",
       "interventionStage": "草稿修改",
-      "applicableSubject": ["语文", "英语"],
+      "applicableSubject": [
+        "语文",
+        "英语"
+      ],
       "useBoundary": "AI 只评价清楚、准确、条理，不替学生生成最终文本。",
       "studentCritiqueTask": "比较原稿、AI 建议和修改稿，说明保留或拒绝某条建议的原因。"
     },
@@ -27,7 +35,12 @@
       "toolType": "通用大模型",
       "toolRole": "追问生成器",
       "interventionStage": "探究深化",
-      "applicableSubject": ["科学", "物理", "化学", "生物"],
+      "applicableSubject": [
+        "科学",
+        "物理",
+        "化学",
+        "生物"
+      ],
       "useBoundary": "AI 生成的问题必须由学生筛选，教师确认是否符合课标和课堂目标。",
       "studentCritiqueTask": "选择 1 个最值得继续探究的问题，并说明它与本课目标的关系。"
     },
@@ -36,7 +49,12 @@
       "toolType": "通用大模型",
       "toolRole": "类比生成器",
       "interventionStage": "概念理解",
-      "applicableSubject": ["物理", "化学", "生物", "数学"],
+      "applicableSubject": [
+        "物理",
+        "化学",
+        "生物",
+        "数学"
+      ],
       "useBoundary": "AI 提供生活类比帮助理解抽象概念，学生必须判断类比是否贴切并说明哪里贴切、哪里不贴切。",
       "studentCritiqueTask": "选择 AI 给出的类比中最贴切的一个，指出它在哪里与概念一致、在哪里有偏差，并尝试修正。"
     },
@@ -45,7 +63,11 @@
       "toolType": "通用大模型或数据分析工具",
       "toolRole": "数据分析助手",
       "interventionStage": "数据处理与可视化",
-      "applicableSubject": ["数学", "科学", "地理"],
+      "applicableSubject": [
+        "数学",
+        "科学",
+        "地理"
+      ],
       "useBoundary": "AI 帮助整理数据格式和生成图表建议，学生必须自己选择图表类型、解释数据含义并得出结论。",
       "studentCritiqueTask": "比较 AI 建议的图表类型与自己选择的图表类型，说明为什么自己的选择更适合当前数据。"
     },
@@ -54,7 +76,11 @@
       "toolType": "通用大模型",
       "toolRole": "辩论对手",
       "interventionStage": "观点论证",
-      "applicableSubject": ["语文", "历史", "道德与法治"],
+      "applicableSubject": [
+        "语文",
+        "历史",
+        "道德与法治"
+      ],
       "useBoundary": "AI 模拟反方观点帮助学生发现论证漏洞，学生必须自己组织反驳论据，不能直接复制 AI 的表述。",
       "studentCritiqueTask": "指出 AI 反驳中最有力的 1 个质疑，用自己的论据回应，并评估自己的论证是否因此需要调整。"
     },
@@ -63,7 +89,11 @@
       "toolType": "通用大模型",
       "toolRole": "情境模拟器",
       "interventionStage": "情境体验",
-      "applicableSubject": ["历史", "地理", "语文"],
+      "applicableSubject": [
+        "历史",
+        "地理",
+        "语文"
+      ],
       "useBoundary": "AI 生成历史或地理情境的描述帮助学生建立画面感，学生必须结合史料或数据验证情境的合理性。",
       "studentCritiqueTask": "指出 AI 描述的情境中哪些细节有史料或数据支撑，哪些是推测，并说明推测是否合理。"
     },
@@ -72,7 +102,12 @@
       "toolType": "通用大模型",
       "toolRole": "实验方案建议器",
       "interventionStage": "实验设计",
-      "applicableSubject": ["物理", "化学", "生物", "科学"],
+      "applicableSubject": [
+        "物理",
+        "化学",
+        "生物",
+        "科学"
+      ],
       "useBoundary": "AI 提供实验步骤和器材建议，学生必须评估方案的可行性、安全性和变量控制，最终方案由学生确认。",
       "studentCritiqueTask": "审查 AI 建议的实验方案，找出 1 个可能影响结果准确性的因素，提出改进办法。"
     },
@@ -81,7 +116,12 @@
       "toolType": "通用大模型或思维导图工具",
       "toolRole": "知识关联提示器",
       "interventionStage": "知识梳理",
-      "applicableSubject": ["生物", "历史", "地理", "科学"],
+      "applicableSubject": [
+        "生物",
+        "历史",
+        "地理",
+        "科学"
+      ],
       "useBoundary": "AI 提示知识点之间的可能关联，学生必须判断关联是否成立并补充自己的理解。",
       "studentCritiqueTask": "保留 AI 提示中自己认同的关联，删除不准确的，并添加 AI 未提到的 1 个自己的关联。"
     },
@@ -90,7 +130,11 @@
       "toolType": "通用大模型或图表分析工具",
       "toolRole": "可视化审阅员",
       "interventionStage": "成果优化",
-      "applicableSubject": ["数学", "科学", "地理"],
+      "applicableSubject": [
+        "数学",
+        "科学",
+        "地理"
+      ],
       "useBoundary": "AI 评价学生制作的图表或海报的信息完整性和表达清晰度，不替学生修改设计。",
       "studentCritiqueTask": "根据 AI 的 3 条改进建议，选择最有价值的 1 条实施，说明选择理由。"
     }

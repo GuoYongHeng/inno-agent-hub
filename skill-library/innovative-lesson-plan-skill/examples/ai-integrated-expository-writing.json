@@ -1,0 +1,15 @@
+{
+  "subject": "语文",
+  "grade": "高一",
+  "textbookVersion": "统编版",
+  "topic": "说明文写作",
+  "innovationType": "ai_integrated",
+  "durationMin": 40,
+  "constraints": ["普通教室", "学生可用平板或机房电脑", "小组合作", "有可联网的写作辅助工具"],
+  "requirements": "生成一份 AI 融合教案，包含 AI 介入环节、人机协同流程、学生审辨任务和评价量规。",
+  "confirmedContext": {
+    "aiInterventionStage": "草稿修改环节：让 AI 对学生的说明文初稿给表达反馈",
+    "useBoundaryHint": "AI 只给建议不替学生写，最终稿必须由学生自己改写完成",
+    "critiqueApproach": "学生逐条判断 AI 建议是否成立：指出哪条建议采纳、哪条不采纳并说明理由"
+  }
+}

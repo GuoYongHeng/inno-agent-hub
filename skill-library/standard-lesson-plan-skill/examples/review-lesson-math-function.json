@@ -1,0 +1,16 @@
+{
+  "subject": "数学",
+  "grade": "八年级",
+  "topic": "一次函数单元复习",
+  "lessonType": "review",
+  "durationMin": 40,
+  "textbookVersion": "人教版",
+  "periodNo": "单元复习第1课时",
+  "constraints": ["普通教室", "学生已学完本单元", "可用投影展示学生作品"],
+  "requirements": "生成一份单元复习课教案，重点是知识结构化和分层练习，不要变成把新课再讲一遍。",
+  "confirmedContext": {
+    "structureTool": "学生先在无提示状态下自己画知识结构图，教师再用思维导图归并，重点补 k、b 与图象位置的关系",
+    "mistakeData": "本单元作业集中在两处出错：k 的符号与图象倾斜方向记反；综合题里不会选择用图象法还是解析式法",
+    "layeredPractice": "基础 50%、综合 35%、拓展 15%，并标明各层对应的目标学生"
+  }
+}
