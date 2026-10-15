@@ -1,11 +1,11 @@
 ---
 name: innovative-lesson-plan-skill
-name-zh: "创新教案生成"
+name-zh: "创新课堂教学设计"
 category: 课程教学
 description: 生成 PBL（项目化学习）、跨学科融合、AI 融合三类创新教案，产出教案 JSON、Word-ready Markdown 与可编辑 DOCX，并自动校验类型特征、活动总时长、引用闭合、AI 使用边界与行为动词。凡是教师说「做一节创新课」「PBL 教案」「项目式学习」「跨学科主题学习」「学科融合课」「AI 融合课」「让 AI 进课堂」，或要求围绕真实问题／真实任务设计一节课并给出驱动问题、融合节点、AI 介入环节与评价量规，都应当使用本 Skill，即使用户没有明确说「创新教案」。不适用于常规单课时教案（新授课、复习课、讲评课、实验实践课，那类请用 standard-lesson-plan-skill）、课件／PPT 制作、课堂互动网页、大单元整体规划、论文或项目申报写作。
 ---
 
-# 创新教案生成 Skill
+# 创新课堂教学设计 Skill
 
 ## 场景定位
 
@@ -19,10 +19,10 @@ description: 生成 PBL（项目化学习）、跨学科融合、AI 融合三类
 
 ## 入口与路由契约
 
-- 显式入口：`@创新教案生成`。
+- 显式入口：`@创新课堂教学设计`。
 - Skill ID：`innovative-lesson-plan-skill`。
 - 当前状态：`runnable_prototype`（`references/` 为技能自带教学法知识库；教材与课标内容由生成模型内置知识直接提供，生成时直接采用、不要求教师核对，非外部数据库）。
-- 用户显式使用 `@创新教案生成` 时，优先进入本 Skill。
+- 用户显式使用 `@创新课堂教学设计` 时，优先进入本 Skill。
 - 无显式入口时，由外层 Controller 返回菜单或按用户选择路由，不靠关键词猜测。
 - 必填槽位：`subject`、`grade`、`topic`、`textbookVersion`；`innovationType` 由 Controller 通过类型澄清补齐，不要默认按 PBL 处理。`textbookVersion` 是必须先问后生成的槽位：教师未指明时，读 `references/textbook-versions.json` 用 `ask_user_question` 让教师从该学科可选版本中选择；**该学科在清单中只有一个版本时也必须提问确认**（如语文只有统编版，也要给出该版本与「其他版本，我另行说明」两个选项），不得以「只有一个版本」为由跳过确认。
 
@@ -132,7 +132,7 @@ description: 生成 PBL（项目化学习）、跨学科融合、AI 融合三类
 
 ## 执行协议
 
-1. Controller 识别 `@创新教案生成`，抽取 `subject`、`grade`、`topic`、`requirements` 与显式约束。
+1. Controller 识别 `@创新课堂教学设计`，抽取 `subject`、`grade`、`topic`、`requirements` 与显式约束。
 1.5 若 `textbookVersion` 缺失，按 `references/textbook-versions.json` 列出该学科可选版本，用 `ask_user_question` 让教师确认。该学科只有一个版本时同样要问：给出「该版本」与「其他版本，我另行说明」两个选项，提问本身就是确认动作。教师回答前不得进入生成；教师已明确指定版本时直接采用，不重复问。
 2. 若 `innovationType` 不明确，读 `references/innovation-type-guide.json` 完成类型引导与确认复述。
 3. Controller 形成完整请求 JSON，写入 `confirmedContext`。
