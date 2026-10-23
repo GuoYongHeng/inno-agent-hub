@@ -73,6 +73,7 @@
 - `lessonType` 会归一化为 `new`、`review`、`commentary`、`lab` 之一。
 - `textbookVersion` 缺失时请求预检直接失败（必须先向教师提问确认，学科只有一个版本时也不例外）；已填写但与学科可选清单不匹配时，校验器给 warning。
 - `confirmedContext` 必须是对象；缺少课型专属字段时给出警告但仍允许生成。
+- `excludedSections`（**必填**，缺失时预检直接失败）承接教师「按序号去掉哪几节」的选择：可以是序号数组（`[8, 11]`）、章节名（`["板书设计"]`）、或一句原话（`"去掉 8、11"`）。教师明确说全部保留时也要显式写 `"全部保留"` 或 `[]`——不能因为教师没提到章节就省略这个字段，否则教师就失去了选择的机会（这条曾经真的漏过）。三种可直接用的写法：`"全部保留"`、`"只留骨架"`、`"去掉 8、11"`。归一化由 `scripts/lp_common.py` 的 `normalize_excluded_sections()` 完成，调用方不要自己写匹配规则。
 - 生成模型必须显式吸收 `confirmedContext`，校验器会对覆盖度给警告，`--strict-context` 可转为失败。
 - `lab` 课型若未提供 `confirmedContext.safetyLevel`，校验器要求 `safetyNotes` 中标注需按校规核对。
 
@@ -119,6 +120,7 @@
 | `homeworkDesign` | array | 分层作业，每项含 `level`、`content`、`estimatedMin`、`target` |
 | `assessmentRubric` | array | 评价量规，每项含 `id`、`dimension`、`excellent`、`qualified`、`needsImprovement`、`evidence` |
 | `resources` | array | 教学资源 |
+| `sectionSelection` | object | 教师去掉了哪些章节：`excluded`（章节 id 列表）、`excludedTitles`、`refused`（想删但属于骨架，附理由）、`unresolved`（没认出来的说法）。没有选择时 `keepAll` 为 `true` |
 | `export` | object | 导出信息：`format` 固定 `markdown`，`deliverable` 与 `filename` 为交付的 docx 文件名，`markdown` 供校验器使用 |
 | `qualityReport` | object | 校验结果，含 `checks` 与 `warnings` |
 

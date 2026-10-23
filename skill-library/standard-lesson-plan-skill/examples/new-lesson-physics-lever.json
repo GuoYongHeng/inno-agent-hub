@@ -5,8 +5,13 @@
   "lessonType": "new",
   "durationMin": 40,
   "textbookVersion": "人教版",
+  "excludedSections": "全部保留",
   "periodNo": "第1课时",
-  "constraints": ["普通教室", "有杠杆演示教具", "小组合作"],
+  "constraints": [
+    "普通教室",
+    "有杠杆演示教具",
+    "小组合作"
+  ],
   "requirements": "生成一份新授课教案，包含情境导入、概念建构、变式应用、分层作业和评价量规。",
   "confirmedContext": {
     "conceptAnchor": "用撬棒撬石头和开瓶器开瓶两个动作引入，让学生先说说为什么更省力",

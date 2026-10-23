@@ -14,7 +14,7 @@ import json
 import os
 import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 # 目录结构：SKILL_ROOT 是本 skill 根目录，PROJECT_ROOT 是它的上两层。
 # PROJECT_ROOT 用来找项目级 .env；找不到也不会报错，只是少一层配置来源。
@@ -288,17 +288,449 @@ def textbook_versions(subject: str = "") -> List[str]:
     return []
 
 
+def textbook_version_subject_conflict(subject: str, textbook_version: str) -> str:
+    """教材版本串里是否混进了别的学科名，返回冲突的学科名，没有冲突返回空串。
+
+    纯包含匹配会把「物理 + 人教版高中数学」判成合格，因为字符串里确实有「人教版」。
+    但出现别的学科名说明学科与教材已经串了，这种串必须抓出来，否则错版教案会一路过审。
+    """
+    text = value_to_text(textbook_version)
+    current = value_to_text(subject).strip()
+    if not text:
+        return ""
+    data = load_reference_data(only=["textbook-versions"])
+    for item in data.get("textbook-versions", {}).get("subjects", []):
+        if not isinstance(item, dict):
+            continue
+        name = value_to_text(item.get("subject")).strip()
+        if not name or name == current or name in current or current in name:
+            continue
+        if name in text:
+            return name
+    return ""
+
+
 def textbook_version_matches(subject: str, textbook_version: str) -> bool:
     """教材版本是否与该学科的可选清单相容。
 
     用包含关系而不是相等：教师常写成「人教版（2024 修订）」，这种写法仍然有效。
+    但串了别的学科（如「人教版高中数学」配物理）一律不算匹配。
     清单本身缺失时返回 True —— 缺少参照时不应报错。
     """
     options = textbook_versions(subject)
     if not options or not non_empty(textbook_version):
         return True
     text = value_to_text(textbook_version)
+    if textbook_version_subject_conflict(subject, text):
+        return False
     return any(option in text or text in option for option in options)
+
+
+# 教师确认内容落地的判定阈值：确认原话切成 3~4 字片段后，
+# 至少要有这么大比例能在教案里找到。留出改写空间，又不至于完全没写也放过。
+CONTEXT_COVERAGE_THRESHOLD = 0.35
+
+
+def _content_segments(text: str) -> List[str]:
+    """把一段话切成连续的中文/字母数字片段，标点与空白自然成为分隔。"""
+    return [seg for seg in re.findall(r"[\u4e00-\u9fa5A-Za-z0-9]+", text or "") if seg]
+
+
+def context_coverage(value_text: str, target_text: str, min_n: int = 3, max_n: int = 4) -> Tuple[float, List[str]]:
+    """教师确认过的内容，有多少真正落进了教案。
+
+    旧做法取前 12 个字在教案里做原文比对。但模型的活就是把教师的口语改写成教案语言，
+    一改写就命中不了，于是正常教案天天报「未体现」，教师会把这句提示当噪音忽略。
+
+    现在按字覆盖算：确认原话里每个字，只要落进了任意一个 3~4 字的连续重合片段就算覆盖。
+    这样「学生总把力臂当成支点到力作用点的距离」被改写成「学生常把力臂误解为支点到作用点的距离」
+    仍能拿到六成以上，而完全没写会掉到零。
+
+    返回 (字覆盖率, 基本没落地的原话片段列表)。
+    """
+    segments = _content_segments(value_text)
+    if not segments:
+        return 1.0, []
+    covered = 0
+    total = 0
+    missing: List[str] = []
+    for seg in segments:
+        total += len(seg)
+        if len(seg) < min_n:
+            # 极短片段没法切 n-gram，按整体算命中
+            hit_count = len(seg) if seg in target_text else 0
+        else:
+            mask = [False] * len(seg)
+            for n in range(min_n, max_n + 1):
+                for i in range(len(seg) - n + 1):
+                    if seg[i : i + n] in target_text:
+                        for k in range(i, i + n):
+                            mask[k] = True
+            hit_count = sum(mask)
+        covered += hit_count
+        if len(seg) >= min_n and hit_count < len(seg) * 0.5:
+            missing.append(seg)
+    if not total:
+        return 1.0, []
+    return covered / total, missing
+
+
+def upsert_quality_check(report: Dict[str, Any], check_id: str, status: str, message: str) -> Dict[str, Any]:
+    """写入一条检查记录：同 id 的旧记录被替换，不追加。
+
+    管线会被重跑（--from-json 重跑渲染是最常见的用法）。如果直接 append，
+    qualityReport.checks 会随运行次数膨胀，同一件事重复十几条，
+    下游读「这次有没有问题」时会被历史记录带偏。顺手清掉已有的重复项，
+    让历史文件重跑一次就自动修干净。
+    """
+    if not isinstance(report, dict):
+        report = {}
+    existing = report.get("checks")
+    if not isinstance(existing, list):
+        existing = []
+    kept: List[Any] = []
+    position: Dict[str, int] = {}
+    for item in existing:
+        if not isinstance(item, dict):
+            continue
+        item_id = value_to_text(item.get("id"))
+        if not item_id:
+            kept.append(item)
+            continue
+        if item_id in position:
+            kept[position[item_id]] = item  # 同 id 覆盖前一条，保留最后一次的结果
+            continue
+        position[item_id] = len(kept)
+        kept.append(item)
+    entry = {"id": check_id, "status": status, "message": message}
+    if check_id in position:
+        kept[position[check_id]] = entry
+    else:
+        kept.append(entry)
+    report["checks"] = kept
+    return report
+
+
+# ---------------------------------------------------------------------------
+# 教案章节目录
+# ---------------------------------------------------------------------------
+# 教师可以在生成前按序号去掉不需要的部分，剩下的再组织成一份教案。
+# 这里的 title 必须与 render_lesson_plan._section_spec 的章节名逐字一致，
+# 顺序也要一致：selftest 有一条一致性用例盯着这两处，谁漂了自检直接失败。
+#
+# removable=False 的项是「骨架」：去掉就不是教案了，或者去掉会伤到教学安全。
+# reason 会原样展示给教师，所以要说人话、说清后果，而不是「系统限制」。
+SECTION_META: Dict[str, List[Dict[str, Any]]] = {
+    "new": [
+        {"id": "basicInfo", "title": "基本信息", "removable": False,
+         "description": "课题、学科、年级、课型、课时长度、教材版本一览",
+         "reason": "去掉后教案没有课题、课型与课时记录，不成文档"},
+        {"id": "textbookAnalysis", "title": "教材分析", "removable": True,
+         "description": "本课在教材中的位置、知识主线、课标要求"},
+        {"id": "studentAnalysis", "title": "学情分析", "removable": True,
+         "description": "已有基础、认知特点、预计困难、学习习惯"},
+        {"id": "objectives", "title": "教学目标", "removable": False,
+         "description": "目标 + 行为动词 + 对应环节 + 评价证据",
+         "reason": "目标是教案与课堂的锚点，去掉后环节无从对齐"},
+        {"id": "focusDifficulty", "title": "教学重点与难点", "removable": True,
+         "description": "重点、难点、关键问题串、突破支架与撤除时机"},
+        {"id": "preparation", "title": "教学准备", "removable": True,
+         "description": "教具、学具、材料清单与使用方式"},
+        {"id": "process", "title": "教学过程", "removable": False,
+         "description": "设计思路 + 逐环节流程（环节/时间/教师活动/学生活动/设计意图 + 环节产出）",
+         "reason": "教学过程是教案主体，去掉后只剩一份说明"},
+        {"id": "blackboard", "title": "板书设计", "removable": True,
+         "description": "板书形式与板书内容"},
+        {"id": "homework", "title": "作业设计", "removable": True,
+         "description": "基础/提升/拓展分层作业、预计用时与适用学生"},
+        {"id": "rubric", "title": "评价量规", "removable": True,
+         "description": "各评价维度的优秀/合格/待改进描述与证据来源"},
+        {"id": "reflection", "title": "教学反思", "removable": True,
+         "description": "留空，课后由你填写"},
+    ],
+    "review": [
+        {"id": "basicInfo", "title": "基本信息", "removable": False,
+         "description": "课题、学科、年级、课型、课时长度、教材版本一览",
+         "reason": "去掉后教案没有课题、课型与课时记录，不成文档"},
+        {"id": "reviewScope", "title": "复习内容与依据", "removable": True,
+         "description": "复习范围与单元位置、知识结构与连接、课标要求"},
+        {"id": "studentAnalysis", "title": "学情分析", "removable": True,
+         "description": "已有基础、认知特点、预计困难、学习习惯"},
+        {"id": "objectives", "title": "复习目标", "removable": False,
+         "description": "目标 + 行为动词 + 对应环节 + 评价证据",
+         "reason": "目标是教案与课堂的锚点，去掉后环节无从对齐"},
+        {"id": "focusDifficulty", "title": "复习重点与难点", "removable": True,
+         "description": "复习重点、复习难点、关键问题串、突破支架"},
+        {"id": "preparation", "title": "教学准备", "removable": True,
+         "description": "教具、学具、材料清单与使用方式"},
+        {"id": "process", "title": "教学过程", "removable": False,
+         "description": "设计思路 + 逐环节流程（环节/时间/教师活动/学生活动/设计意图 + 环节产出）",
+         "reason": "教学过程是教案主体，去掉后只剩一份说明"},
+        {"id": "blackboard", "title": "板书设计", "removable": True,
+         "description": "板书形式与板书内容"},
+        {"id": "layeredPractice", "title": "分层练习设计", "removable": False,
+         "description": "基础/综合/拓展各层的题量与目标学生",
+         "reason": "分层是复习课的定义性内容，去掉后复习课与习题课没有区别"},
+        {"id": "homework", "title": "作业设计", "removable": True,
+         "description": "基础/提升/拓展分层作业、预计用时与适用学生"},
+        {"id": "rubric", "title": "评价量规", "removable": True,
+         "description": "各评价维度的优秀/合格/待改进描述与证据来源"},
+        {"id": "reflection", "title": "教学反思", "removable": True,
+         "description": "留空，课后由你填写"},
+    ],
+    "commentary": [
+        {"id": "basicInfo", "title": "基本信息", "removable": False,
+         "description": "课题、学科、年级、课型、课时长度、教材版本一览",
+         "reason": "去掉后教案没有课题、课型与课时记录，不成文档"},
+        {"id": "commentaryData", "title": "讲评素材与数据", "removable": True,
+         "description": "讲评对象与范围、涉及的知识与方法结构、数据来源与口径"},
+        {"id": "studentAnalysis", "title": "学情分析", "removable": True,
+         "description": "已有基础、认知特点、预计困难、学习习惯"},
+        {"id": "objectives", "title": "讲评目标", "removable": False,
+         "description": "目标 + 行为动词 + 对应环节 + 评价证据",
+         "reason": "目标是教案与课堂的锚点，去掉后环节无从对齐"},
+        {"id": "focusDifficulty", "title": "讲评重点与难点", "removable": True,
+         "description": "讲评重点、讲评难点、关键问题串、突破支架"},
+        {"id": "preparation", "title": "教学准备", "removable": True,
+         "description": "教具、学具、材料清单与使用方式"},
+        {"id": "process", "title": "讲评过程", "removable": False,
+         "description": "设计思路 + 逐环节流程（环节/时间/教师活动/学生活动/设计意图 + 环节产出）",
+         "reason": "讲评过程是教案主体，去掉后只剩一份说明"},
+        {"id": "errorClassification", "title": "错因归类表", "removable": False,
+         "description": "把本次错题按错因归类，并给出对应干预方向",
+         "reason": "没有错因归类，讲评课会退化成逐题对答案"},
+        {"id": "blackboard", "title": "板书设计", "removable": True,
+         "description": "板书形式与板书内容"},
+        {"id": "homework", "title": "补偿作业设计", "removable": True,
+         "description": "只针对本次暴露的薄弱点的分层补偿作业"},
+        {"id": "rubric", "title": "评价量规", "removable": True,
+         "description": "各评价维度的优秀/合格/待改进描述与证据来源"},
+        {"id": "reflection", "title": "教学反思", "removable": True,
+         "description": "留空，课后由你填写"},
+    ],
+    "lab": [
+        {"id": "basicInfo", "title": "基本信息", "removable": False,
+         "description": "课题、学科、年级、课型、课时长度、教材版本一览",
+         "reason": "去掉后教案没有课题、课型与课时记录，不成文档"},
+        {"id": "textbookAnalysis", "title": "教材分析", "removable": True,
+         "description": "实验在教材中的位置、涉及的知识结构、课标要求"},
+        {"id": "studentAnalysis", "title": "学情分析", "removable": True,
+         "description": "已有基础、认知特点、预计困难、学习习惯"},
+        {"id": "objectives", "title": "实验目标", "removable": False,
+         "description": "目标 + 行为动词 + 对应环节 + 评价证据",
+         "reason": "目标是教案与课堂的锚点，去掉后环节无从对齐"},
+        {"id": "focusDifficulty", "title": "实验重点与难点", "removable": True,
+         "description": "实验重点、实验难点、关键问题串、突破支架"},
+        {"id": "apparatusSafety", "title": "实验器材与安全须知", "removable": False,
+         "description": "器材清单（名称/数量/用途）与安全须知",
+         "reason": "安全须知不能省，去掉后课堂出事没有依据"},
+        {"id": "preparation", "title": "教学准备", "removable": True,
+         "description": "教具、学具、材料清单与使用方式"},
+        {"id": "process", "title": "实验教学流程", "removable": False,
+         "description": "设计思路 + 逐环节流程（环节/时间/教师活动/学生活动/设计意图 + 环节产出）",
+         "reason": "实验流程是教案主体，去掉后只剩一份说明"},
+        {"id": "recordSheet", "title": "实验记录单", "removable": False,
+         "description": "记录单表头、填写要求与误差来源分析",
+         "reason": "没有记录单，学生数据无处落笔，数据分析环节就落空"},
+        {"id": "blackboard", "title": "板书设计", "removable": True,
+         "description": "板书形式与板书内容"},
+        {"id": "homework", "title": "作业设计", "removable": True,
+         "description": "基础/提升/拓展分层作业、预计用时与适用学生"},
+        {"id": "rubric", "title": "评价量规", "removable": True,
+         "description": "各评价维度的优秀/合格/待改进描述与证据来源"},
+        {"id": "reflection", "title": "教学反思", "removable": True,
+         "description": "留空，课后由你填写"},
+    ],
+}
+
+
+# 各课型「教材/素材分析」那一节的 id。四种课型名字不同，但校验器要跳过的
+# 是同一组字段（textbookPosition / knowledgeStructure / curriculumRequirement）。
+ANALYSIS_SECTION_BY_TYPE: Dict[str, str] = {
+    "new": "textbookAnalysis",
+    "review": "reviewScope",
+    "commentary": "commentaryData",
+    "lab": "textbookAnalysis",
+}
+
+
+def analysis_section_id(lesson_type: str) -> str:
+    return ANALYSIS_SECTION_BY_TYPE.get(normalize_lesson_type(lesson_type) or "new", "textbookAnalysis")
+
+
+def sections_for(lesson_type: str) -> List[Dict[str, Any]]:
+    """取某课型的章节目录；课型不明时按新授课给，避免调用方拿到空列表。"""
+    key = normalize_lesson_type(lesson_type) or "new"
+    return SECTION_META.get(key, SECTION_META["new"])
+
+
+def kept_sections(lesson_type: str, excluded: Any = None) -> List[Dict[str, Any]]:
+    """去掉教师不要的部分之后，实际会写进教案的章节。"""
+    drop = {value_to_text(item) for item in ensure_list(excluded) if value_to_text(item)}
+    return [meta for meta in sections_for(lesson_type) if meta["id"] not in drop]
+
+
+def required_section_ids(lesson_type: str) -> List[str]:
+    """骨架章节：教师不能去掉的那些。"""
+    return [meta["id"] for meta in sections_for(lesson_type) if not meta.get("removable")]
+
+
+def normalize_excluded_sections(raw: Any, lesson_type: str) -> Dict[str, Any]:
+    """把教师说的「去掉 8、11」翻译成要排除的章节 id。
+
+    教师可能用序号、章节名、或者一句话，三种写法都要认：教案是给老师用的，
+    不应该要求老师记住内部标识。认不出来的原样回给调用方去追问，不静默丢弃。
+
+    返回 {excluded, excludedTitles, refused, unresolved}：
+    - excluded：确认去掉的章节 id
+    - refused：教师想删但属于骨架的章节，附上为什么不能删
+    - unresolved：没认出来的说法，需要向教师复核
+    """
+    metas = sections_for(lesson_type)
+    by_index = {index + 1: meta for index, meta in enumerate(metas)}
+
+    # 「全部保留」是教师最常见的回答，不该被报成「没认出来」。
+    if _looks_like_keep_all(raw):
+        return {"excluded": [], "excludedTitles": [], "refused": [], "unresolved": [], "keepAll": True}
+
+    # 「只留骨架」：把首选单选里那个选项真的实现出来，否则教师点了它反而报「没认出来」。
+    if _looks_like_skeleton_only(raw):
+        drop = [meta for meta in metas if meta.get("removable", True)]
+        return {
+            "excluded": [meta["id"] for meta in drop],
+            "excludedTitles": [meta["title"] for meta in drop],
+            "refused": [],
+            "unresolved": [],
+            "keepAll": False,
+        }
+
+    if isinstance(raw, (list, tuple, set)):
+        tokens: List[str] = []
+        for item in raw:
+            tokens.extend(_split_section_tokens(item))
+    else:
+        tokens = _split_section_tokens(raw)
+
+    picked: List[Dict[str, Any]] = []
+    unresolved: List[str] = []
+    for token in tokens:
+        # 「去掉 8、11」拆出来的「去掉」本身不是章节，属于口语填充词，静默丢掉即可；
+        # 但「随便什么东西」这种认不出的说法要报回去，否则教师以为删掉了其实没删。
+        filler_removed = _strip_section_filler(token)
+        if not filler_removed:
+            continue
+        token = filler_removed
+        hits = [meta for meta in metas if meta["title"] in token or meta["id"] == token]
+        if not hits:
+            numbers = re.findall(r"\d+", token)
+            hits = [by_index[int(number)] for number in numbers if int(number) in by_index]
+        if not hits:
+            unresolved.append(token)
+            continue
+        for meta in hits:
+            if meta not in picked:
+                picked.append(meta)
+
+    excluded: List[str] = []
+    excluded_titles: List[str] = []
+    refused: List[Dict[str, str]] = []
+    for meta in picked:
+        if meta.get("removable", True):
+            excluded.append(meta["id"])
+            excluded_titles.append(meta["title"])
+        else:
+            refused.append({"title": meta["title"], "reason": value_to_text(meta.get("reason"))})
+    return {
+        "excluded": excluded,
+        "excludedTitles": excluded_titles,
+        "refused": refused,
+        "unresolved": unresolved,
+        # 有没认出来的说法时不能当成「全部保留」：教师可能确实想删，
+        # 只是说法没对上，静默按全保留会让他以为删掉了。
+        "keepAll": (not excluded) and (not unresolved),
+    }
+
+
+def _looks_like_skeleton_only(raw: Any) -> bool:
+    """教师是否表示「只保留必留的那几节」。"""
+    if raw is None or isinstance(raw, (list, tuple, set)):
+        return False
+    text = value_to_text(raw)
+    if not text:
+        return False
+    return bool(
+        re.search(r"只(留|保留|要)(骨架|必留|必需|基础部分)|仅留骨架|(去掉|删掉)(所有)?(可选|其余|其他)部分|其余(都)?(去掉|不要)", text)
+    )
+
+
+def _looks_like_keep_all(raw: Any) -> bool:
+    """教师是否明确表示「一个都不删」。"""
+    if raw is None:
+        return False
+    if isinstance(raw, (list, tuple, set)):
+        return any(_looks_like_keep_all(item) for item in raw)
+    text = value_to_text(raw)
+    if not text:
+        return False
+    return bool(re.search(r"全部(保留|都要|要|不删|留着)|都(保留|要|留着)|全(部)?(保留|要|留着)|不删|一个都不|没有要(删|去掉)的|保持原样", text))
+
+
+# 教师回复里会带的口语填充词。这些词不指向任何章节，剥掉之后为空就说明
+# 这个词本身没有信息量，不该被报成「没认出来」。
+SECTION_FILLER_WORDS = (
+    "去掉", "不要", "删除", "删掉", "省掉", "取消", "不需要", "不用", "移除", "拿掉",
+    "部分", "章节", "内容", "这一项", "一项", "项", "个", "条", "第", "了", "的", "吧",
+    "我", "想", "请", "把", "和", "与", "及", "就", "都", "也", "不", "要",
+)
+
+
+def _strip_section_filler(token: str) -> str:
+    """剥掉口语填充词；剥完为空说明这个词没有指向任何章节。"""
+    text = value_to_text(token)
+    for word in SECTION_FILLER_WORDS:
+        text = text.replace(word, "")
+    return text.strip()
+
+
+def _split_section_tokens(raw: Any) -> List[str]:
+    """把「去掉 8、11」这类说法拆成一个个短语，便于逐个识别。"""
+    if raw is None:
+        return []
+    if isinstance(raw, (list, tuple, set)):
+        tokens: List[str] = []
+        for item in raw:
+            tokens.extend(_split_section_tokens(item))
+        return tokens
+    text = value_to_text(raw)
+    if not text:
+        return []
+    return [part.strip() for part in re.split(r"[、,，;；/\s]+|和|与|及", text) if part.strip()]
+
+
+def section_prompt_text(lesson_type: str, grade: str = "", subject: str = "", topic: str = "") -> str:
+    """生成前展示给教师的章节目录，供教师按序号去掉不要的部分。
+
+    这段文本会原样发给教师，所以只出现课堂语言：章节名、它大致装什么、
+    以及哪些是骨架。不出现 id、字段名、校验术语。
+    """
+    metas = sections_for(lesson_type)
+    label = TYPE_LABELS.get(normalize_lesson_type(lesson_type) or "new", "教案")
+    heading = f"{grade}{subject}《{topic}》{label}教案" if topic else f"{label}教案"
+
+    lines = [f"这份{heading}默认包含 {len(metas)} 个部分：", ""]
+    for index, meta in enumerate(metas, start=1):
+        tag = "" if meta.get("removable", True) else "　【必留】"
+        lines.append(f"{index:>2}. {meta['title']}　{meta['description']}{tag}")
+
+    locked = [(index, meta) for index, meta in enumerate(metas, start=1) if not meta.get("removable", True)]
+    lines.append("")
+    if locked:
+        numbers = "、".join(str(index) for index, _ in locked)
+        reasons = "；".join(f"{meta['title']}：{meta.get('reason', '')}" for _, meta in locked)
+        lines.append(f"第 {numbers} 项是这份教案的骨架，固定保留（{reasons}）。")
+        lines.append("")
+    lines.append("回复序号即可去掉你不需要的部分（例如「去掉 8、11」）；不回或回「全部保留」，我就按全部生成。")
+    return "\n".join(lines)
 
 
 def compact_json(value: Any) -> str:

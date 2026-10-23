@@ -5,6 +5,11 @@
   "lessonType": "new",
   "durationMin": 40,
   "textbookVersion": "人教版",
-  "constraints": ["普通教室", "有杠杆演示教具", "小组合作"],
+  "excludedSections": "全部保留",
+  "constraints": [
+    "普通教室",
+    "有杠杆演示教具",
+    "小组合作"
+  ],
   "requirements": "生成一份新授课教案，包含情境导入、概念建构、变式应用、分层作业和评价量规。"
 }

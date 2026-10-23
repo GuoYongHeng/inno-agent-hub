@@ -29,6 +29,8 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from lp_common import (  # noqa: E402
+    CONTEXT_COVERAGE_THRESHOLD,
+    analysis_section_id,
     LESSON_TYPES,
     TYPE_CONTEXT_FIELDS,
     TYPE_DESIGN_FIELDS,
@@ -42,6 +44,11 @@ from lp_common import (  # noqa: E402
     normalize_lesson_type,
     textbook_version_matches,
     textbook_versions,
+    context_coverage,
+    normalize_excluded_sections,
+    required_section_ids,
+    sections_for,
+    textbook_version_subject_conflict,
     value_to_text,
     vague_verbs,
 )
@@ -92,6 +99,81 @@ STAGE_HINTS = {
 }
 
 
+# 学生动作要分「接收类」和「产出类」。
+# 只看环节名字拦不住满堂灌：把环节标题写成「概念建构」，学生动作全填「认真听老师讲解」，
+# 形式上一点破绽都没有。所以课型特征必须一路查到学生到底做了什么。
+# 先剥掉这些「看起来像动作、其实是坐着接收」的说法，再判断有没有产出动词。
+# 不剥的话，「认真听老师讲解」会因为里面有个「讲」字被算成学生产出，
+# 那这个检查就等于没做。
+RECEPTIVE_PHRASE_PATTERNS = (
+    # 「听老师讲解」后面常常还连着一串教师行为（归纳、总结、点评……），
+    # 用 + 一次吃掉整段，否则剥完还剩个「总结」，又会被当成学生产出。
+    r"听老师(?:讲解|讲|串讲|归纳|总结|点评|演示|示范|介绍|解释|说明|分析|梳理|提炼|强调|补充|复述|板书|读)+",
+    r"听讲|听课|聆听老师?|倾听老师?",
+    r"记笔记|做笔记|记下要点|记录笔记|做记录|抄写|抄下|抄录|记录老师",
+    r"观看老师?(?:演示|示范|操作|讲解|视频)?|看老师(?:演示|示范|讲解)?",
+    r"阅读教材|看书|跟随老师|跟随教师|接受老师",
+    r"认真(?:听|看|记)",
+)
+PRODUCTIVE_ACTION_HINTS = (
+    r"画|试|说|讲|写|比|测|量|算|改|辨|讨论|交流|演示|操作|动手|标注|列举|归纳|设计|提出|"
+    r"记录|实验|猜测|估算|验证|评价|互评|自评|汇报|展示|纠错|订正|推断|分类|整理|搭建|制作|"
+    r"描述|说明|复述|质疑|补充|找出|寻找|标记|标出|比对|对比|填写|完成|解答|证明|推导|绘制|朗读|"
+    r"背诵|提问|回答|举出|举例|联想|预测|排序|连线|勾画|圈出|生成|构建|修正|回顾|总结|概括|"
+    r"提炼|演算|操作|观察并|记录并|口述|转述|讲解|示范"
+)
+
+# 每个课型里「必须是学生自己在做事」的那个环节，光有标题不算数。
+TYPE_ACTIVE_STAGE_KEY = {
+    "new": "concept",
+    "review": "self_structure",
+    "commentary": "retry",
+    "lab": "operation",
+}
+TYPE_ACTIVE_STAGE_LABEL = {
+    "new": "学生先尝试、教师再揭示",
+    "review": "学生自主梳理",
+    "commentary": "当堂变式再练",
+    "lab": "学生分组动手操作",
+}
+
+# 课堂可执行性的经验阈值。都是 warning：这些是判断而非错误，
+# 但一份每个环节两分钟、教师动作写七条的教案，讲课时一定跑不完。
+MIN_SENSIBLE_STAGE_MIN = 3.0
+MAX_SENSIBLE_STAGE_MIN = 25.0
+MAX_TEACHER_ACTIONS_PER_STAGE = 5
+MAX_STAGE_COUNT = 8
+
+
+def student_action_is_productive(text: str) -> bool:
+    """这条学生动作里有没有「要学生自己动手动口、留下东西」的成分。
+
+    「观察演示并说出自己的初步解释」既有接收也有产出，算产出；
+    只有通篇都是听、记笔记、抄写，才判成纯听讲。
+    """
+    value = value_to_text(text)
+    if not value:
+        return False
+    residual = value
+    # 剥离是幂等的：剥掉「听老师讲解」后可能露出下一层「听讲」，多跑几轮直到不再变化。
+    for _ in range(3):
+        stripped = residual
+        for pattern in RECEPTIVE_PHRASE_PATTERNS:
+            stripped = re.sub(pattern, "", stripped)
+        if stripped == residual:
+            break
+        residual = stripped
+    return bool(re.search(PRODUCTIVE_ACTION_HINTS, residual))
+
+
+def activity_actions(activity: Any) -> List[str]:
+    return [value_to_text(item) for item in ensure_list(item_get_safe(activity, "studentActions")) if value_to_text(item)]
+
+
+def item_get_safe(activity: Any, key: str) -> Any:
+    return activity.get(key) if isinstance(activity, dict) else None
+
+
 def collect_ids(items: Any, label: str, failures: List[str]) -> Set[str]:
     """收集列表项 id，同时检查重复和缺失。id 是引用闭合的前提。"""
     ids: Set[str] = set()
@@ -122,6 +204,30 @@ def stage_texts(plan: Dict[str, Any]) -> List[str]:
 def plan_full_text(plan: Dict[str, Any]) -> str:
     """把教案压成一段可检索文本，用于 confirmedContext 覆盖度检查。"""
     return json.dumps(plan, ensure_ascii=False)
+
+
+def resolve_excluded_sections(plan: Dict[str, Any], request: Optional[Dict[str, Any]], lesson_type: str) -> Tuple[Set[str], List[str], List[str]]:
+    """算出教师去掉了哪些章节，以及哪些说法没被接住。
+
+    优先读教案里的 sectionSelection（生成阶段已经归一化过）；只有在教案没带
+    这个字段时才回头解析请求里的原始说法，兼容手工调用校验器的情况。
+
+    返回 (排除的章节 id, 想删但属于骨架的章节名, 没认出来的说法)。
+    """
+    selection = plan.get("sectionSelection") if isinstance(plan.get("sectionSelection"), dict) else {}
+    excluded = [value_to_text(item) for item in ensure_list(selection.get("excluded")) if value_to_text(item)]
+    refused = [
+        value_to_text(item.get("title"))
+        for item in ensure_list(selection.get("refused"))
+        if isinstance(item, dict) and value_to_text(item.get("title"))
+    ]
+    unresolved = [value_to_text(item) for item in ensure_list(selection.get("unresolved")) if value_to_text(item)]
+    if not excluded and not refused and not unresolved and isinstance(request, dict) and non_empty(request.get("excludedSections")):
+        result = normalize_excluded_sections(request.get("excludedSections"), lesson_type)
+        excluded = list(result["excluded"])
+        refused += [item["title"] for item in result["refused"]]
+        unresolved += list(result["unresolved"])
+    return set(excluded), refused, unresolved
 
 
 def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = None) -> Tuple[List[str], List[str]]:
@@ -164,17 +270,42 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
 
     if not non_empty(meta.get("textbookVersion")):
         warnings.append("lessonMeta.textbookVersion 为空：教材版本必须先由教师确认（参见 references/textbook-versions.json）")
-    elif not textbook_version_matches(value_to_text(meta.get("subject")), value_to_text(meta.get("textbookVersion"))):
-        options = "、".join(textbook_versions(value_to_text(meta.get("subject"))))
-        warnings.append(
-            f"教材版本「{value_to_text(meta.get('textbookVersion'))}」不在学科「{value_to_text(meta.get('subject'))}」的可选清单内"
-            f"（可选：{options or '清单缺失'}），请与教师确认"
-        )
+    else:
+        subject_text = value_to_text(meta.get("subject"))
+        version_text = value_to_text(meta.get("textbookVersion"))
+        conflict = textbook_version_subject_conflict(subject_text, version_text)
+        if conflict:
+            warnings.append(
+                f"教材版本「{version_text}」里出现了其它学科「{conflict}」，学科与教材版本可能串了，请与教师确认"
+            )
+        elif not textbook_version_matches(subject_text, version_text):
+            options = "、".join(textbook_versions(subject_text))
+            warnings.append(
+                f"教材版本「{version_text}」不在学科「{subject_text}」的可选清单内"
+                f"（可选：{options or '清单缺失'}），请与教师确认"
+            )
 
-    if not non_empty(plan.get("teachingFocus")):
-        failures.append("teachingFocus 不能为空")
-    if not non_empty(plan.get("teachingDifficulty")):
-        failures.append("teachingDifficulty 不能为空")
+    # ---------- 章节选择 ----------
+    # 教师去掉的章节，对应的字段就不该再被强制要求；但骨架章节不许去掉，
+    # 否则会出现「删成一张白纸也算合格」。
+    excluded_ids, refused_titles, unresolved_tokens = resolve_excluded_sections(plan, request, lesson_type)
+    locked = sorted(excluded_ids & set(required_section_ids(lesson_type)))
+    if locked:
+        titles = "、".join(
+            meta["title"] for meta in sections_for(lesson_type) if meta["id"] in locked
+        )
+        failures.append(f"以下章节是这份教案的骨架，不能去掉：{titles}")
+        excluded_ids -= set(locked)  # 删错了不能连带把结构要求也放宽
+    if refused_titles:
+        warnings.append(f"已保留教师想去掉的骨架章节：{'、'.join(refused_titles)}")
+    if unresolved_tokens:
+        warnings.append(f"没看明白要去掉哪一部分，已按全部保留处理：{'、'.join(unresolved_tokens)}")
+
+    if "focusDifficulty" not in excluded_ids:
+        if not non_empty(plan.get("teachingFocus")):
+            failures.append("teachingFocus 不能为空")
+        if not non_empty(plan.get("teachingDifficulty")):
+            failures.append("teachingDifficulty 不能为空")
 
     # ---------- P0 活动时长 ----------
     activities = plan.get("activityFlow")
@@ -210,6 +341,33 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
         if expected is not None and abs(total_duration - expected) > 1e-6:
             failures.append(f"活动总时长不匹配: 期望 {expected:g} 分钟, 实际 {total_duration:g} 分钟")
 
+    # ---------- P2 课堂可执行性 ----------
+    # 时长合计对得上，不代表这份教案上得出来：一个 2 分钟的环节放不下任何活动，
+    # 一个环节写 7 条教师动作课堂上念都念不完。这些是判断不是错误，所以只给警告。
+    for index, item in enumerate(activities):
+        if not isinstance(item, dict):
+            continue
+        stage_name = value_to_text(item.get("stage")) or f"第{index + 1}个环节"
+        try:
+            stage_duration = float(item.get("durationMin"))
+        except (TypeError, ValueError):
+            stage_duration = 0.0
+        if 0 < stage_duration < MIN_SENSIBLE_STAGE_MIN:
+            warnings.append(
+                f"「{stage_name}」只安排了 {stage_duration:g} 分钟，课堂上放不下一个完整活动，请确认是压缩环节还是增加时间"
+            )
+        elif stage_duration > MAX_SENSIBLE_STAGE_MIN:
+            warnings.append(
+                f"「{stage_name}」长达 {stage_duration:g} 分钟，学生注意力难以维持，建议拆成两个环节"
+            )
+        teacher_actions = [t for t in (value_to_text(x) for x in ensure_list(item.get("teacherActions"))) if t]
+        if len(teacher_actions) > MAX_TEACHER_ACTIONS_PER_STAGE:
+            warnings.append(
+                f"「{stage_name}」写了 {len(teacher_actions)} 条教师动作，课堂上很难逐条完成，建议合并到 {MAX_TEACHER_ACTIONS_PER_STAGE} 条以内"
+            )
+    if len(activities) > MAX_STAGE_COUNT:
+        warnings.append(f"教学流程有 {len(activities)} 个环节，环节过碎会让课堂反复切换，建议合并到 {MAX_STAGE_COUNT} 个以内")
+
     # ---------- P0 引用闭合 ----------
     activity_ids = collect_ids(activities, "activityFlow", failures)
     rubric_ids = collect_ids(plan.get("assessmentRubric"), "assessmentRubric", failures)
@@ -224,43 +382,47 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
         validate_id_refs(
             objective.get("linkedActivities"), activity_ids, f"objectives[{index}].linkedActivities", "活动", failures
         )
-        validate_id_refs(
-            objective.get("assessmentEvidence"),
-            rubric_ids,
-            f"objectives[{index}].assessmentEvidence",
-            "评价量规",
-            failures,
-        )
-
-    for index, activity in enumerate(activities):
-        if isinstance(activity, dict):
+        if "rubric" not in excluded_ids:
             validate_id_refs(
-                activity.get("assessmentLinks"), rubric_ids, f"activityFlow[{index}].assessmentLinks", "评价量规", failures
+                objective.get("assessmentEvidence"),
+                rubric_ids,
+                f"objectives[{index}].assessmentEvidence",
+                "评价量规",
+                failures,
             )
 
-    if not isinstance(plan.get("assessmentRubric"), list) or not plan.get("assessmentRubric"):
-        failures.append("assessmentRubric 必须是非空数组")
-    for index, item in enumerate(ensure_list(plan.get("assessmentRubric"))):
-        if not isinstance(item, dict):
-            failures.append(f"assessmentRubric[{index}] 必须是对象")
-            continue
-        for key in ("dimension", "excellent", "qualified", "needsImprovement"):
-            if not non_empty(item.get(key)):
-                failures.append(f"assessmentRubric[{index}] 缺少或为空: {key}")
+    if "rubric" not in excluded_ids:
+        for index, activity in enumerate(activities):
+            if isinstance(activity, dict):
+                validate_id_refs(
+                    activity.get("assessmentLinks"), rubric_ids, f"activityFlow[{index}].assessmentLinks", "评价量规", failures
+                )
 
-    homework = plan.get("homeworkDesign")
-    if not isinstance(homework, list) or not homework:
-        failures.append("homeworkDesign 必须是非空数组")
-    for index, item in enumerate(ensure_list(homework)):
-        if not isinstance(item, dict):
-            failures.append(f"homeworkDesign[{index}] 必须是对象")
-            continue
-        for key in ("level", "content"):
-            if not non_empty(item.get(key)):
-                failures.append(f"homeworkDesign[{index}] 缺少或为空: {key}")
+        if not isinstance(plan.get("assessmentRubric"), list) or not plan.get("assessmentRubric"):
+            failures.append("assessmentRubric 必须是非空数组")
+        for index, item in enumerate(ensure_list(plan.get("assessmentRubric"))):
+            if not isinstance(item, dict):
+                failures.append(f"assessmentRubric[{index}] 必须是对象")
+                continue
+            for key in ("dimension", "excellent", "qualified", "needsImprovement"):
+                if not non_empty(item.get(key)):
+                    failures.append(f"assessmentRubric[{index}] 缺少或为空: {key}")
 
-    if not isinstance(plan.get("resources"), list) or not plan.get("resources"):
-        failures.append("resources 必须是非空数组")
+    if "homework" not in excluded_ids:
+        homework = plan.get("homeworkDesign")
+        if not isinstance(homework, list) or not homework:
+            failures.append("homeworkDesign 必须是非空数组")
+        for index, item in enumerate(ensure_list(homework)):
+            if not isinstance(item, dict):
+                failures.append(f"homeworkDesign[{index}] 必须是对象")
+                continue
+            for key in ("level", "content"):
+                if not non_empty(item.get(key)):
+                    failures.append(f"homeworkDesign[{index}] 缺少或为空: {key}")
+
+    if "preparation" not in excluded_ids:
+        if not isinstance(plan.get("resources"), list) or not plan.get("resources"):
+            failures.append("resources 必须是非空数组")
 
     export = plan.get("export")
     if not isinstance(export, dict):
@@ -311,10 +473,12 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
     background = plan.get("backgroundAnalysis")
     if not isinstance(background, dict):
         failures.append("backgroundAnalysis 必须是对象")
-    else:
+        background = {}
+    elif analysis_section_id(lesson_type) not in excluded_ids:
         for field in BACKGROUND_FIELDS:
             if not non_empty(background.get(field)):
                 failures.append(f"backgroundAnalysis.{field} 不能为空")
+    if isinstance(background, dict):
         curriculum = value_to_text(background.get("curriculumRequirement"))
         # 课标内容直接来自生成模型内置的课标知识，因此不再要求教师核对；
         # 但页码与课标编号没有可核验来源，出现即视为编造。
@@ -324,7 +488,7 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
     student = plan.get("studentAnalysis")
     if not isinstance(student, dict):
         failures.append("studentAnalysis 必须是对象")
-    else:
+    elif "studentAnalysis" not in excluded_ids:
         for field in STUDENT_FIELDS:
             if not non_empty(student.get(field)):
                 failures.append(f"studentAnalysis.{field} 不能为空")
@@ -344,13 +508,14 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
         if not non_empty(type_design.get(field)):
             failures.append(f"teachingDesign.lessonTypeDesign.{field} 不能为空（{TYPE_LABELS[lesson_type]}必需）")
 
-    board = design.get("blackboardDesign")
-    if not isinstance(board, dict):
-        failures.append("teachingDesign.blackboardDesign 必须是对象")
-    else:
-        for key in ("format", "content"):
-            if not non_empty(board.get(key)):
-                failures.append(f"teachingDesign.blackboardDesign.{key} 不能为空")
+    if "blackboard" not in excluded_ids:
+        board = design.get("blackboardDesign")
+        if not isinstance(board, dict):
+            failures.append("teachingDesign.blackboardDesign 必须是对象")
+        else:
+            for key in ("format", "content"):
+                if not non_empty(board.get(key)):
+                    failures.append(f"teachingDesign.blackboardDesign.{key} 不能为空")
 
     # 难点必须和学情里的预计困难指向同一处，否则学情分析就是摆设。
     difficulties = value_to_text(student.get("likelyDifficulties")) if isinstance(student, dict) else ""
@@ -364,6 +529,45 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
     stages = stage_texts(plan)
     joined_stages = " ".join(stages)
     hints = STAGE_HINTS.get(lesson_type, {})
+
+    # 环节名字对得上，只能证明这份教案「长得像」某类课。
+    # 学生在这一环到底做了什么，才是这节课成立与否的根据，所以在这里再查一层。
+    stage_actions: List[Tuple[int, str, List[str], List[str]]] = []
+    for index, activity in enumerate(activities):
+        if not isinstance(activity, dict):
+            continue
+        texts = activity_actions(activity)
+        if not texts:
+            continue
+        receptive = [text for text in texts if not student_action_is_productive(text)]
+        stage_actions.append((index, value_to_text(activity.get("stage")) or f"第{index + 1}个环节", texts, receptive))
+
+    action_total = sum(len(item[2]) for item in stage_actions)
+    receptive_total = sum(len(item[3]) for item in stage_actions)
+    fully_receptive = [item for item in stage_actions if len(item[3]) == len(item[2])]
+
+    if action_total and receptive_total == action_total:
+        failures.append(
+            "全课的学生动作都是「听讲、记笔记」一类的接收动作：这份教案里学生没有动手、动口或留下任何东西。"
+            "环节标题写得再整齐也只是一份讲稿，请给学生安排可观察的产出（画、说、比、测、写、讨论并汇报等）"
+        )
+    elif fully_receptive and len(fully_receptive) >= max(2, len(stage_actions) // 2):
+        names = "、".join(f"「{item[1]}」" for item in fully_receptive[:4])
+        warnings.append(
+            f"{names}这几个环节的学生动作全是听讲或记笔记，学生基本处于旁观状态，建议至少改一处为学生自己做"
+        )
+
+    active_key = TYPE_ACTIVE_STAGE_KEY.get(lesson_type)
+    if active_key and hints.get(active_key):
+        active_index = next((i for i, stage in enumerate(stages) if re.search(hints[active_key], stage)), None)
+        if active_index is not None:
+            match = next((item for item in stage_actions if item[0] == active_index), None)
+            if match and len(match[3]) == len(match[2]):
+                label = TYPE_ACTIVE_STAGE_LABEL.get(lesson_type, "关键环节")
+                failures.append(
+                    f"「{match[1]}」是{label}环节，但学生动作全是听讲或记笔记："
+                    f"这一环的教学价值就在学生自己想、自己做，教师直接讲出来等于把这一环取消了"
+                )
 
     if lesson_type == "new":
         for key, label in (("leadin", "情境导入"), ("concept", "概念建构")):
@@ -421,10 +625,15 @@ def validate_document(plan: Dict[str, Any], request: Optional[Dict[str, Any]] = 
             if not non_empty(value):
                 continue
             value_text = value_to_text(value)
-            # 用较长的连续片段做匹配，避免短词偶然命中造成假通过。
-            probe = value_text[:12]
-            if probe and probe not in text:
-                context_warnings.append(f"confirmedContext.{field} 未在教案中体现: {value_text[:30]}")
+            # 按字覆盖率判断，而不是原文比对：模型本来就要把教师的口语改写成教案语言，
+            # 要求一字不差会把正常教案全判成「没写进去」，教师很快就不看这条提示了。
+            coverage, missing = context_coverage(value_text, text)
+            if coverage < CONTEXT_COVERAGE_THRESHOLD:
+                detail = f"，例如「{missing[0][:18]}」没找到" if missing else ""
+                context_warnings.append(
+                    f"教师确认过的 {field} 只有 {coverage:.0%} 出现在教案里{detail}："
+                    f"原话是「{value_text[:40]}」，请确认是模型漏写了还是改写后没对上"
+                )
     if context_warnings:
         if getattr(validate_document, "_strict_context", False):
             failures.extend(context_warnings)

@@ -277,46 +277,6 @@
         "id": "docx",
         "status": "pass",
         "message": "python-docx"
-      },
-      {
-        "id": "normalize",
-        "status": "pass",
-        "message": "结构修补完成，未改动活动时长。"
-      },
-      {
-        "id": "docx",
-        "status": "pass",
-        "message": "python-docx"
-      },
-      {
-        "id": "normalize",
-        "status": "pass",
-        "message": "结构修补完成，未改动活动时长。"
-      },
-      {
-        "id": "docx",
-        "status": "pass",
-        "message": "python-docx"
-      },
-      {
-        "id": "normalize",
-        "status": "pass",
-        "message": "结构修补完成，未改动活动时长。"
-      },
-      {
-        "id": "docx",
-        "status": "pass",
-        "message": "python-docx"
-      },
-      {
-        "id": "normalize",
-        "status": "pass",
-        "message": "结构修补完成，未改动活动时长。"
-      },
-      {
-        "id": "docx",
-        "status": "pass",
-        "message": "python-docx"
       }
     ],
     "warnings": []

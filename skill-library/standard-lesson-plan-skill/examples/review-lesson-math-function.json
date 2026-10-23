@@ -5,8 +5,13 @@
   "lessonType": "review",
   "durationMin": 40,
   "textbookVersion": "人教版",
+  "excludedSections": "全部保留",
   "periodNo": "单元复习第1课时",
-  "constraints": ["普通教室", "学生已学完本单元", "可用投影展示学生作品"],
+  "constraints": [
+    "普通教室",
+    "学生已学完本单元",
+    "可用投影展示学生作品"
+  ],
   "requirements": "生成一份单元复习课教案，重点是知识结构化和分层练习，不要变成把新课再讲一遍。",
   "confirmedContext": {
     "structureTool": "学生先在无提示状态下自己画知识结构图，教师再用思维导图归并，重点补 k、b 与图象位置的关系",

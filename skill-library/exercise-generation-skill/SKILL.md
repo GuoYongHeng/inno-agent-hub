@@ -2,337 +2,156 @@
 name: exercise-generation-skill
 name-zh: "出题助手"
 category: 课程教学
-description: 按课标、教材进度、知识点、题型和难度层级生成课堂练习、分层作业、单元测验、阶段测验和专题练习。适用于教师需要结构化题目、答案解析、错因标签、覆盖检查、难度报告、换题建议和超纲风险提示的任务；不用于拍题答疑、知识点讲解、课件生成或真实测量学等值组卷。
-entryName: 出题
-entryToken: "@出题"
-displayName: 出题
-status: runnable_prototype
+description: >-
+  像学校出卷老师一样，为一个课时或知识点出一份"基础巩固 / 能力提升 / 拓展挑战"
+  三层作业，交付学生版（只有题）和教师版（设计说明、双向细目表、答案解析、易错点与讲评建议、分层使用建议）。
+  流程是先定位课时目标和典型错因，再调题源（教材例题、常考题型、经典母题，可联网搜真题）做选编/改编/创编，
+  按可量化的难度画像组成阶梯，最后独立试做、用程序验算、审卷。符合 2022 版义务教育课标与高中课标，
+  情境只在必要时使用。全学科可用，数学最深（小学/初中/高中题型谱）。也适合学生自学要"从易到难出几道题"。
+  触发词：分层作业, 出题, 出一份作业, 课后作业, 作业设计, 分层练习, 练习题, 习题, 出几道题, 变式训练, 一题多变,
+  题组, 单元作业, 弹性作业, 作业单, 基础题提高题拓展题, 有区分度的题, 帮我出卷, 组卷, 随堂练习;
+  layered homework, differentiated practice, tiered worksheet, generate practice problems.
 ---
 
-# 出题 Skill
+# K12 分层作业出题助手
 
-## 场景定位
+## 这个技能产出什么
 
-面向教师备课中的出题与组卷需求，解决题目与课标、教材进度、知识点覆盖、题型比例、难度分层不精确对齐的问题。
+一份针对**一个课时目标**的分层作业，包括两份文件：
+- **学生版**：只有题目和作答空间。层名用学生能看懂的叫法，不出现答案和设计术语。
+- **教师版**：设计说明（课时目标、重难点、课标依据、前置知识）、分层结构、**双向细目表**（考查点、认知要求、情境、题源、预估难度系数、用时，以及每题相对前一题升级在哪里）、逐题答案、解析与评分要点、干扰项对应的错误、典型错误与讲评建议、分层使用建议、自检记录。
 
-核心闭环：
+如果用户是**学生**（比如"我是初二学生，给我出几道题练练"），就交付"练习"和"答案与讲解"两份，语气对学生说话，不写给老师看的内容（见第 1 步）。
 
-`教师出题需求 -> 任务蓝图 -> 课标/教材/知识点边界 -> 种子题选择与变式 -> 答案解析与错因 -> 覆盖/难度/风险报告 -> 本地校验`
+两份文件都由同一份 `output/homework.json` 渲染出来，题干和顺序一定一致。
 
-本 Skill 不负责拍题答疑、知识点讲解、课件生成、课堂互动网页，也不承诺真实测量学区分度或等值试卷。
+## 运行环境（先判断）
 
-## 入口与路由契约
+- **能读文件、能运行 python**（Claude Code 或其他 agent 环境）：走完整流程。按步骤读 `references/` 下的文件，把作业写成 `output/homework.json`，用 `scripts/` 下的脚本验算、检查和渲染。
+- **只能对话，没有文件和代码工具**：流程不变，只是在心里完成 json 和脚本的工作。最终回复里直接按"学生版 → 教师版"的结构给出 Markdown。每道计算题都要独立重算一遍，审卷清单逐条过一遍，过程不展示给用户。
+- **有联网搜索工具**：可以按 `references/sources.md` 第 4 节搜真题和命题风向，最多搜 3–5 次。没有就不搜，也不要声称搜过。
 
-- 显式入口：`@出题`。
-- Skill ID：`exercise-generation-skill`。
-- 当前状态：`runnable_prototype`。
-- 当用户显式使用 `@出题` 时，优先进入本 Skill。
-- 无显式入口时，由外层 Controller 或 `agent_cases/agent_cli.py` 返回菜单或按用户选择序号路由，不依赖关键词猜测。
-- `agent_cases/skill-entrypoints.json` 中的必填槽位为 `subject`、`grade`、`knowledgePointIds`。
+下文的 `python3`、路径都相对本技能目录。缺 sympy 时先问用户要不要安装；用户不在场就把计算题改为 `blind` 验证，并在自检记录里注明。
 
-## 能力边界
+---
 
-### 可以做
+## 工作流程
 
-- 生成课堂练习、分层作业、单元测验、阶段测验和专题练习。
-- 根据 `taskType` 选择题量、分层、题型和难度蓝图。
-- 基于课标、知识点图谱、教材映射和结构化种子题生成练习。
-- 输出题目、答案、分步解析、错因标签、评分点和讲评建议。
-- 输出覆盖报告、难度报告、风险报告和换题建议。
-- 使用本地脚本校验题量、分层、比例、重复、超纲和结构完整性。
+### 第 0 步：路由（不对用户说）
 
-### 不可以做
+先判断学科和学段，**立刻读**对应的学科文件。这一步必读：
 
-- 不承诺真实测量学难度、区分度、信度或等值 AB 卷。
-- 不自动接入外部题库检索；当前基于本目录结构化种子题与规则变式。
-- 不为主观题只给笼统答案；必须给评分点或评分依据。
-- 不把超出输入学段、教材进度或知识点边界的内容伪装成可用题。
-- 不替拍题答疑 Skill 做学生错步诊断；只提供题目层面的常见错因和讲评建议。
+| 学科 | 读 |
+|---|---|
+| 数学 | `references/math/overview.md`，再读学段文件：`math/primary.md`（小学）/ `math/junior.md`（初中）/ `math/senior.md`（高中） |
+| 语文 | `references/subjects/chinese.md` |
+| 英语 | `references/subjects/english.md` |
+| 物理 / 化学 / 生物 | `references/subjects/physics.md` / `chemistry.md` / `biology.md` |
+| 小学科学 | `references/subjects/science.md` |
+| 历史 / 地理 / 道德与法治·思想政治 | `references/subjects/history.md` / `geography.md` / `politics.md` |
+| 其他（信息科技、艺术、劳动等） | `references/subjects/others.md` |
 
-## 任务模式
+### 第 1 步：读懂需求，补齐默认值
 
-本 Skill 用 `taskType` 区分出题任务：
+从用户的话里提取：学科、年级、教材版本、课题或知识点、作业用途、时长或题量、分层方式、学情（班级差异、常见错误）、题型偏好，以及有没有给参考材料（教材页、错题、讲义）。
 
-| taskType | 场景 | 核心输入 | 核心输出 | 是否可独立运行 |
-|---|---|---|---|---|
-| `classroom_practice` | 课堂即时练习 | 知识点、题量、题型 | 少量题目、答案解析、易错提醒 | 是 |
-| `layered_homework` | A/B/C 分层作业 | 知识点、层级、题量 | 分层题目、分层目标、讲评建议 | 是 |
-| `unit_test` | 单元测验 | 单元、知识点集合、题型比例 | 测验题、覆盖报告、难度报告 | 是 |
-| `stage_test` | 阶段测验 | 阶段范围、题量、难度范围 | 阶段题组、讲评建议、风险提示 | 是 |
-| `topic_drill` | 专题练习或换题 | 单知识点/题型、方法标签 | 专项题组、变式和替换建议 | 是 |
+**最多追问一个问题，而且只在答案会改变题目时才问。**通常只有两种情况需要问：年级推断不出来（比如"分数加减"可能是三年级也可能是五年级），或者课题对应的内容跨度太大（比如"二次函数"是一整章）。其他一律按默认值处理，并写进 `meta.assumptions`，在教师版里展示出来。**如果对话没法追问（批量任务、无人值守），就直接按最合理的理解出题。**
 
-## 输入契约
+| 项 | 默认值 |
+|---|---|
+| 教材 | 数学人教版（高中人教 A 版），其他学科用该学段使用最广的版本；写进 assumptions |
+| 用途 | 课后巩固（一个课时） |
+| 分层 | 三层：A 基础巩固（全体必做）/ B 能力提升（大多数学生）/ C 拓展挑战（选做） |
+| 时长 | 见 `references/layering.md` 3.1 节（小学 15–20 分钟，初中 20–30 分钟，高中 30–45 分钟，指 A+B 层） |
+| 情境 | 按需使用，能不用就不用（见 `references/situation.md`） |
+| 读者 | 老师。如果用户自称学生或家长，设 `meta.audience` 为 `"student"`：题目从易到难三组，每组前加一句鼓励性的说明；"答案与讲解"按"先自己做，再对答案"组织，写清每题最容易错在哪 |
 
-脚本当前消费扁平 JSON 配置。最小请求结构：
+用户给出的要求（题量、题型、层数、时长、某道题的样子）**一律优先于**本文件和参考文件里的默认值。
 
-```json
-{
-  "subject": "数学",
-  "grade": "五年级",
-  "textbookVersion": "人教版",
-  "unit": "分数的加法和减法",
-  "period": "第2课时",
-  "topic": "异分母分数加减法",
-  "knowledgePointIds": ["math-g5-fraction-add"],
-  "taskType": "layered_homework",
-  "questionCount": 9,
-  "layers": ["A", "B", "C"],
-  "questionTypes": ["计算题", "应用题"],
-  "requirements": "每层 3 题，附答案、分步解析、错因和换题建议。"
-}
-```
+### 第 2 步：定位（出卷老师的第一步）
 
-### 必需输入
+先不出题。把下面这些写进 `meta` 和 `misconceptions`：
+1. **一个可检测的课时目标**（"学生能……"）。用户只给了一个大主题时，选这一课时最核心的那个目标，不要把一整章塞进一份作业。
+2. **重点与难点**，各 1–2 条。
+3. **课标依据**：对应的内容要求或学业要求，用自己的话概括，不编条文编号。
+4. **前置知识**：具名写出，比如"一元一次不等式的解法（七下）"，基础层的支架会指向这里。
+5. **典型错因表（错因先行）**：从学科文件的题型谱里找出本课 3–5 个最常见的错误，写成可观察的行为（"去括号时漏变号"），不写"概念不清"。后面的干扰项、易错设计和讲评建议都从这张表来。
 
-| 字段 | 类型 | 说明 | 缺失处理 |
-|---|---|---|---|
-| `subject` | string | 学科 | Controller 追问 |
-| `grade` | string | 年级或学段 | Controller 追问 |
-| `knowledgePointIds` | string[] | 目标知识点 ID | 若只给 `topic`，尝试由教材/知识图谱映射；仍缺失则追问 |
+### 第 3 步：调题源，画蓝图
 
-### 推荐输入
+依次读 `references/sources.md`、`references/layering.md`、`references/situation.md`，然后：
+1. 从学科题型谱里选出本课时真正覆盖的 2–4 个常考题型和 1–2 个**母题**。
+2. **把蓝图写进文件 `work/blueprint.md`**，不要在脑子里把整份作业想完再动笔，那样既慢又容易超出输出长度。蓝图包括错因表和**双向细目表草稿**：题号、层、考查点、题型、母题或主线、计划的难度画像（k/s/c/r/o/g）、相对哪题升级以及升级了什么、是否用情境、预估难度系数、用时。
+3. 检查蓝图本身：
+   - 三层是否都服务于同一个课时目标？
+   - B、C 层每一题是否都动了**结构性元素**（逆用、条件更隐含、多一个知识点、要说理或构造），而不只是换数字？
+   - A 层是否有至少一道"理解或应用"题，而不是全是识记？
+   - 每层是否至少有一道"说理由或写想法"的题？
+   - 时长是否合理？
+   - 是否超纲？
+   - **题量和三层的题数，按时长预算和用户要求来定**（`layering.md` 3.1 节）。不要照抄范例的"9 题、4/3/2"结构：小学可能只要 6–7 题，高中综合题少而精，用户要 15 道就出 15 道。
 
-| 字段 | 用途 | 缺失影响 |
-|---|---|---|
-| `taskType` | 选择蓝图 | 默认按课堂练习或分层作业保守处理 |
-| `questionCount` | 控制题量 | 使用蓝图默认题量 |
-| `textbookVersion`、`unit`、`period` | 限定教材进度 | 只能按知识点边界判断 |
-| `layers` | 分层作业层级 | 分层任务默认 A/B/C |
-| `questionTypes` / `questionTypeMix` | 控制题型 | 使用蓝图推荐比例 |
-| `difficultyRange` / `difficultyMix` | 控制难度 | 使用蓝图推荐难度 |
-| `strictBlueprint` | 是否严格执行比例 | 缺省为非严格，偏差进入 warning |
-| `requirements` | 个性化要求 | 只按默认规则生成 |
+蓝图有问题就在这一步改。到了写题阶段再改结构，代价要大得多。
 
-## 信息缺失与降级
+### 第 4 步：写题
 
-- 缺少 `subject`、`grade` 或可定位的知识点时，Controller 先追问，不直接生成。
-- 如果用户只给课题，脚本或 Controller 可通过 `references/textbook-map.json` 与 `references/knowledge-graph.json` 尝试映射知识点。
-- 当前题库未覆盖的知识点，不编造题目来源；输出缺口或建议扩充种子题库。
-- 题型、难度或分层比例无法完全满足时，写入 `qualityReport` 和比例报告；`strictBlueprint=true` 时应失败。
-- 超纲风险写入 `riskReport`，不得静默删除或伪装为合规。
+读 `references/homework-json.md`，并照着 `assets/example_homework.json` 的**写法**，把作业写进 `output/homework.json`。范例只示范字段怎么写，**不要沿用范例里的情境、数据和题目**（比如阶梯水价、复印店、租大巴）；每份作业的情境和数据都要为本课重新设计。要点：
+- **选择题先有错因，再写干扰项**：每个干扰项对应错因表里的一个具体错误。正确选项的位置要分散，长度不要明显比其他选项长。
+- **每道计算题都写 `check.code`**：只用题干里的条件重新算一遍，不要把答案抄进去。
+- **题干表述**：用本学段的规范术语；否定词要加着重号；单位统一；条件写全，包括"整数""至少""精确到"这类限定。图形要用文字完整描述（`figure`），但描述不能替学生把题做了。
+- **A 层支架逐题递减**：第 1 题最多 2 处提示，第 2 题最多 1 处，之后不给。撤掉支架时不提醒学生。
+- **题源**：每题写 `source`（选编、改编或创编，加说明）。**凭记忆调出的题源不写具体页码和真题题号。**
+- **有图的题写 `figure_spec`**：几何图、坐标图、函数图象、立体图形，以及题干说"如图"的题，都按 `references/figures.md` 写 `figure_spec`，渲染时脚本会按坐标精确画图并嵌进学生版。**先定坐标再写题**，图和 `check.code` 用同一组坐标。`figure` 文字描述照写。
+- **题与题互不泄露**：提示、图形描述、前一题的题干，都不能透露后面题的答案。图形描述只写坐标、数据、位置关系，不写题目要问的性质（比如问"y 随 x 怎样变化"，描述里就不能写"从左到右下降"）。
+- **要引用别的题时写 `{{题目id}}`**，比如"在 {{B1}} 的条件下……"，渲染时会自动换成学生版里的题号。不要写"第二关第 1 题"。
+- **教师版里的每一句话也要对。** 解析、易错表、讲评建议里的学科陈述，和题目一样要经得起推敲。
+- **课标依据只做概括**，不要写"课标规定……""课标必做实验""课标原文"，除非参考文件里明确写了这一条原文。
 
-## 执行协议
-
-1. Controller 识别 `@出题`，抽取学科、年级、教材、单元、课题、知识点、题量、题型、难度和要求。
-2. `scripts/render_exercise_set.py` 读取请求，按 `taskType` 加载蓝图。
-3. 脚本读取课标、知识图谱、教材映射和种子题库，确定可出题范围。
-4. 脚本选择或变式种子题，补齐答案、分步解析、常见错因和评分点。
-5. 脚本生成覆盖、难度、风险、讲评和换题建议。
-6. 输出 JSON 和 Markdown 后，运行 `scripts/patch_exercise_set.py` 修复结构缺陷并重建 Markdown。
-7. 运行 `scripts/validate_exercise_set.py`；基础数据可用 `scripts/validate_reference_data.py` 预检。
-8. Controller 向用户摘要题组用途、题量、覆盖情况、风险提示和输出路径，不重复粘贴完整 JSON。
-
-## 资源加载顺序
-
-1. 读本 `SKILL.md`，确认任务模式、边界和输出约束。
-2. 读 `references/input-output-schema.md`。
-3. 读 `references/blueprint-rules.md`，按 `taskType` 选择题量、层级和难度蓝图。
-4. 读 `references/curriculum-standards.json`、`knowledge-graph.json`、`textbook-map.json`，确定课标、知识点和教材边界。
-5. 读 `references/seed-question-bank.json` 及匹配当前学科/年级的其他 `seed-question-bank-*.json` 文件，选择或变式种子题。
-6. 读 `references/difficulty-rules.json` 和 `misconception-tags.json`，补充分层、错因和讲评建议。
-7. 读 `references/similar-question-groups.json`，生成换题建议。
-8. 输出前运行 validate，并对照 `references/quality-checklist.md`。
-
-## 输出契约
-
-脚本输出：
-
-- `<output>.json`：结构化练习/作业数据。
-- `<output>.md`：教师可读题目、答案解析与讲评建议。
-
-结构化结果必须包含：
-
-```json
-{
-  "exerciseMeta": {},
-  "blueprint": {},
-  "questions": [],
-  "answerKey": [],
-  "coverageReport": {},
-  "difficultyReport": {},
-  "riskReport": {},
-  "teachingSuggestions": [],
-  "replacementSuggestions": [],
-  "qualityReport": {}
-}
-```
-
-每道题必须包含：
-
-```json
-{
-  "id": "q001",
-  "sourceId": "seed-frac-a-001",
-  "layer": "A",
-  "questionType": "计算题",
-  "difficulty": 1,
-  "knowledgePointIds": ["math-g5-fraction-add"],
-  "stem": "计算：1/2 + 1/3 = ?",
-  "answer": "5/6",
-  "solutionSteps": [],
-  "commonErrors": [],
-  "scorePoints": []
-}
-```
-
-Controller 面向下游或用户汇总时，建议使用统一信封：
-
-```json
-{
-  "skillId": "exercise-generation-skill",
-  "taskIntent": "layered_homework",
-  "status": "pass|warn|failed",
-  "inputSummary": {},
-  "result": {},
-  "artifacts": [],
-  "handoff": {},
-  "qualityReport": {},
-  "warnings": [],
-  "nextActions": []
-}
-```
-
-## 脚本入口
-
-生成分层作业样例：
-
-种子库选题模式（默认，毫秒级）：
+### 第 5 步：验算、检查、渲染、试做审卷
 
 ```bash
-python3 agent_cases/exercise-generation-skill/scripts/render_exercise_set.py \
-  agent_cases/exercise-generation-skill/generated-outputs/math-g5-fraction-layered-homework \
-  --config agent_cases/exercise-generation-skill/examples/math-g5-fraction-layered-homework.json
+python3 scripts/verify_items.py output/homework.json --write
+python3 scripts/check_homework.py output/homework.json
+python3 scripts/render.py output/homework.json
 ```
 
-动态生成模式（调用 InnoSpark-235B，每层约 15-30 秒）：
+修到两个脚本都是 0 个 ERROR 为止。**这时候再读 `references/verification.md`**，提前读没有用。按它的要求做：读回 `output/学生版.md`，独立试做；检查答案是否唯一、条件是否恰好够用；验证每个干扰项真的有学生会选；按审卷清单逐条过。发现问题就改 json，重新跑三条命令。所有门禁通过后，把每题的 `check.status` 设为 `"pass"`，在 `self_check_summary` 里写一两句结论。
 
-```bash
-python3 agent_cases/exercise-generation-skill/scripts/render_exercise_set.py \
-  agent_cases/exercise-generation-skill/generated-outputs/demo-01 \
-  --config agent_cases/exercise-generation-skill/examples/demo-01-classroom-quick-check.json \
-  --model InnoSpark-235B
-```
+**交付一份没有经过试做和验算的作业，是本技能最严重的失败。**
 
-只校验已有 JSON：
+### 第 6 步：交付
 
-```bash
-python3 agent_cases/exercise-generation-skill/scripts/validate_exercise_set.py \
-  agent_cases/exercise-generation-skill/generated-outputs/math-g5-fraction-layered-homework.json
-```
+- 交付 `output/学生版.html` 和 `output/教师版.html`（可直接用浏览器打开、打印，图已内嵌），同时附上同名 `.md` 版本，方便复制编辑；`homework.json` 留着，方便以后修改。环境不能交付文件时，把两份 Markdown 完整贴在回复里，学生版在前；有图的题注明"图见 HTML 版"。
+- 回复正文**简短**：一句话说明这份作业的课时目标和三层分别练什么，再列出你替用户做的默认设定（如有）。最后给出**两个具体的调整选项**，要贴合这份作业，例如"把第 6 题的情境换成纯数学题""C 层加一道与二次函数衔接的题""整份降一档给基础较弱的班"。不要写"如有需要请告诉我"这类空话。
+- 不要向用户讲流程细节，比如读了哪些文件、跑了什么脚本、门禁改了什么。
+- 用户要求局部修改（"重出第 5 题""B 层太难了"）时，只改 json 里受影响的题目，重新跑第 5 步，再交付。
 
-严格校验：
+---
 
-```bash
-python3 agent_cases/exercise-generation-skill/scripts/validate_exercise_set.py \
-  agent_cases/exercise-generation-skill/generated-outputs/math-g5-fraction-layered-homework.json \
-  --strict
-```
+## 贯穿始终的规则
 
-校验基础数据：
+- **答案必须对。** 能算的用程序算，不能算的独立试做。宁可少一道题，也不交付没把握的题。
+- **一个课时目标，三层同一目标进阶。** A 层不降目标，只加支持；B、C 层升级的是思考，不是数字。
+- **不超纲。** 只用本课时及之前学过的内容。C 层需要用到后续知识时，在教师版里标"选学"。难度不超过课标要求。
+- **情境能不用就不用。** 用了就必须通过 `situation.md` 的情境测试（已给模型、删除、反问、数据、改写风险）。不要把编造的数据说成真实数据。
+- **不编造出处，不照搬原题。** 凭记忆的题源只标题型。搜到的真题可以标出处，但题目要改编。
+- **学生版干净。** 没有答案，没有"分层、支架、难度、错因"这类术语，也不给学生贴"学困生、优等生"之类的标签。
+- **不机械重复。** 同一层里同构题最多 2 道。
+- **难度是预估的。** 教师版写"预估难度系数"，不写"保证区分度"。
 
-```bash
-python3 agent_cases/exercise-generation-skill/scripts/validate_reference_data.py
-```
+## 目录
 
-后处理补丁（修复结构缺陷 + 重建 Markdown）：
-
-```bash
-python3 agent_cases/exercise-generation-skill/scripts/patch_exercise_set.py \
-  agent_cases/exercise-generation-skill/generated-outputs/<case-name>/<case-name>.json
-```
-
-扩充种子题库（调用 InnoSpark-235B）：
-
-```bash
-python3 agent_cases/exercise-generation-skill/scripts/generate_seed_data.py \
-  --subject 数学 --grade 七年级 --topic "一元一次方程" \
-  --count 30 --batch-size 10 \
-  --knowledge-points agent_cases/exercise-generation-skill/references/knowledge-points-math-g7-linear-equation.json \
-  --output agent_cases/exercise-generation-skill/references/seed-question-bank-math-g7-linear-equation.json
-```
-
-## 联动与 handoff
-
-- 可向课件生成 Skill 传递 `handoff.exerciseSummary`、`handoff.questions`、`handoff.commonErrors`、`handoff.coverageReport` 和输出路径。
-- 可向拍题答疑或知识点讲解 Skill 传递题目、答案、解析步骤、错因标签和知识点 ID。
-- handoff 只传结构化摘要、题目对象和文件路径，不传完整题库。
-- 下游使用前必须重新按自己的输入契约校验。
-
-## 质量标准
-
-- 题目不超出输入年级、教材进度和知识点边界。
-- 每道题包含题干、答案、分步解析、知识点、题型、难度和错因/评分信息。
-- 分层作业必须区分 A/B/C 层，且每层题量符合蓝图。
-- 试卷型输出必须包含覆盖检查、难度报告和讲评建议。
-- 专题练习和试卷草稿应尽量给出可替换题建议。
-- 题干不重复；重复风险进入 `riskReport`。
-- `strictBlueprint=true` 时，题型或难度比例偏差必须失败。
-- 输出 JSON 必须通过 `scripts/validate_exercise_set.py`。
-
-## 边界
-
-- 当前为可运行原型，使用标签和规则近似难度与层级，不承诺真实测量学区分度。
-- 暂不承诺等值 AB 卷、完整专题热力图和大规模真实作答统计。
-- 种子题库当前覆盖五年级数学分数单元（90题）和七年级数学一元一次方程（30题）。未覆盖的知识点不编造题目来源，输出缺口或建议通过 `scripts/generate_seed_data.py` 扩充。
-- 当前换题建议基于相似题组，不自动重算复杂变式答案。
-- 扩展到真实业务前，应替换或增补为授权课标、教材、题库和错因数据。
-
-## 双模型架构：Controller × Generator
-
-本 Skill 遵循 AgentDesign 统一的 [Controller+Generator 流水线架构](../../agent_design/docs/教育智能体SKILL统一模板.md#十二双模型-controllergenerator-流水线架构)。
-
-| 角色 | 模型 | 职责 |
-| :--- | :--- | :--- |
-| **Controller** | deepseek-v4-pro（主控模型） | 意图识别、槽位抽取、配置组装、脚本调度、后处理修复、质量校验、结果呈现 |
-| **Generator** | InnoSpark-235B（生成模型） | 种子题库扩充——生成特定学科/年级/知识点的结构化题目 |
-
-本 Skill 的 Generator 采用**离线数据制备模式**：InnoSpark-235B 不参与每次出题的实时生成，而是通过 `scripts/generate_seed_data.py` 批量生成种子题库，供 render 脚本的规则引擎选用。这种模式下：
-
-- **实时出题**：render 脚本进行确定性选题 + 变式，毫秒级响应，结果可复现
-- **离线扩充**：当种子题库覆盖不足时，Controller 触发 Generator 批量生成新种子数据
-- **质量闭环**：种子数据生成后经 render → patch → validate 校验，确保进入题库的数据结构合规
-
-### 种子数据生成
-
-```bash
-python3 scripts/generate_seed_data.py \
-  --subject 数学 --grade 七年级 --topic "一元一次方程" \
-  --count 30 --batch-size 10 \
-  --knowledge-points references/knowledge-points-math-g7-linear-equation.json \
-  --output references/seed-question-bank-math-g7-linear-equation.json
-```
-
-### 全流水线执行
-
-```
-Config → Render (规则引擎 + 种子库) → Patch → Validate → Present
-   │          │                           │        │          │
- examples/  generated-outputs/         修复结构   校验通过    Controller
- <name>.json  <name>/<name>.json       重建.md    /失败      摘要呈现
-              <name>/<name>.md
-```
-
-## 资源索引
-
-| 文件 | 用途 | 何时读取 |
-|---|---|---|
-| `references/input-output-schema.md` | 请求与输出结构 | 每次 |
-| `references/quality-checklist.md` | 质量自检 | 输出前 |
-| `references/blueprint-rules.md` | taskType 蓝图 | 生成前 |
-| `references/curriculum-standards.json` | 课标边界 | 生成前 |
-| `references/knowledge-graph.json` | 知识点、前置关系、边界 | 生成前 |
-| `references/textbook-map.json` | 教材单元和课时映射 | 生成前 |
-| `references/seed-question-bank.json` | 种子题库（五年级数学） | 生成时 |
-| `references/seed-question-bank-math-g7-linear-equation.json` | 种子题库（七年级数学·一元一次方程） | 生成时 |
-| `references/knowledge-points-math-g7-linear-equation.json` | 知识点定义（七年级数学） | 种子数据生成时 |
-| `references/difficulty-rules.json` | 难度与分层规则 | 生成时 |
-| `references/misconception-tags.json` | 错因标签 | 生成时 |
-| `references/similar-question-groups.json` | 换题建议 | 生成时 |
-
-## 组件地图
-
-- `scripts/render_exercise_set.py`：主生成入口，负责组卷、Markdown 导出和默认校验。
-- `scripts/patch_exercise_set.py`：后处理补丁——修复结构缺陷（必填字段补齐、去重）、重建 Markdown、记录补丁日志到 qualityReport。
-- `scripts/validate_exercise_set.py`：结构、题量、分层、答案解析、覆盖和严格蓝图校验。
-- `scripts/validate_reference_data.py`：基础 references 数据质量校验。
-- `scripts/generate_seed_data.py`：种子题库扩充——调用 InnoSpark-235B 批量生成指定学科/年级/知识点的结构化题目，输出符合 schema 的 JSON。
+- `references/sources.md`：题源，以及选编、改编、创编的做法与规则（含联网搜索）
+- `references/layering.md`：三层的定义、难度画像、蓝图与题量时长
+- `references/situation.md`：情境闸门（何时用、情境测试、真实数据）
+- `references/homework-json.md`：数据格式
+- `references/figures.md`：画图（figure_spec：平面几何、坐标图、立体图形）
+- `references/verification.md`：试做与审卷（第 5 步才读）
+- `references/math/`：数学总纲与小学、初中、高中题型谱（常考题型、经典母题、典型错因）
+- `references/subjects/`：其他学科的命题要点
+- `scripts/verify_items.py`：独立验算（sympy）
+- `scripts/check_homework.py`：结构、阶梯、难度系数、用时、选项检查
+- `scripts/render.py`：渲染学生版和教师版（.md 与可打印 .html，自动画图）
+- `scripts/figure.py`：figure_spec → SVG
+- `scripts/chem_tools.py`：化学式原子计数、方程式配平、相对分子质量（化学验算时 import）
+- `assets/example_homework.json`：完整范例（七下·一元一次不等式的应用）

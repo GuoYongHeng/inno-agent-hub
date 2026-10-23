@@ -5,8 +5,12 @@
   "lessonType": "commentary",
   "durationMin": 40,
   "textbookVersion": "统编版",
+  "excludedSections": "全部保留",
   "periodNo": "第1课时",
-  "constraints": ["普通教室", "已完成一次议论文片段写作练习"],
+  "constraints": [
+    "普通教室",
+    "已完成一次议论文片段写作练习"
+  ],
   "requirements": "生成一份讲评课教案。不要按题号从头讲到尾，要先做错因归类，再给当堂变式再练。",
   "confirmedContext": {
     "dataSource": "本次练习共 42 份，数据为教师手工统计的假设数据：论点不清 6 人，论据与论点脱节 19 人，缺少分析句 27 人，语句规范问题 11 人",

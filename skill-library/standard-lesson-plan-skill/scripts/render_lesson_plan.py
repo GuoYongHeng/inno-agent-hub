@@ -39,6 +39,10 @@ from typing import Any, Dict, List, Optional, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from lp_common import (  # noqa: E402
+    kept_sections,
+    normalize_excluded_sections,
+    section_prompt_text,
+    sections_for,
     EXAMPLES_DIR,
     INTERMEDIATE_DIRNAME,
     LESSON_TYPES,
@@ -50,10 +54,11 @@ from lp_common import (  # noqa: E402
     load_env_file,
     load_json,
     load_reference_data,
-    normalize_lesson_type,
     non_empty,
+    normalize_lesson_type,
     sanitize_file_name,
     table_cell,
+    upsert_quality_check,
     value_to_text,
 )
 from normalize_lesson_plan import normalize_lesson_plan  # noqa: E402
@@ -181,6 +186,52 @@ SYSTEM_PROMPT = """你是一位熟悉中国中小学课堂的一线教研员，�
 你只输出一个 JSON 对象，不输出解释、不输出多个候选方案。"""
 
 
+SECTION_DECISION_UNREADABLE = (
+    "章节答复没法解析: \"{raw}\"。请再问教师一次，并在问题里说明：要精确指定就在输入框直接写序号"
+    "（例如 8、11），或者点「全部保留」「只留骨架」这类现成选项。"
+    "不会的答复不许当成「全部保留」——那样教师以为自己删了，实际一节没删。"
+)
+
+SECTION_DECISION_MISSING = (
+    "缺少必填字段: excludedSections。生成前必须把章节目录展示给教师并拿到答复："
+    "教师说全部保留时写 \"全部保留\"（或 []），教师要去掉时原样写教师的说法（如 \"去掉 8、11\"）。"
+    "不要因为教师没提到章节就默认全部保留——那样教师根本没机会选择。"
+)
+
+
+def check_section_decision(request: Any) -> List[str]:
+    """章节选择必须由教师给出，而且必须能看懂；两种情况都算没选定。
+
+    为什么单列成一道门槛：教材版本缺失时预检会拒绝生成，所以模型每次都会问；
+    章节选择原来只写在 SKILL.md 里，结果模型打印了目录却没有展示、也没有提问，
+    直接把 11 节全生成了。写在文档里的规则拦不住执行，写在代码里才拦得住。
+
+    第二道检查是「看懂没看懂」：教师答了「按序号去掉」却没给序号时，
+    如果只是记个警告然后按全部生成，教师会以为自己删掉了，实际一节没删。
+    这种情况必须退回重问，不能静默降级。
+    """
+    if not isinstance(request, dict):
+        return []
+    if "excludedSections" not in request and "sectionSelection" not in request:
+        return [SECTION_DECISION_MISSING]
+
+    decision = request.get("excludedSections")
+    if decision is None:
+        selection = request.get("sectionSelection")
+        if isinstance(selection, dict):
+            # 已经归一化过的写法，直接看结果
+            if selection.get("keepAll") or non_empty(selection.get("excluded")) or non_empty(selection.get("refused")):
+                return []
+            return [SECTION_DECISION_UNREADABLE.format(raw="（已归一化但没有结果）")]
+        decision = selection
+
+    lesson_type = normalize_lesson_type(request.get("lessonType")) or "new"
+    result = normalize_excluded_sections(decision, lesson_type)
+    if result["keepAll"] or result["excluded"] or result["refused"]:
+        return []
+    return [SECTION_DECISION_UNREADABLE.format(raw=value_to_text(decision)[:40])]
+
+
 def validate_request_config(request: Dict[str, Any]) -> Tuple[List[str], List[str]]:
     """请求预检。缺必填字段要拦下来，缺推荐字段只提示。"""
     failures: List[str] = []
@@ -226,6 +277,25 @@ def validate_request_config(request: Dict[str, Any]) -> Tuple[List[str], List[st
             "（按 references/textbook-versions.json 提问，即使该学科只有一个可选版本也要确认），"
             "不得默认或猜测某个版本"
         )
+
+    # 教师按序号去掉的章节。这里只做归一化与提示，不在这里拒绝：
+    # 骨架章节的拒绝交给校验器统一裁决，避免两处规则各说一套。
+    if non_empty(request.get("excludedSections")) or non_empty(request.get("sectionSelection")):
+        raw = request.get("excludedSections", request.get("sectionSelection"))
+        result = normalize_excluded_sections(raw, normalize_lesson_type(raw_type) or "new")
+        request["sectionSelection"] = result
+        if result["refused"]:
+            for item in result["refused"]:
+                warnings.append(f"「{item['title']}」是教案骨架，不能去掉，已保留（{item['reason']}）")
+        if result["unresolved"]:
+            warnings.append(
+                "没看明白要去掉哪一部分：" + "、".join(result["unresolved"]) + "（已按全部保留处理，请向教师复核）"
+            )
+        if result["excludedTitles"]:
+            warnings.append("按教师要求去掉：" + "、".join(result["excludedTitles"]))
+
+    for item in check_section_decision(request):
+        failures.append(item)
 
     context = request.get("confirmedContext")
     if context is None:
@@ -813,6 +883,12 @@ def _reflection_section() -> List[str]:
 
 
 def _section_spec(lesson_type: str) -> List[Tuple[str, Any]]:
+    """某课型的完整章节目录（教师没删任何部分时的样子）。
+
+    这里的章节名与顺序必须和 lp_common.SECTION_META 逐字一致 ——
+    教师看到的目录就是根据 SECTION_META 生成的，两边漂了就会出现
+    「教师删了第 8 项，实际删掉的是另一节」。selftest 有一条一致性用例守着。
+    """
     common_head: List[Tuple[str, Any]] = [
         ("基本信息", _basic_info),
         (
@@ -933,7 +1009,14 @@ def build_markdown(plan: Dict[str, Any]) -> str:
     title = f"# {value_to_text(meta.get('grade'))}{value_to_text(meta.get('subject'))}《{value_to_text(meta.get('topic'))}》{label}教案"
     lines: List[str] = [title, ""]
 
-    for index, (section_title, builder) in enumerate(_section_spec(lesson_type), start=1):
+    # 教师按序号去掉的部分在这里落地：标题序号会在过滤后重新编，
+    # 所以删掉第 8 节之后，文档里不会留下「八、」跳号。
+    selection = plan.get("sectionSelection") if isinstance(plan.get("sectionSelection"), dict) else {}
+    kept_titles = {meta["title"] for meta in kept_sections(lesson_type, selection.get("excluded"))}
+    # 两侧目录用章节名对齐：SECTION_META 定「有哪些章节」，_section_spec 定每节怎么渲染。
+    sections = [item for item in _section_spec(lesson_type) if item[0] in kept_titles]
+
+    for index, (section_title, builder) in enumerate(sections, start=1):
         lines.append(_section_title(index, section_title))
         lines.append("")
         try:
@@ -1072,11 +1155,7 @@ def write_outputs(
     if note:
         report = plan.get("qualityReport")
         if isinstance(report, dict):
-            checks = report.get("checks")
-            if not isinstance(checks, list):
-                checks = []
-            checks.append({"id": "docx", "status": "warn" if degraded else "pass", "message": note})
-            report["checks"] = checks
+            upsert_quality_check(report, "docx", "warn" if degraded else "pass", note)
             if degraded:
                 warnings = report.get("warnings")
                 if not isinstance(warnings, list):
@@ -1126,9 +1205,31 @@ def main() -> int:
     parser.add_argument("--no-validate", action="store_true", help="跳过规则校验")
     parser.add_argument("--no-docx", action="store_true", help="不导出 DOCX（本次将没有交付物，只保留中间产物）")
     parser.add_argument("--strict-context", action="store_true", help="把 confirmedContext 覆盖度警告提升为失败")
+    parser.add_argument(
+        "--show-sections",
+        action="store_true",
+        help="只打印该课型的章节目录（生成前展示给教师、让教师按序号去掉不需要的部分），不生成教案",
+    )
     args = parser.parse_args()
 
     request: Optional[Dict[str, Any]] = None
+
+    if args.show_sections:
+        config_path = resolve_config(args)
+        if config_path is None or not config_path.exists():
+            print("需要 --config / --sample 指定一份请求，才能知道课型与课题。", file=sys.stderr)
+            return 2
+        shown = load_json(config_path)
+        lesson_type = normalize_lesson_type(shown.get("lessonType")) or "new"
+        print(
+            section_prompt_text(
+                lesson_type,
+                value_to_text(shown.get("grade")),
+                value_to_text(shown.get("subject")),
+                value_to_text(shown.get("topic")),
+            )
+        )
+        return 0
 
     if args.request:
         request_path = Path(args.request)
@@ -1138,6 +1239,11 @@ def main() -> int:
         request = load_json(request_path)
 
     if args.from_json:
+        if isinstance(request, dict):
+            missing = check_section_decision(request)
+            if missing:
+                print("生成失败：" + "\n- ".join(missing), file=sys.stderr)
+                return 1
         source = Path(args.from_json)
         if not source.exists():
             print(f"教案 JSON 不存在: {source}", file=sys.stderr)

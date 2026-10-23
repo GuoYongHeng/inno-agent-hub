@@ -16,16 +16,26 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lp_common import INTERMEDIATE_DIRNAME, SKILL_ROOT, deliverable_file_name, normalize_lesson_type  # noqa: E402
+from lp_common import (  # noqa: E402
+    INTERMEDIATE_DIRNAME,
+    SECTION_META,
+    SKILL_ROOT,
+    deliverable_file_name,
+    normalize_excluded_sections,
+    normalize_lesson_type,
+    sections_for,
+    upsert_quality_check,
+)
 from normalize_lesson_plan import normalize_lesson_plan  # noqa: E402
-from render_lesson_plan import build_markdown  # noqa: E402
+from render_lesson_plan import CN_NUMERALS, _section_spec, build_markdown  # noqa: E402
 from validate_lesson_plan import validate_document  # noqa: E402
 
 # 每种课型的环节骨架。环节名刻意用最朴素的写法，检验渲染与校验在
@@ -145,10 +155,236 @@ def check_delivery_contract(problems: List[str]) -> None:
     print(f"delivery     交付文件名 {len(naming_cases)} 例，中间产物目录「{INTERMEDIATE_DIRNAME}」")
 
 
+# ---------- 负向用例：校验器必须拦得住 ----------
+# 只测「好教案能过」是不够的：一个永远返回 pass 的校验器也能通过全部正向自检。
+# 这些用例把教案故意改坏，确认校验器真的会报出来。
+# 其中「全课学生动作皆为听讲」最关键——环节标题写整齐、学生动作全填听讲记笔记，
+# 只查环节名字的校验器会一路放行，这份教案就成了一份讲稿。
+
+
+def _mut_all_listening(plan: Dict[str, Any]) -> None:
+    for activity in plan["activityFlow"]:
+        activity["studentActions"] = ["认真听老师讲解", "记笔记"]
+
+
+def _mut_concept_listening(plan: Dict[str, Any]) -> None:
+    for activity in plan["activityFlow"]:
+        if "建构" in str(activity.get("stage", "")):
+            activity["studentActions"] = ["听老师讲解力臂的定义", "记笔记"]
+
+
+def _mut_duration_mismatch(plan: Dict[str, Any]) -> None:
+    plan["activityFlow"][0]["durationMin"] += 6
+
+
+def _mut_short_stage(plan: Dict[str, Any]) -> None:
+    """把一个环节压到 1 分钟，同时把省下的时间挪给下一环节。
+
+    挪时间是必须的：不挪的话总时长就对不上了，校验器会先报时长错误，
+    这个用例就测不到「环节过短」这条判断。
+    """
+    removed = plan["activityFlow"][0]["durationMin"] - 1.0
+    plan["activityFlow"][0]["durationMin"] = 1.0
+    plan["activityFlow"][1]["durationMin"] += removed
+
+
+def _mut_dangling_rubric(plan: Dict[str, Any]) -> None:
+    plan["activityFlow"][0]["assessmentLinks"] = ["rubric-99"]
+
+
+def _mut_drop_design_intent(plan: Dict[str, Any]) -> None:
+    plan["activityFlow"][1]["designIntent"] = ""
+
+
+def _mut_cross_subject_textbook(plan: Dict[str, Any]) -> None:
+    plan["lessonMeta"]["textbookVersion"] = "人教版高中数学"
+
+
+NEGATIVE_CASES: List[Tuple[str, Callable[[Dict[str, Any]], None], str, str]] = [
+    ("全课学生动作皆为听讲", _mut_all_listening, "failed", "接收动作"),
+    ("概念建构环节学生只听讲", _mut_concept_listening, "failed", "学生先尝试"),
+    ("某环节只留 1 分钟", _mut_short_stage, "warn", "放不下"),
+    ("活动指向不存在的量规", _mut_dangling_rubric, "failed", "不存在的"),
+    ("环节缺少设计意图", _mut_drop_design_intent, "failed", "designIntent"),
+    ("教材版本串了别的学科", _mut_cross_subject_textbook, "warn", "其它学科"),
+]
+
+
+def check_validator_rejects(problems: List[str]) -> None:
+    sample_path = SKILL_ROOT / "generated-outputs" / "sample-valid.json"
+    request_path = SKILL_ROOT / "examples" / "new-lesson-physics-lever.json"
+    if not sample_path.exists() or not request_path.exists():
+        problems.append("未找到负向用例所需的 sample-valid.json 或请求文件")
+        return
+
+    sample = json.loads(sample_path.read_text(encoding="utf-8"))
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    validate_document._strict_context = False  # type: ignore[attr-defined]
+
+    caught = 0
+    for name, mutate, expected, keyword in NEGATIVE_CASES:
+        # 时长注入用例会让总时长对不上，先把它排除在时长一致的前提之外。
+        broken = copy.deepcopy(sample)
+        mutate(broken)
+        broken["export"]["markdown"] = build_markdown(broken)
+        failures, warnings = validate_document(broken, request)
+        status = "failed" if failures else ("warn" if warnings else "pass")
+        messages = failures + warnings
+        if status == expected and any(keyword in message for message in messages):
+            caught += 1
+        else:
+            hit = messages[0][:60] if messages else "无任何提示"
+            problems.append(f"[negative] 「{name}」未被拦下：期望 {expected} 且含「{keyword}」，实际 {status}（{hit}）")
+
+    # 重复写入检查记录时，checks 不能膨胀。
+    report: Dict[str, Any] = {"checks": [], "warnings": []}
+    for _ in range(3):
+        upsert_quality_check(report, "normalize", "pass", "结构修补完成")
+        upsert_quality_check(report, "docx", "pass", "python-docx")
+    if len(report["checks"]) != 2:
+        problems.append(f"[negative] qualityReport.checks 未去重：重复写入 3 轮后为 {len(report['checks'])} 条，应为 2 条")
+
+    print(f"negative     {caught}/{len(NEGATIVE_CASES)} 组坏教案被拦下，检查记录去重正常" if caught == len(NEGATIVE_CASES) else f"negative     {caught}/{len(NEGATIVE_CASES)} 组坏教案被拦下")
+
+
+def check_section_decision_gate(problems: List[str]) -> None:
+    """章节选择必须由教师给出：请求里没这个字段，脚本要拒绝生成。
+
+    这条防的是一个真实故障：模型打印了目录、却没展示给教师、也没提问，
+    直接把全部章节都生成了。规则写在 SKILL.md 里拦不住，写在代码里才拦得住。
+    """
+    from render_lesson_plan import check_section_decision
+
+    if not check_section_decision({"subject": "物理", "grade": "八年级", "topic": "杠杆"}):
+        problems.append("[gate] 请求缺少 excludedSections 时未被拦下")
+    for ok in (
+        {"lessonType": "new", "excludedSections": "全部保留"},
+        {"lessonType": "new", "excludedSections": "去掉 8、11"},
+        {"lessonType": "new", "excludedSections": []},
+        {"lessonType": "new", "excludedSections": "只留骨架"},
+    ):
+        if check_section_decision(ok):
+            problems.append(f"[gate] {ok} 是教师的明确答复，不应被拦下")
+
+    # 只表意向、没有具体序号的答复必须退回重问，不能当成「全部保留」。
+    # 这类答复在界面上很容易产生：选项一点，输入框就被禁用了。
+    for vague in ("按序号去掉", "自定义", "我要自己挑"):
+        if not check_section_decision({"lessonType": "new", "excludedSections": vague}):
+            problems.append(f"[gate] 「{vague}」没有具体序号，应当退回重问，实际放行了")
+    print("gate         章节选择缺失时生成被拦下，教师答复过的请求正常放行")
+
+
+def check_section_catalog(problems: List[str]) -> None:
+    """教师看到的目录（SECTION_META）和实际渲染的章节（_section_spec）必须一致。
+
+    这两份清单一个管「展示给教师按序号选」，一个管「怎么渲染」。
+    一旦漂了，教师删第 8 项，实际删掉的会是另一节，而且不会报错。
+    """
+    total = 0
+    for lesson_type, metas in SECTION_META.items():
+        catalog = [meta["title"] for meta in metas]
+        rendered = [title for title, _builder in _section_spec(lesson_type)]
+        total += len(catalog)
+        if catalog != rendered:
+            problems.append(
+                f"[catalog] {lesson_type} 的章节目录与渲染章节不一致："
+                f"目录 {catalog}，渲染 {rendered}"
+            )
+    print(f"catalog      四种课型章节目录与渲染章节一致（共 {total} 节）")
+
+
+def check_section_selection(problems: List[str]) -> None:
+    """按序号去掉章节之后，教案里真的少掉那几节，序号还要连得上。"""
+    sample_path = SKILL_ROOT / "generated-outputs" / "sample-valid.json"
+    request_path = SKILL_ROOT / "examples" / "new-lesson-physics-lever.json"
+    if not sample_path.exists() or not request_path.exists():
+        problems.append("未找到章节选择用例所需的样例文件")
+        return
+
+    sample = json.loads(sample_path.read_text(encoding="utf-8"))
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    lesson_type = "new"
+    total = len(sections_for(lesson_type))
+
+    # 1) 不做选择 → 全部章节都在
+    default_md = build_markdown(copy.deepcopy(sample))
+    if count_sections(default_md) != total:
+        problems.append(f"[sections] 未做选择时应输出 {total} 节，实际 {count_sections(default_md)} 节")
+
+    # 2) 去掉两节 → 少两节，且序号连续不留空号
+    trimmed = copy.deepcopy(sample)
+    trimmed["sectionSelection"] = {
+        "excluded": ["blackboard", "reflection"],
+        "excludedTitles": ["板书设计", "教学反思"],
+    }
+    md = build_markdown(trimmed)
+    if count_sections(md) != total - 2:
+        problems.append(f"[sections] 去掉 2 节后应输出 {total - 2} 节，实际 {count_sections(md)} 节")
+    for title in ("板书设计", "教学反思"):
+        if f"、{title}" in md:
+            problems.append(f"[sections] 被去掉的「{title}」仍出现在教案里")
+    expected_numerals = CN_NUMERALS[: total - 2]
+    actual_numerals = [line.split("、")[0].replace("## ", "") for line in md.split("\n") if line.startswith("## ")]
+    if actual_numerals != expected_numerals:
+        problems.append(f"[sections] 去掉章节后序号未重新连号：{actual_numerals}")
+
+    # 3) 骨架章节不许删
+    locked = copy.deepcopy(sample)
+    locked["sectionSelection"] = {"excluded": ["basicInfo", "process"], "excludedTitles": ["基本信息", "教学过程"]}
+    locked["export"]["markdown"] = build_markdown(locked)
+    validate_document._strict_context = False  # type: ignore[attr-defined]
+    failures, _warnings = validate_document(locked, request)
+    if not any("骨架" in item for item in failures):
+        problems.append("[sections] 去掉骨架章节没有被拦下")
+
+    # 4) 教师用序号说话也要认
+    parsed = normalize_excluded_sections("去掉 8、11", lesson_type)
+    if parsed["excludedTitles"] != ["板书设计", "教学反思"]:
+        problems.append(f"[sections] 「去掉 8、11」解析结果不对：{parsed['excludedTitles']}")
+
+    # 5) 章节选择是硬门槛：请求里没记录教师的答复必须拒绝生成。
+    # 这条防的是「模型打印了目录却没问教师，直接把全部生成了」——真实发生过一次。
+    from render_lesson_plan import check_section_decision, validate_request_config
+
+    no_decision = {k: v for k, v in request.items() if k != "excludedSections"}
+    if not check_section_decision(no_decision):
+        problems.append("[sections] 请求没记录章节选择时应当拒绝生成，实际放行了")
+    missing, _warnings = validate_request_config(dict(no_decision))
+    if not any("excludedSections" in item for item in missing):
+        problems.append("[sections] 请求预检未把缺失的章节选择报出来")
+    if check_section_decision({"excludedSections": "全部保留"}):
+        problems.append("[sections] 教师明确说全部保留时不应再报缺失")
+    if check_section_decision({"excludedSections": "去掉 8、11"}):
+        problems.append("[sections] 教师要去掉某几节时不应再报缺失")
+
+    # 6) 「只留骨架」这个选项要真的能用
+    skeleton_only = normalize_excluded_sections("只留骨架", lesson_type)
+    if len(skeleton_only["excludedTitles"]) != total - len(REQUIRED_SECTION_TITLES[lesson_type]):
+        problems.append(f"[sections] 「只留骨架」结果不对：{skeleton_only['excludedTitles']}")
+
+    print(
+        f"sections     章节选择正常（默认 {total} 节，去掉 2 节后 {total - 2} 节且重新连号，骨架被拦下）"
+    )
+
+
+REQUIRED_SECTION_TITLES = {
+    lesson_type: [meta["title"] for meta in metas if not meta.get("removable", True)]
+    for lesson_type, metas in SECTION_META.items()
+}
+
+
+def count_sections(markdown: str) -> int:
+    return sum(1 for line in markdown.split("\n") if line.startswith("## "))
+
+
 def main() -> int:
     problems: List[str] = []
 
     check_delivery_contract(problems)
+    check_section_decision_gate(problems)
+    check_section_catalog(problems)
+    check_section_selection(problems)
+    check_validator_rejects(problems)
 
     for lesson_type in STAGE_SKELETONS:
         plan = build_skeleton(lesson_type)
@@ -193,7 +429,7 @@ def main() -> int:
             print(f"  - {item}")
         return 1
 
-    print("\n自检通过：四种课型的渲染与校验分支均正常，样例在严格模式下通过。")
+    print("\n自检通过：四种课型的渲染与校验分支均正常，样例在严格模式下通过，坏教案能被拦下。")
     return 0
 
 

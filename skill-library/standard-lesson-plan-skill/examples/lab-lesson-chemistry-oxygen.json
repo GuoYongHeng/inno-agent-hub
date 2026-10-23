@@ -5,8 +5,14 @@
   "lessonType": "lab",
   "durationMin": 40,
   "textbookVersion": "人教版",
+  "excludedSections": "全部保留",
   "periodNo": "第1课时",
-  "constraints": ["化学实验室", "4人一组共10组", "有加热装置与集气瓶", "需使用酒精灯"],
+  "constraints": [
+    "化学实验室",
+    "4人一组共10组",
+    "有加热装置与集气瓶",
+    "需使用酒精灯"
+  ],
   "requirements": "生成一份实验课教案。要包含器材清单、安全须知、可直接打印的实验记录单和误差来源分析。",
   "confirmedContext": {
     "apparatusAvailability": "4 人一组，器材够 10 组同时操作；铁架台、大试管、酒精灯、水槽、集气瓶、导管齐全",

@@ -27,12 +27,14 @@ from typing import Any, Dict, List, Optional
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from lp_common import (  # noqa: E402
+    normalize_excluded_sections,
     TYPE_CONTEXT_FIELDS,
     TYPE_DESIGN_FIELDS,
     ensure_list,
     load_json,
     non_empty,
     normalize_lesson_type,
+    upsert_quality_check,
     value_to_text,
 )
 
@@ -382,6 +384,42 @@ def patch_resources(plan: Dict[str, Any], notes: List[str]) -> List[Dict[str, An
     return patched
 
 
+def patch_section_selection(
+    plan: Dict[str, Any],
+    request: Optional[Dict[str, Any]],
+    lesson_type: str,
+    notes: List[str],
+) -> Dict[str, Any]:
+    """把教师「按序号去掉哪几节」的决定固定到教案里。
+
+    教案已经带了 sectionSelection 就不再重算：从 --from-json 重跑时，
+    以教案里记录的选择为准，避免重跑把教师的选择悄悄改回默认。
+    """
+    selection = plan.get("sectionSelection")
+    if isinstance(selection, dict) and non_empty(selection.get("excluded") or selection.get("refused") or selection.get("keepAll")):
+        return selection
+
+    raw = None
+    if isinstance(request, dict):
+        raw = request.get("excludedSections")
+        if raw is None and isinstance(request.get("sectionSelection"), dict):
+            return dict(request["sectionSelection"])
+    if raw is None:
+        notes.append("sectionSelection（教师未指定，按全部章节生成）")
+        return {"excluded": [], "excludedTitles": [], "refused": [], "unresolved": [], "keepAll": True}
+
+    result = normalize_excluded_sections(raw, lesson_type)
+    if result["refused"]:
+        notes.append(
+            "sectionSelection（教师想去掉骨架章节 "
+            + "、".join(item["title"] for item in result["refused"])
+            + "，已保留）"
+        )
+    if result["unresolved"]:
+        notes.append("sectionSelection（有说法没认出来：" + "、".join(result["unresolved"]) + "）")
+    return result
+
+
 def patch_meta(plan: Dict[str, Any], request: Optional[Dict[str, Any]], lesson_type: str, notes: List[str]) -> Dict[str, Any]:
     meta = plan.get("lessonMeta")
     if not isinstance(meta, dict):
@@ -403,9 +441,6 @@ def patch_quality_report(plan: Dict[str, Any], notes: List[str]) -> Dict[str, An
     report = plan.get("qualityReport")
     if not isinstance(report, dict):
         report = {}
-    checks = report.get("checks")
-    if not isinstance(checks, list):
-        checks = []
     warnings = report.get("warnings")
     if not isinstance(warnings, list):
         warnings = []
@@ -416,8 +451,8 @@ def patch_quality_report(plan: Dict[str, Any], notes: List[str]) -> Dict[str, An
         if len(notes) > 8:
             preview += f"；等共 {len(notes)} 处"
         message = f"结构修补补全了以下字段，请教师确认：{preview}"
-    checks.append({"id": "normalize", "status": "pass", "message": message})
-    report["checks"] = checks
+    # 用 upsert 而不是 append：管线会被重跑，append 会让 checks 随运行次数膨胀出重复项。
+    upsert_quality_check(report, "normalize", "pass", message)
     report["warnings"] = warnings
     if notes:
         warnings.append(f"normalize 补全了 {len(notes)} 处字段，内容为保证结构完整而生成，需教师核对。")
@@ -433,6 +468,7 @@ def normalize_lesson_plan(plan: Dict[str, Any], request: Optional[Dict[str, Any]
     raw_type = plan.get("lessonMeta", {}).get("lessonType") if isinstance(plan.get("lessonMeta"), dict) else None
     lesson_type = normalize_lesson_type(raw_type) or normalize_lesson_type((request or {}).get("lessonType")) or "new"
 
+    plan["sectionSelection"] = patch_section_selection(plan, request, lesson_type, notes)
     plan["lessonMeta"] = patch_meta(plan, request, lesson_type, notes)
     plan["backgroundAnalysis"] = patch_background_analysis(plan, notes)
     plan["studentAnalysis"] = patch_student_analysis(plan, notes)
